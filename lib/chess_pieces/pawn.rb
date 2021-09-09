@@ -27,7 +27,7 @@ class Pawn < ChessPiece
     # has already moved before.
     legal_move_arr.append([row + 2 * direction, col]) unless @has_moved
 
-    legal_move_arr
+    moves_in_bounds(legal_move_arr)
   end
 
   ##

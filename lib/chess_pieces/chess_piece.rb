@@ -36,4 +36,11 @@ class ChessPiece
   def to_s
     "#{@color} #{@name} at #{@position}"
   end
+
+  ##
+  # Filters an array of moves, eliminating any that are outside
+  # a typical 8 x 8 chess board.
+  def moves_in_bounds(move_arr)
+    move_arr.select { |position| position.all? { |coordinate| coordinate.between?(0, 8) } }
+  end
 end
