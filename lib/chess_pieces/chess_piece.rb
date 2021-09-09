@@ -21,7 +21,7 @@ class ChessPiece
 
   ##
   # Returns an array of legal move positions
-  def legal_moves(board)
+  def legal_moves
     raise 'Overwrite for each piece'
   end
 
