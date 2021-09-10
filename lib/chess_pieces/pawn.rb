@@ -5,12 +5,13 @@ require_relative 'chess_piece'
 ##
 # Pawn piece for chess
 class Pawn < ChessPiece
-  attr_reader :has_moved
+  attr_reader :has_moved, :direction
 
   ##
   # Initializes a new pawn
   def initialize(color, position)
     @has_moved = false
+    @direction = color == 'white' ? 1 : -1
     super(color == 'white' ? '♙' : '♟', color, position, 1)
   end
 
@@ -20,12 +21,11 @@ class Pawn < ChessPiece
   def legal_moves
     row, col = @position
     legal_move_arr = []
-    direction = color == 'white' ? 1 : -1
-    (-1..1).each { |val| legal_move_arr.append([row + direction, col + val]) }
+    (-1..1).each { |val| legal_move_arr.append([row + @direction, col + val]) }
 
     # A pawn may travel two spaces in the given direction unless it
     # has already moved before.
-    legal_move_arr.append([row + 2 * direction, col]) unless @has_moved
+    legal_move_arr.append([row + 2 * @direction, col]) unless @has_moved
 
     moves_in_bounds(legal_move_arr)
   end
@@ -39,8 +39,8 @@ class Pawn < ChessPiece
   def can_capture?(occupied_position, other_piece)
     return false if other_piece.color == @color
 
-    in_front = occupied_position[1] == @position[1]
-    diagonal = [@position[0] + 1, @position[0] - 1].include?(occupied_position[0])
+    in_front = occupied_position[0] == (@position[0] + @direction)
+    diagonal = [@position[1] + 1, @position[1] - 1].include?(occupied_position[1])
     in_front && diagonal
   end
 
@@ -49,5 +49,4 @@ class Pawn < ChessPiece
   def moved
     @has_moved = true
   end
-
 end
