@@ -22,13 +22,13 @@ class ChessPiece
   ##
   # Returns an array of legal move positions
   def legal_moves
-    raise 'Overwrite for each piece'
+    raise StandardError.new('Overwrite for each piece')
   end
 
   ##
   # Returns whether the piece can capture another piece given its position
   def can_capture?(occupied_position)
-    raise 'Overwrite for each piece'
+    raise StandardError.new('Overwrite for each piece')
   end
 
   ##
@@ -41,6 +41,6 @@ class ChessPiece
   # Filters an array of moves, eliminating any that are outside
   # a typical 8 x 8 chess board.
   def moves_in_bounds(move_arr)
-    move_arr.select { |position| position.all? { |coordinate| coordinate.between?(0, 8) } }
+    move_arr.select { |position| position.all? { |coordinate| coordinate.between?(0, 7) } }
   end
 end
