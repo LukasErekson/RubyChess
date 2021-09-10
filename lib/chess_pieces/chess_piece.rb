@@ -22,13 +22,13 @@ class ChessPiece
   ##
   # Returns an array of legal move positions
   def legal_moves
-    raise StandardError.new('Overwrite for each piece')
+    raise StandardError, 'Overwrite for each piece'
   end
 
   ##
   # Returns whether the piece can capture another piece given its position
-  def can_capture?(occupied_position)
-    raise StandardError.new('Overwrite for each piece')
+  def can_capture?(_occupied_position)
+    raise StandardError, 'Overwrite for each piece'
   end
 
   ##
