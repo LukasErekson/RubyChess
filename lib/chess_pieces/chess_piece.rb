@@ -32,11 +32,11 @@ class ChessPiece
   end
 
   ##
-  # Returns the name, color, and location as as a string
+  # Returns the name of the piece with a space after it
   def to_s
-    "#{@color} #{@name} at #{@position}"
+    "#{@name} "
   end
-
+  
   ##
   # Filters an array of moves, eliminating any that are outside
   # a typical 8 x 8 chess board.
