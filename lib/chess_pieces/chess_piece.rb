@@ -36,7 +36,7 @@ class ChessPiece
   def to_s
     "#{@name} "
   end
-  
+
   ##
   # Filters an array of moves, eliminating any that are outside
   # a typical 8 x 8 chess board.
