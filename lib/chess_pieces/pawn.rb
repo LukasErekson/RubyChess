@@ -12,7 +12,7 @@ class Pawn < ChessPiece
   def initialize(color, position)
     @has_moved = false
     @direction = color == 'white' ? 1 : -1
-    super(color == 'white' ? '♙' : '♟', color, position, 1)
+    super(color == 'white' ? '♟' : '♙', color, position, 1)
   end
 
   ##
