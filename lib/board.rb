@@ -8,8 +8,8 @@ require_relative 'chess_pieces/pawn'
 # A chess board, complete with setup of chess pieces,
 # validation of moves, and computing check/checkmate.
 class Board
-  WHITE_SQUARE = '██'.white
-  BLACK_SQAURE = '  '
+  WHITE_SQUARE = { background: :light_red }.freeze
+  BLACK_SQAURE = { background: :black }.freeze
 
   ##
   # Creates instance variables and sets up the board for
@@ -25,8 +25,9 @@ class Board
     string_stream = StringIO.new
     8.downto(1) do |row|
       string_stream << " #{row} "
-      @game_board[row - 1].each do |col|
-        string_stream << col
+      @game_board[row - 1].each_with_index do |col, col_num|
+        bg_color = (row - 1) % 2 == col_num % 2 ? WHITE_SQUARE : BLACK_SQAURE
+        string_stream << col.to_s.colorize(bg_color)
       end
       string_stream << "\n"
     end
@@ -51,10 +52,7 @@ class Board
       when 6 # white pawns
         8.times { |col| rows[row] << Pawn.new('black', [row, col]) }
       else
-        8.times do |col|
-          empty_square = row % 2 == col % 2 ? WHITE_SQUARE : BLACK_SQAURE
-          rows[row] << empty_square
-        end
+        8.times { rows[row] << '  ' }
       end
     end
 
