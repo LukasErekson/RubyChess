@@ -3,6 +3,11 @@
 require 'colorize'
 require 'stringio'
 require_relative 'chess_pieces/pawn'
+require_relative 'chess_pieces/rook'
+require_relative 'chess_pieces/knight'
+require_relative 'chess_pieces/bishop'
+require_relative 'chess_pieces/queen'
+require_relative 'chess_pieces/king'
 
 ##
 # A chess board, complete with setup of chess pieces,
@@ -26,7 +31,7 @@ class Board
     8.downto(1) do |row|
       string_stream << " #{row} "
       @game_board[row - 1].each_with_index do |col, col_num|
-        bg_color = (row - 1) % 2 == col_num % 2 ? WHITE_SQUARE : BLACK_SQAURE
+        bg_color = (row - 1) % 2 == col_num % 2 ? BLACK_SQAURE : WHITE_SQUARE
         string_stream << col.to_s.colorize(bg_color)
       end
       string_stream << "\n"
@@ -44,18 +49,39 @@ class Board
   # start of the game.
   def setup_board
     # Build the empty board
-    rows = Array.new(8) { [] }
-    8.times do |row|
-      case row
-      when 1 # black pawns
-        8.times { |col| rows[row] << Pawn.new('white', [row, col]) }
-      when 6 # white pawns
-        8.times { |col| rows[row] << Pawn.new('black', [row, col]) }
-      else
-        8.times { rows[row] << '  ' }
-      end
+    rows = place_pieces('white')
+    4.times do
+      blank_rows = []
+      8.times { blank_rows << '  ' }
+      rows << blank_rows
     end
+    rows += place_pieces('black')
 
     rows
+  end
+
+  ##
+  # Returns the 2 arrays of the chess pieces in the proper places based od
+  # their color.
+  def place_pieces(color)
+    is_white = color == 'white'
+    pawn_row = is_white ? 1 : 6
+    pawns = []
+    8.times { |col| pawns << Pawn.new(color, [pawn_row, col]) }
+
+    back_row = is_white ? 0 : 7
+    back_row_pieces = [Rook.new(color, [back_row, 0]),
+                       Knight.new(color, [back_row, 1]),
+                       Bishop.new(color, [back_row, 2]),
+                       Queen.new(color, [back_row, 3]),
+                       King.new(color, [back_row, 4]),
+                       Bishop.new(color, [back_row, 5]),
+                       Knight.new(color, [back_row, 6]),
+                       Rook.new(color, [back_row, 7])]
+    if is_white
+      [back_row_pieces, pawns]
+    else
+      [pawns, back_row_pieces]
+    end
   end
 end
