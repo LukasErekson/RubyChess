@@ -23,9 +23,9 @@ class Board
   # shaded spaces.
   def to_s
     string_stream = StringIO.new
-    @game_board.each_with_index do |row, idx|
-      string_stream << " #{8 - idx} "
-      row.each do |col|
+    8.downto(1) do |row|
+      string_stream << " #{row} "
+      @game_board[row - 1].each do |col|
         string_stream << col
       end
       string_stream << "\n"
@@ -47,14 +47,13 @@ class Board
     8.times do |row|
       case row
       when 1 # black pawns
-        8.times { |col| rows[row] << Pawn.new('black', [row, col]) }
-        next
-      when 6 # white pawns
         8.times { |col| rows[row] << Pawn.new('white', [row, col]) }
-        next
+      when 6 # white pawns
+        8.times { |col| rows[row] << Pawn.new('black', [row, col]) }
       else
         8.times do |col|
-          rows[row] << row % 2 == col % 2 ? BLACK_SQAURE : WHITE_SQUARE
+          empty_square = row % 2 == col % 2 ? WHITE_SQUARE : BLACK_SQAURE
+          rows[row] << empty_square
         end
       end
     end

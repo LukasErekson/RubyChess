@@ -4,46 +4,46 @@ require 'rspec'
 require_relative '../lib/chess_pieces/pawn'
 
 RSpec.describe Pawn do
-  let(:bpawn) { described_class.new('black', [1, 0]) }
-  let(:wpawn) { described_class.new('white', [6, 1]) }
+  let(:white_pawn) { described_class.new('white', [1, 0]) }
+  let(:black_pawn) { described_class.new('black', [6, 1]) }
 
   describe '#legal_moves' do
     context 'having not moved before' do
       it 'returns only valid moves for a white pawn' do
-        expect(bpawn.legal_moves).to eq([[2, 0], [2, 1], [3, 0]])
+        expect(white_pawn.legal_moves).to eq([[2, 0], [2, 1], [3, 0]])
       end
 
       it 'returns only valid moves for a black pawn' do
-        expect(wpawn.legal_moves).to eq([[5, 0], [5, 1], [5, 2], [4, 1]])
+        expect(black_pawn.legal_moves).to eq([[5, 0], [5, 1], [5, 2], [4, 1]])
       end
     end
 
     context 'having moved' do
       it 'returns only valid moves for a white pawn' do
-        bpawn.moved
-        expect(bpawn.legal_moves).to eq([[2, 0], [2, 1]])
+        white_pawn.moved
+        expect(white_pawn.legal_moves).to eq([[2, 0], [2, 1]])
       end
 
       it 'returns only valid moves for a black pawn' do
-        wpawn.moved
-        expect(wpawn.legal_moves).to eq([[5, 0], [5, 1], [5, 2]])
+        black_pawn.moved
+        expect(black_pawn.legal_moves).to eq([[5, 0], [5, 1], [5, 2]])
       end
     end
   end
 
   describe '#moved' do
     it 'flags white pawn as having moved' do
-      expect(proc { bpawn.moved }).to change(bpawn, :has_moved).to(true)
+      expect(proc { white_pawn.moved }).to change(white_pawn, :has_moved).to(true)
     end
     it 'flags black pawn as having moved' do
-      expect(proc { wpawn.moved }).to change(wpawn, :has_moved).to(true)
+      expect(proc { black_pawn.moved }).to change(black_pawn, :has_moved).to(true)
     end
   end
 
   describe '#can_capture?' do
-    let(:pawn1) { described_class.new('black', [3, 3]) }
-    let(:pawn2) { described_class.new('white', [4, 2]) }
-    let(:pawn3) { described_class.new('white', [4, 3]) }
+    let(:pawn1) { described_class.new('white', [3, 3]) }
+    let(:pawn2) { described_class.new('black', [4, 2]) }
+    let(:pawn3) { described_class.new('black', [4, 3]) }
 
     context 'when a pawn can capture the piece' do
       it 'returns true for black pawn' do
