@@ -2,6 +2,7 @@
 
 require 'colorize'
 require_relative 'chess_piece'
+require_relative 'move_tree_node'
 
 ##
 # Pawn piece for chess
@@ -21,14 +22,13 @@ class Pawn < ChessPiece
   # current position.
   def legal_moves
     row, col = @position
-    legal_move_arr = []
-    (-1..1).each { |val| legal_move_arr.append([row + @direction, col + val]) }
+    (-1..1).each { |val| @move_tree.root.add_child([row + @direction, col + val]) }
 
     # A pawn may travel two spaces in the given direction unless it
     # has already moved before.
-    legal_move_arr.append([row + 2 * @direction, col]) unless @has_moved
+    @move_tree.root.children[1].add_child([row + 2 * @direction, col]) unless @has_moved
 
-    moves_in_bounds(legal_move_arr)
+    @move_tree = moves_in_bounds
   end
 
   ##

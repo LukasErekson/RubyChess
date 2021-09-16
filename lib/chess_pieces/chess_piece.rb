@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
+require_relative 'move_tree'
+
 ##
 # An abstract class for a chess piece (pawn, king, rook, etc.)
 class ChessPiece
-  attr_reader :name, :color, :position, :points
+  attr_reader :name, :color, :position, :points, :move_tree
 
   ##
   # Initializes a piece with its name, color, position, and score.
@@ -17,6 +19,7 @@ class ChessPiece
     @color = color
     @position = position
     @points = points
+    @move_tree = MoveTree.new(position)
   end
 
   ##
@@ -38,9 +41,17 @@ class ChessPiece
   end
 
   ##
-  # Filters an array of moves, eliminating any that are outside
+  # Filters move tree, eliminating any that are outside
   # a typical 8 x 8 chess board.
-  def moves_in_bounds(move_arr)
-    move_arr.select { |position| position.all? { |coordinate| coordinate.between?(0, 7) } }
+  def moves_in_bounds
+    @move_tree.each do |node|
+      node.children.each do |child|
+        unless child.loc.all? { |coordinate| coordinate.between?(0, 7) }
+          node.children.delete(child)
+        end
+      end
+    end
+
+    @move_tree
   end
 end
