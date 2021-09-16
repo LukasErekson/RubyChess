@@ -26,7 +26,13 @@ class MoveTree
   end
 
   ##
-  # Returns an array of the Move Tree using in-order
+  # Creates a deep copy of the move tree
+  def clone
+    Marshal.load( Marshal.dump(self) )
+  end
+
+  ##
+  # Returns an array of the Move Tree using level order
   # (for ease of writing test cases)
   def to_a
     # return [@loc] if @children.empty?
