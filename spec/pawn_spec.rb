@@ -14,7 +14,7 @@ RSpec.describe Pawn do
       end
 
       it 'returns only valid moves for a black pawn' do
-        expect(black_pawn.legal_moves.to_a).to eq([[5, 0], [5, 1], [5, 2], [4, 1]])
+        expect(black_pawn.legal_moves.to_a).to eq([[5, 1], [5, 2], [5, 0], [4, 1]])
       end
     end
 
@@ -26,7 +26,7 @@ RSpec.describe Pawn do
 
       it 'returns only valid moves for a black pawn' do
         black_pawn.moved
-        expect(black_pawn.legal_moves.to_a).to eq([[5, 0], [5, 1], [5, 2]])
+        expect(black_pawn.legal_moves.to_a).to eq([[5, 1], [5, 2], [5, 0]])
       end
     end
   end
