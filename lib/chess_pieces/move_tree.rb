@@ -20,8 +20,8 @@ class MoveTree
     visit_queue = [@root]
     until visit_queue.empty?
       current_node = visit_queue.shift
-      current_node.children.each { |child| visit_queue << child }
       block.call(current_node)
+      current_node.children.each { |child| visit_queue << child }
     end
   end
 
