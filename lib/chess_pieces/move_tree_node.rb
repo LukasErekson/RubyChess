@@ -39,4 +39,12 @@ class MoveTreeNode
   def to_s
     "#{@loc}: #{@children}"
   end
+
+  ##
+  # Define equality between two nodes by same location and children.
+  def ==(other)
+    return false unless other.is_a? MoveTreeNode
+
+    @loc == other.loc && @children == other.children
+  end
 end
