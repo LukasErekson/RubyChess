@@ -17,23 +17,13 @@ class MoveTreeNode
 
     return @children << loc if loc.is_a? MoveTreeNode
 
-    raise(StandardError, "Argument is a #{loc.class}; should be Array or MoveTreeNode")
+    # Raise an error if the argument is not either an array or a MoveTreeNode
+    raise(ArgumentError, "Argument is a #{loc.class}; should be Array or MoveTreeNode")
   end
 
   ##
-  # Returns an array of the Move Tree using in-order
-  # (for ease of writing test cases)
-  def to_a
-    return [@loc] if @children.empty?
-
-    tree_array = []
-    @children.each do |child|
-      puts child
-      tree_array += child.to_a
-    end
-    tree_array
-  end
-
+  # Returns a astring representation of the node using its location
+  # and a list of its children.
   def to_s
     "#{@loc}: #{@children}"
   end

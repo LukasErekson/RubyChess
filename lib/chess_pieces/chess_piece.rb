@@ -46,9 +46,7 @@ class ChessPiece
   def moves_in_bounds
     @move_tree.each do |node|
       node.children.each do |child|
-        unless child.loc.all? { |coordinate| coordinate.between?(0, 7) }
-          node.children.delete(child)
-        end
+        node.children.delete(child) unless child.loc.all? { |coordinate| coordinate.between?(0, 7) }
       end
     end
 

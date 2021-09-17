@@ -28,7 +28,7 @@ class MoveTree
   ##
   # Creates a deep copy of the move tree
   def clone
-    Marshal.load( Marshal.dump(self) )
+    Marshal.load(Marshal.dump(self))
   end
 
   ##

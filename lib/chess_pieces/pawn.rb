@@ -9,7 +9,6 @@ require_relative 'move_tree_node'
 # Pawn piece for chess
 class Pawn < ChessPiece
   attr_reader :has_moved, :direction
-  
 
   ##
   # Initializes a new pawn
