@@ -23,24 +23,4 @@ RSpec.describe ChessPiece do
       expect(abstract_piece.to_s).to eq('piece ')
     end
   end
-
-  describe '#moves_in_bounds' do
-    context 'given valid positions' do
-      it 'returns the same positions' do
-        expect(abstract_piece.moves_in_bounds([[0, 0], [1, 0], [5, 3]])).to eq([[0, 0], [1, 0], [5, 3]])
-      end
-    end
-
-    context 'given invalid positions' do
-      it 'returns an empty array' do
-        expect(abstract_piece.moves_in_bounds([[8, 8], [-1, 2], [-8, -2], [0, 9]])).to eq([])
-      end
-    end
-
-    context 'given a mix of valid and invalid positions' do
-      it 'returns only the valid positions' do
-        expect(abstract_piece.moves_in_bounds([[0, 1], [5, 8], [2, 4], [-1, 0]])).to eq([[0, 1], [2, 4]])
-      end
-    end
-  end
 end
