@@ -41,7 +41,7 @@ class Pawn < ChessPiece
   # TODO: Implement Empassan(sp?)
   def can_capture?(other_piece)
     unless other_piece.is_a? ChessPiece
-      raise ArgumentError, "other_piece is a #{other_piece.class}, but it must be a ChessPiece."
+      raise(ArgumentError, "other_piece is a #{other_piece.class}, but it must be a ChessPiece.")
     end
 
     return false if other_piece.color == @color
