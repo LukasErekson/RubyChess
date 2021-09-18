@@ -39,9 +39,14 @@ class Pawn < ChessPiece
   # piece is in front of and diagonal to the current space.
   #
   # TODO: Implement Empassan(sp?)
-  def can_capture?(occupied_position, other_piece)
+  def can_capture?(other_piece)
+    unless other_piece.is_a? ChessPiece
+      raise ArgumentError, "other_piece is a #{other_piece.class}, but it must be a ChessPiece."
+    end
+
     return false if other_piece.color == @color
 
+    occupied_position = other_piece.position
     in_front = occupied_position[0] == (@position[0] + @direction)
     diagonal = [@position[1] + 1, @position[1] - 1].include?(occupied_position[1])
     in_front && diagonal

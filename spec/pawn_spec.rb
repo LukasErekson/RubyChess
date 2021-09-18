@@ -47,21 +47,21 @@ RSpec.describe Pawn do
 
     context 'when a pawn can capture the piece' do
       it 'returns true for black pawn' do
-        expect(pawn1.can_capture?([4, 2], pawn2)).to be(true)
+        expect(pawn1.can_capture?(pawn2)).to be(true)
       end
 
       it 'returns true for white pawn' do
-        expect(pawn2.can_capture?([3, 3], pawn1)).to be(true)
+        expect(pawn2.can_capture?(pawn1)).to be(true)
       end
     end
 
     context 'when a pawn cannot capture the piece' do
       it 'returns false for white pawn' do
-        expect(pawn1.can_capture?([4, 3], pawn3)).to be(false)
+        expect(pawn1.can_capture?(pawn3)).to be(false)
       end
 
       it 'returns false for white pawn' do
-        expect(pawn3.can_capture?([3, 3], pawn1)).to be(false)
+        expect(pawn3.can_capture?(pawn1)).to be(false)
       end
     end
   end
