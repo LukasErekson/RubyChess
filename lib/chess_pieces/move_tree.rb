@@ -23,6 +23,7 @@ class MoveTree
       block.call(current_node)
       current_node.children.each { |child| visit_queue << child }
     end
+    self
   end
 
   ##
@@ -37,7 +38,8 @@ class MoveTree
   def to_a
     tree_array = []
     each { |node| tree_array << node.loc }
-    # Remove the root node
+    # Remove the root node since staying in the same location
+    # is not a move.
     tree_array.shift
     tree_array
   end
