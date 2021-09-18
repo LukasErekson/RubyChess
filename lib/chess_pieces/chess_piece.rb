@@ -24,7 +24,7 @@ class ChessPiece
 
   ##
   # Returns an array of legal move positions
-  def legal_moves
+  def possible_moves
     raise StandardError, 'Overwrite for each piece'
   end
 

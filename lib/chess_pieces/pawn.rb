@@ -22,7 +22,7 @@ class Pawn < ChessPiece
   ##
   # Returns an array of legal move positions based on the
   # current position.
-  def legal_moves
+  def possible_moves
     row, col = @position
     @move_tree = @move_tree_template.clone
     @move_tree.each do |node|

@@ -6,15 +6,15 @@ require_relative '../lib/chess_pieces/chess_piece'
 RSpec.describe ChessPiece do
   subject(:abstract_piece) { described_class.new('piece', 'white', [0, 0], 0) }
   let(:overwrite_err) { StandardError.new('Overwrite for each piece') }
-  describe '#legal_moves' do
+  describe '#possible_moves' do
     it 'raises an overwrite error' do
-      expect(proc { abstract_piece.legal_moves }).to raise_error(proc { overwrite_err })
+      expect(proc { abstract_piece.possible_moves }).to raise_error(proc { overwrite_err })
     end
   end
 
   describe '#can_capture?' do
     it 'raises an overwrite error' do
-      expect(proc { abstract_piece.legal_moves }).to raise_error(proc { overwrite_err })
+      expect(proc { abstract_piece.possible_moves }).to raise_error(proc { overwrite_err })
     end
   end
 

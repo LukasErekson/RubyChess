@@ -7,26 +7,26 @@ RSpec.describe Pawn do
   let(:white_pawn) { described_class.new('white', [1, 0]) }
   let(:black_pawn) { described_class.new('black', [6, 1]) }
 
-  describe '#legal_moves' do
+  describe '#possible_moves' do
     context 'having not moved before' do
       it 'returns only valid moves for a white pawn' do
-        expect(white_pawn.legal_moves.to_a).to eq([[2, 0], [2, 1], [3, 0]])
+        expect(white_pawn.possible_moves.to_a).to eq([[2, 0], [2, 1], [3, 0]])
       end
 
       it 'returns only valid moves for a black pawn' do
-        expect(black_pawn.legal_moves.to_a).to eq([[5, 1], [5, 2], [5, 0], [4, 1]])
+        expect(black_pawn.possible_moves.to_a).to eq([[5, 1], [5, 2], [5, 0], [4, 1]])
       end
     end
 
     context 'having moved' do
       it 'returns only valid moves for a white pawn' do
         white_pawn.moved
-        expect(white_pawn.legal_moves.to_a).to eq([[2, 0], [2, 1]])
+        expect(white_pawn.possible_moves.to_a).to eq([[2, 0], [2, 1]])
       end
 
       it 'returns only valid moves for a black pawn' do
         black_pawn.moved
-        expect(black_pawn.legal_moves.to_a).to eq([[5, 1], [5, 2], [5, 0]])
+        expect(black_pawn.possible_moves.to_a).to eq([[5, 1], [5, 2], [5, 0]])
       end
     end
   end
