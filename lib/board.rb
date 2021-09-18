@@ -8,6 +8,7 @@ require_relative 'chess_pieces/knight'
 require_relative 'chess_pieces/bishop'
 require_relative 'chess_pieces/queen'
 require_relative 'chess_pieces/king'
+require_relative 'invalid_move_error'
 
 ##
 # A chess board, complete with setup of chess pieces,
@@ -21,6 +22,29 @@ class Board
   # the start of the game.
   def initialize
     @game_board = setup_board
+    @current_player_color = 'white'
+  end
+
+  ##
+  # Moves a piece at a given location to another location if
+  # the move is valid. Raises an InvalidMoveError otherwise.
+  def move(from, to)
+    frow, fcol = from
+    piece = game_board[frow][fcol]
+    raise InvalidMoveError, "No piece at #{from}" unless piece.is_a? ChessPiece
+
+    raise InvalidMoveError, "You cannot move opponent's piece at #{from}" unless piece.color == @current_player_color
+
+    unless ChessPiece.possible_moves.to_a.include?(to) do
+      raise InvalidMoveError, "You cannot move from #{from} to #{to}."
+    end
+
+    trow, tcol = to
+    to_space = @game_board[trow][tcol]
+    if to_space.is_a? ChessPiece
+      raise InvalidMoveError, 'You cannot capture your own piece.' unless to_space.color != @current_player_color
+      raise InvalidMoveError, 'You cannot capture this piece.' unless piece.can_capture?(to, to_space)
+    end
   end
 
   ##
