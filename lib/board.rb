@@ -64,24 +64,37 @@ class Board
   # Returns the 2 arrays of the chess pieces in the proper places based od
   # their color.
   def place_pieces(color)
-    is_white = color == 'white'
-    pawn_row = is_white ? 1 : 6
-    pawns = []
-    8.times { |col| pawns << Pawn.new(color, [pawn_row, col]) }
-
-    back_row = is_white ? 0 : 7
-    back_row_pieces = [Rook.new(color, [back_row, 0]),
-                       Knight.new(color, [back_row, 1]),
-                       Bishop.new(color, [back_row, 2]),
-                       Queen.new(color, [back_row, 3]),
-                       King.new(color, [back_row, 4]),
-                       Bishop.new(color, [back_row, 5]),
-                       Knight.new(color, [back_row, 6]),
-                       Rook.new(color, [back_row, 7])]
-    if is_white
+    pawns = place_pawns(color)
+    back_row_pieces = place_back_row(color)
+    if color == 'white'
       [back_row_pieces, pawns]
     else
       [pawns, back_row_pieces]
     end
+  end
+
+  ##
+  # Returns an array of pawns of the appropriate color on the
+  # appropriate row based on +color+.
+  def place_pawns(color)
+    pawn_row = color == 'white' ? 1 : 6
+    pawns = []
+    8.times { |col| pawns << Pawn.new(color, [pawn_row, col]) }
+    pawns
+  end
+
+  ##
+  # Returns an array of back row pieces of the appropriate color
+  # on the appropriate row based on +color+.
+  def place_back_row(color)
+    back_row = color == 'white' ? 0 : 7
+    [Rook.new(color, [back_row, 0]),
+     Knight.new(color, [back_row, 1]),
+     Bishop.new(color, [back_row, 2]),
+     Queen.new(color, [back_row, 3]),
+     King.new(color, [back_row, 4]),
+     Bishop.new(color, [back_row, 5]),
+     Knight.new(color, [back_row, 6]),
+     Rook.new(color, [back_row, 7])]
   end
 end
