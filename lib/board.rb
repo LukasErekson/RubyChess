@@ -31,7 +31,7 @@ class Board
   # the move is valid. Raises an InvalidMoveError otherwise.
   def move(from, to)
     frow, fcol = from
-    piece = game_board[frow][fcol]
+    piece = @game_board[frow][fcol]
     raise(InvalidMoveError, "No piece at #{from}") unless piece.is_a? ChessPiece
 
     raise(InvalidMoveError, "You cannot move opponent's piece at #{from}") unless piece.color == @current_player_color
@@ -44,10 +44,13 @@ class Board
     if to_space.is_a? ChessPiece
       raise(InvalidMoveError, 'You cannot capture your own piece.') unless to_space.color != @current_player_color
 
-      raise(InvalidMoveError, 'You cannot capture this piece.') unless piece.can_capture?(to, to_space)
+      raise(InvalidMoveError, 'You cannot capture this piece.') unless piece.can_capture?(to_space)
 
-      piece.position = [trow, tcol]
     end
+    @game_board[trow][tcol] = piece.move(to)
+    @game_board[frow][fcol] = BLANK_SQUARE
+
+    @current_player_color == 'white' ? 'black' : 'white'
   end
 
   ##

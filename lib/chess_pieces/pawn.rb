@@ -2,6 +2,7 @@
 
 require 'colorize'
 require_relative 'chess_piece'
+require_relative 'queen'
 require_relative 'move_tree'
 require_relative 'move_tree_node'
 
@@ -15,8 +16,22 @@ class Pawn < ChessPiece
   def initialize(color, position)
     @has_moved = false
     @direction = color == 'white' ? 1 : -1
+    @back_row = color == 'white' ? 7 : 0
     @move_tree_template = build_pawn_move_tree
     super(color == 'white' ? '♟'.white : '♙', color, position, 1)
+  end
+
+  ##
+  # Moves the pawn and updates +@has_moved+.
+  # If the pawn reaches the back row of the opposing side,
+  # it returns a queen.
+  def move(to)
+    moved unless @has_moved
+
+    # Pawn becomes a queen
+    return Queen.new(@color, to) if to[0] == @back_row
+
+    super(to)
   end
 
   ##

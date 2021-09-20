@@ -23,6 +23,14 @@ class ChessPiece
   end
 
   ##
+  # Updates position to be the +to+. Returns the piece with the updated
+  # location
+  def move(to)
+    @position = to
+    self
+  end
+
+  ##
   # Returns an array of legal move positions
   def possible_moves
     raise StandardError, 'Overwrite for each piece'
