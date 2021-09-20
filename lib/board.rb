@@ -16,6 +16,7 @@ require_relative 'invalid_move_error'
 class Board
   WHITE_SQUARE = { background: :light_red }.freeze
   BLACK_SQAURE = { background: :black }.freeze
+  BLANK_SQUARE = '  '
 
   ##
   # Creates instance variables and sets up the board for
@@ -45,6 +46,7 @@ class Board
 
       raise(InvalidMoveError, 'You cannot capture this piece.') unless piece.can_capture?(to, to_space)
 
+      piece.position = [trow, tcol]
     end
   end
 
@@ -77,7 +79,7 @@ class Board
     rows = place_pieces('white')
     4.times do
       blank_rows = []
-      8.times { blank_rows << '  ' }
+      8.times { blank_rows << BLANK_SQUARE }
       rows << blank_rows
     end
     rows += place_pieces('black')
