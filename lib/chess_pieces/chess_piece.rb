@@ -31,15 +31,27 @@ class ChessPiece
   end
 
   ##
-  # Returns an array of legal move positions
+  # Returns a move tree of legal move positions
   def possible_moves
-    raise StandardError, 'Overwrite for each piece'
+    row, col = @position
+    @move_tree = @move_tree_template.clone || move_tree
+    @move_tree.each do |node|
+      r, c = node.loc
+      node.loc = [row + r, col + c]
+    end
+
+    @move_tree = moves_in_bounds
   end
 
   ##
   # Returns whether the piece can capture another piece given its position
-  def can_capture?(_occupied_position)
-    raise StandardError, 'Overwrite for each piece'
+  def can_capture?(other_piece)
+    unless other_piece.is_a? ChessPiece
+      raise(ArgumentError, "other_piece is a #{other_piece.class}, but it must be a ChessPiece.")
+    end
+
+    # Most pieces can capture if they can move there. Pawns are the exception.
+    @move_tree.to_a.include?(other_piece.position)
   end
 
   ##
