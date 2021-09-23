@@ -10,7 +10,6 @@ RSpec.describe 'Board#move' do
   let(:board) { Board.new }
   let(:game_board) { board.instance_variable_get(:@game_board) }
   describe 'first turn' do
-
     context 'when a white pawn moves' do
       it 'lets pawn move forward one' do
         8.times do |col|
@@ -35,8 +34,10 @@ RSpec.describe 'Board#move' do
     context 'when a white knight moves' do
       it 'lets knight move to valid space' do
         expect(proc { board.move([0, 1], [2, 0]) }).to change { game_board[0][1] }.to('  ')
-        expect(proc { board.move([0, 1], [2, 2]) }).to change { game_board[0][1] }.to('  ')
         expect(proc { board.move([0, 6], [2, 5]) }).to change { game_board[0][6] }.to('  ')
+        expect(proc { board.move([2, 0], [0, 1]) }).to change { game_board[2][0] }.to('  ')
+        expect(proc { board.move([2, 5], [0, 6]) }).to change { game_board[2][5] }.to('  ')
+        expect(proc { board.move([0, 1], [2, 2]) }).to change { game_board[0][1] }.to('  ')
         expect(proc { board.move([0, 6], [2, 7]) }).to change { game_board[0][6] }.to('  ')
       end
     end

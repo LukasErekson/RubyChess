@@ -35,7 +35,7 @@ class Pawn < ChessPiece
   end
 
   ##
-  # Returns an array of legal move positions based on the
+  # Returns a move tree of legal move positions based on the
   # current position.
   def possible_moves
     row, col = @position

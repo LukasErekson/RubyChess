@@ -8,7 +8,6 @@ class Queen < ChessPiece
   ##
   # Initializes a new pawn
   def initialize(color, position)
-    @direction = color == 'white' ? 1 : -1
     super(color == 'white' ? '♛'.white : '♕', color, position, 9)
   end
 end
