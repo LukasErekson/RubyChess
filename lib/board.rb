@@ -30,6 +30,24 @@ class Board
   # Moves a piece at a given location to another location if
   # the move is valid. Raises an InvalidMoveError otherwise.
   def move(from, to)
+    # Raises an execption if the move isn't valid
+    validate_move(from, to)
+
+    # Moves the piece on the board
+    frow, fcol = from
+    piece = @game_board[frow][fcol]
+    trow, tcol = to
+    @game_board[trow][tcol] = piece.move(to)
+    @game_board[frow][fcol] = BLANK_SQUARE
+
+    # Change whose turn it is
+    change_turn
+  end
+
+  ##
+  # Determines whether or not the move is a valid move
+  # Raises an InvalidMoveError with a specific message if the move is invalid.
+  def validate_move(from, to)
     frow, fcol = from
     piece = @game_board[frow][fcol]
     raise(InvalidMoveError, "No piece at #{from}") unless piece.is_a? ChessPiece
@@ -41,16 +59,11 @@ class Board
 
     trow, tcol = to
     to_space = @game_board[trow][tcol]
-    if to_space.is_a? ChessPiece
-      raise(InvalidMoveError, 'You cannot capture your own piece.') unless to_space.color != @current_player_color
+    return nil unless @game_board[trow][tcol].is_a? ChessPiece
 
-      raise(InvalidMoveError, 'You cannot capture this piece.') unless piece.can_capture?(to_space)
+    raise(InvalidMoveError, 'You cannot capture your own piece.') unless to_space.color != @current_player_color
 
-    end
-    @game_board[trow][tcol] = piece.move(to)
-    @game_board[frow][fcol] = BLANK_SQUARE
-
-    @current_player_color = @current_player_color == 'white' ? 'black' : 'white'
+    raise(InvalidMoveError, 'You cannot capture this piece.') unless piece.can_capture?(to_space)
   end
 
   ##
@@ -126,5 +139,11 @@ class Board
      Bishop.new(color, [back_row, 5]),
      Knight.new(color, [back_row, 6]),
      Rook.new(color, [back_row, 7])]
+  end
+
+  ##
+  # Changes whose turn it is by switching between 'black' and 'white'.
+  def change_turn
+    @current_player_color = @current_player_color == 'white' ? 'black' : 'white'
   end
 end
