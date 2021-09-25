@@ -50,7 +50,7 @@ class Board
     @game_board[trow][tcol] = piece.move(to)
     @game_board[frow][fcol] = BLANK_SQUARE
 
-    @current_player_color == 'white' ? 'black' : 'white'
+    @current_player_color = @current_player_color == 'white' ? 'black' : 'white'
   end
 
   ##
