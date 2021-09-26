@@ -3,12 +3,9 @@
 require_relative 'chess_piece'
 
 class Knight < ChessPiece
-  attr_reader :direction
-
   ##
   # Initializes a new pawn
   def initialize(color, position)
-    @direction = color == 'white' ? 1 : -1
     @move_tree_template = build_knight_move_tree
     super(color == 'white' ? '♞'.white : '♘', color, position, 3)
   end

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'colorize'
 require_relative 'chess_piece'
 
 class Rook < ChessPiece

@@ -3,7 +3,6 @@
 require_relative 'chess_piece'
 
 class King < ChessPiece
-  attr_reader :direction
 
   ##
   # Initializes a new pawn
