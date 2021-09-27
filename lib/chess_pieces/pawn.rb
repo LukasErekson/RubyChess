@@ -55,10 +55,30 @@ class Pawn < ChessPiece
     occupied_position = other_piece.position
     in_front = occupied_position[0] == (@position[0] + @direction)
     diagonal = [@position[1] + 1, @position[1] - 1].include?(occupied_position[1])
-    in_front && diagonal
+    in_front && diagonal || en_passant(other_piece)
   end
 
   protected
+
+  ##
+  # Returns whether the Pawn can capture another Pawn using the rule
+  # "En passant."
+  # See https://en.wikipedia.org/wiki/En_passant
+  def en_passant(other_piece)
+    # Only applies to other Pawns
+    return false unless other_piece.is_a? Pawn
+
+    # Only applies when the other Pawn just finished its first move
+    return false unless other_piece.first_move?
+
+    # Check beside on the right
+    beside = other_piece.position == [@position[0] , @position[1] + 1]
+    # Check beside on the left
+    beside = beside || (other_piece.position ==  [@position[0], @position[1] - 1])
+    
+    # Return true if the other peice is beside the moving pawn
+    beside
+  end
 
   ##
   # Builds the Pawn move tree. The pawn can move forward 2 spaces on its first
