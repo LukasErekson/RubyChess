@@ -13,7 +13,9 @@ class Knight < ChessPiece
   end
 
   ##
-  # Builds +move_tree_template+ for the knight piece.
+  # Builds the Knight move tree. The Knight can move in an L shape in any
+  # direction as long as the board permits. The permutations given represent
+  # the 8 spaces a Knight may move to.
   def build_knight_move_tree
     move_tree = MoveTree.new([0, 0])
     # Get all possible net changes for a knight

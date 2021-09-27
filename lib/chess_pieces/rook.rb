@@ -15,7 +15,8 @@ class Rook < ChessPiece
   protected
 
   ##
-  # Buildsthe rook's template build tree
+  # Builds the Rook's move tree. The Rook can move horizontally and vertically
+  # as far as the board permits.
   def build_rook_move_tree
     move_tree = MoveTree.new([0, 0])
 

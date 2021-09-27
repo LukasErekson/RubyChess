@@ -15,7 +15,8 @@ class Bishop < ChessPiece
   protected
 
   ##
-  # Build a bishop's move tree with only diagonal moves.
+  # Builds a Bishop's move tree. The Bishop can move diagonally as far as the
+  # board permits.
   def build_bishop_move_tree
     move_tree_template = MoveTree.new([0, 0])
 

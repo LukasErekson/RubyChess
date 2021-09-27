@@ -63,13 +63,19 @@ class Pawn < ChessPiece
   protected
 
   ##
-  # Build the pawn move_tree net changes
+  # Builds the Pawn move tree. The pawn can move forward 2 spaces on its first
+  # move, but otherwise can only move one space forward. The Pawn may also move
+  # diagonally to capture an enemy piece.
   def build_pawn_move_tree
     move_tree = MoveTree.new([0, 0])
+
+    # Create changes based on @direction because pawns can only move one
+    # direction.
     move_tree.root.add_child([@direction, 0])
     move_tree.root.children[0].add_child([2 * @direction, 0])
     move_tree.root.add_child([@direction, 1])
     move_tree.root.add_child([@direction, -1])
+
     move_tree
   end
 end
