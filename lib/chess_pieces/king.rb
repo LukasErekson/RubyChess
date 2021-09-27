@@ -19,12 +19,14 @@ class King < ChessPiece
   # one space.
   def build_king_move_tree
     move_tree_template = MoveTree.new([0, 0])
-    [-1, 0, 1].repeated_permutation(2) do |loc|
+
+    # Get the 8 surrounding spaces
+    locations = [-1, 0, 1].repeated_permutation(2).to_a
+    locations.delete([0, 0])
+
+    locations.each do |loc|
       move_tree_template.root.add_child(loc)
     end
-
-    # Remove the extra [0, 0]
-    move_tree_template.root.remove_child([0, 0])
 
     move_tree_template
   end
