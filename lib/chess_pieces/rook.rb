@@ -2,6 +2,8 @@
 
 require_relative 'chess_piece'
 
+##
+# Rook piece for a game of chess
 class Rook < ChessPiece
   ##
   # Initializes a new pawn

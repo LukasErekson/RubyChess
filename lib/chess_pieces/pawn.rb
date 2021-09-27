@@ -7,7 +7,7 @@ require_relative 'move_tree'
 require_relative 'move_tree_node'
 
 ##
-# Pawn piece for chess
+# Pawn piece for a game of chess
 class Pawn < ChessPiece
   attr_reader :has_moved, :direction
 

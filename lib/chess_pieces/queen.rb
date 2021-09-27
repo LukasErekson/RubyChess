@@ -2,6 +2,8 @@
 
 require_relative 'chess_piece'
 
+##
+# Queen piece for a game of chess
 class Queen < ChessPiece
   ##
   # Initializes a new pawn

@@ -2,6 +2,8 @@
 
 require_relative 'chess_piece'
 
+##
+# Bishop piece for a game of chess
 class Bishop < ChessPiece
   ##
   # Initializes a new pawn

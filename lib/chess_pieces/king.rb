@@ -2,11 +2,9 @@
 
 require_relative 'chess_piece'
 
+##
+# King piece for a gameof chess
 class King < ChessPiece
-<<<<<<< HEAD
-=======
-
->>>>>>> f51bab81f3a52469847f51a7475e35268837134b
   ##
   # Initializes a new pawn
   def initialize(color, position)
