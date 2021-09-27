@@ -6,6 +6,20 @@ require_relative '../lib/chess_game'
 # Require all the chess pieces
 Dir.children('./lib/chess_pieces').each { |piece_file| require_relative "../lib/chess_pieces/#{piece_file}" }
 
+##
+# Creates an empty board so that the tests can set up any configuration
+# of ChessGame::@board
+def blank_board
+  rows = []
+  8.times do
+    blank_rows = []
+    8.times { blank_rows << ChessGame::BLANK_SQUARE }
+    rows << blank_rows
+  end
+
+  rows
+end
+
 RSpec.describe 'ChessGame#move' do
   let(:game) { ChessGame.new }
   let(:board) { game.instance_variable_get(:@board) }
