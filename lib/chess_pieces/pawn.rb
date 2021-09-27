@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
-require 'colorize'
 require_relative 'chess_piece'
 require_relative 'queen'
-require_relative 'move_tree'
-require_relative 'move_tree_node'
 
 ##
 # Pawn piece for a game of chess
