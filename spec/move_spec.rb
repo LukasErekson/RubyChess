@@ -44,14 +44,6 @@ RSpec.describe 'ChessGame#move' do
                        }.to('  ')
         end
       end
-
-      it 'flags pawn as having moved afterward' do
-        8.times do |col|
-          game.move([1, col], [3, col])
-          game.instance_variable_set(:@current_player_color, 'white')
-          expect(board[3][col].has_moved).to be true
-        end
-      end
     end
 
     context 'when a white knight moves' do

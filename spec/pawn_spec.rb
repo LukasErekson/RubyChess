@@ -20,23 +20,23 @@ RSpec.describe Pawn do
 
     context 'having moved' do
       it 'returns only valid moves for a white pawn' do
-        white_pawn.moved
+        white_pawn.move([1, 0])
         expect(white_pawn.possible_moves.to_a).to eq([[2, 0], [2, 1]])
       end
 
       it 'returns only valid moves for a black pawn' do
-        black_pawn.moved
+        black_pawn.move([6, 1])
         expect(black_pawn.possible_moves.to_a).to eq([[5, 1], [5, 2], [5, 0]])
       end
     end
   end
 
-  describe '#moved' do
+  describe '#has_moved?' do
     it 'flags white pawn as having moved' do
-      expect(proc { white_pawn.moved }).to change(white_pawn, :has_moved).to(true)
+      expect(proc { white_pawn.move([1, 1]) }).to change(white_pawn, :move_count).to(1)
     end
     it 'flags black pawn as having moved' do
-      expect(proc { black_pawn.moved }).to change(black_pawn, :has_moved).to(true)
+      expect(proc { black_pawn.move([1, 1]) }).to change(black_pawn, :move_count).to(1)
     end
   end
 

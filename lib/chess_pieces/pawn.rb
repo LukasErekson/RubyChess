@@ -6,12 +6,12 @@ require_relative 'queen'
 ##
 # Pawn piece for a game of chess
 class Pawn < ChessPiece
-  attr_reader :has_moved, :direction
+  attr_reader :move_count, :direction
 
   ##
   # Initializes a new pawn
   def initialize(color, position)
-    @has_moved = false
+    @move_count = 0
     @direction = color == 'white' ? 1 : -1
     @back_row = color == 'white' ? 7 : 0
     @move_tree_template = build_pawn_move_tree
@@ -19,11 +19,13 @@ class Pawn < ChessPiece
   end
 
   ##
-  # Moves the pawn and updates +@has_moved+.
-  # If the pawn reaches the back row of the opposing side,
-  # it returns a queen.
+  # Moves the Pawn and updates @move_count
+  # If the pawn reaches the back row of the opposing side, it returns a queen.
   def move(to)
-    moved unless @has_moved
+    # Remove the two space move on the Pawn's first move
+    @move_tree_template.root.children[0].children.pop if @move_count.zero?
+
+    @move_count += 1
 
     # Pawn becomes a queen
     return Queen.new(@color, to) if to[0] == @back_row
@@ -32,29 +34,28 @@ class Pawn < ChessPiece
   end
 
   ##
+  # Returns whether or not the move the Pawn is on is its first ever move.
+  def first_move?
+    @move_count <= 1
+  end
+
+  ##
   # Returns whether the pawn can capture a piece at a given location
   # based on its current position. This only possible if the opposing
   # piece is in front of and diagonal to the current space.
   #
-  # TODO: Implement Empassan(sp?)
+  # TODO : Implement En passant
   def can_capture?(other_piece)
     unless other_piece.is_a? ChessPiece
       raise(ArgumentError, "other_piece is a #{other_piece.class}, but it must be a ChessPiece.")
     end
 
-    return false if other_piece.color == @color
+    raise(ArgumentError, 'cannot capture your own piece') if other_piece.color == @color
 
     occupied_position = other_piece.position
     in_front = occupied_position[0] == (@position[0] + @direction)
     diagonal = [@position[1] + 1, @position[1] - 1].include?(occupied_position[1])
     in_front && diagonal
-  end
-
-  # Flags @has_moved as true, indicating that the pawn can no
-  # longer move two spaces ahead of its current position.
-  def moved
-    @has_moved = true
-    @move_tree_template.root.children[0].children.pop
   end
 
   protected
