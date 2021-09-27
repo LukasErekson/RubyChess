@@ -13,20 +13,6 @@ class Knight < ChessPiece
   end
 
   ##
-  # Returns a move tree of legal move positions based on the
-  # current position.
-  def possible_moves
-    row, col = @position
-    @move_tree = @move_tree_template.clone
-    @move_tree.each do |node|
-      r, c = node.loc
-      node.loc = [row + r, col + c]
-    end
-
-    @move_tree = moves_in_bounds
-  end
-
-  ##
   # Builds +move_tree_template+ for the knight piece.
   def build_knight_move_tree
     move_tree = MoveTree.new([0, 0])

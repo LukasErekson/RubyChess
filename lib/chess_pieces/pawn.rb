@@ -35,20 +35,6 @@ class Pawn < ChessPiece
   end
 
   ##
-  # Returns a move tree of legal move positions based on the
-  # current position.
-  def possible_moves
-    row, col = @position
-    @move_tree = @move_tree_template.clone
-    @move_tree.each do |node|
-      r, c = node.loc
-      node.loc = [row + r, col + c]
-    end
-
-    @move_tree = moves_in_bounds
-  end
-
-  ##
   # Returns whether the pawn can capture a piece at a given location
   # based on its current position. This only possible if the opposing
   # piece is in front of and diagonal to the current space.
