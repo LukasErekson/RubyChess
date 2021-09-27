@@ -8,6 +8,24 @@ class King < ChessPiece
   ##
   # Initializes a new pawn
   def initialize(color, position)
+    @move_tree_template = build_king_move_tree
     super(color == 'white' ? '♚'.white : '♔', color, position, 10_000)
+  end
+
+  protected
+
+  ##
+  # Builds a king move tree where the king can move in any direction up to
+  # one space.
+  def build_king_move_tree
+    move_tree_template = MoveTree.new([0, 0])
+    [-1, 0, 1].repeated_permutation(2) do |loc|
+      move_tree_template.root.add_child(loc)
+    end
+
+    # Remove the extra [0, 0]
+    move_tree_template.root.remove_child([0, 0])
+
+    move_tree_template
   end
 end
