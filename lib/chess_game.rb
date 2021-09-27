@@ -11,9 +11,9 @@ require_relative 'chess_pieces/king'
 require_relative 'invalid_move_error'
 
 ##
-# A chess board, complete with setup of chess pieces,
+# A chess game that contains the game board, rules,
 # validation of moves, and computing check/checkmate.
-class Board
+class ChessGame
   WHITE_SQUARE = { background: :light_red }.freeze
   BLACK_SQAURE = { background: :black }.freeze
   BLANK_SQUARE = '  '
@@ -22,7 +22,7 @@ class Board
   # Creates instance variables and sets up the board for
   # the start of the game.
   def initialize
-    @game_board = setup_board
+    @board = setup_board
     @current_player_color = 'white'
   end
 
@@ -35,10 +35,10 @@ class Board
 
     # Moves the piece on the board
     frow, fcol = from
-    piece = @game_board[frow][fcol]
+    piece = @board[frow][fcol]
     trow, tcol = to
-    @game_board[trow][tcol] = piece.move(to)
-    @game_board[frow][fcol] = BLANK_SQUARE
+    @board[trow][tcol] = piece.move(to)
+    @board[frow][fcol] = BLANK_SQUARE
 
     # Change whose turn it is
     change_turn
@@ -49,7 +49,7 @@ class Board
   # Raises an InvalidMoveError with a specific message if the move is invalid.
   def validate_move(from, to)
     frow, fcol = from
-    piece = @game_board[frow][fcol]
+    piece = @board[frow][fcol]
     raise(InvalidMoveError, "No piece at #{from}") unless piece.is_a? ChessPiece
 
     raise(InvalidMoveError, "You cannot move opponent's piece at #{from}") unless piece.color == @current_player_color
@@ -58,8 +58,8 @@ class Board
     raise(InvalidMoveError, "You cannot move from #{from} to #{to}.") unless possible_moves.include?(to)
 
     trow, tcol = to
-    to_space = @game_board[trow][tcol]
-    return nil unless @game_board[trow][tcol].is_a? ChessPiece
+    to_space = @board[trow][tcol]
+    return nil unless @board[trow][tcol].is_a? ChessPiece
 
     raise(InvalidMoveError, 'You cannot capture your own piece.') unless to_space.color != @current_player_color
 
@@ -73,7 +73,7 @@ class Board
     string_stream = StringIO.new
     8.downto(1) do |row|
       string_stream << " #{row} "
-      @game_board[row - 1].each_with_index do |col, col_num|
+      @board[row - 1].each_with_index do |col, col_num|
         bg_color = (row - 1) % 2 == col_num % 2 ? BLACK_SQAURE : WHITE_SQUARE
         string_stream << col.to_s.colorize(bg_color)
       end
