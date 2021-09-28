@@ -93,11 +93,7 @@ class ChessGame
   def setup_board
     # Build the empty board
     rows = place_pieces('white')
-    4.times do
-      blank_rows = []
-      8.times { blank_rows << BLANK_SQUARE }
-      rows << blank_rows
-    end
+    rows += Array.new(4, Array.new(8, BLANK_SQUARE))
     rows += place_pieces('black')
 
     rows
