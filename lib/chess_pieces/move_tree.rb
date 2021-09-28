@@ -33,6 +33,31 @@ class MoveTree
   end
 
   ##
+  # Removes a node and its children from the MoveTree.
+  # Returns the trimmed child if it was found and nil if it wasn't found in the
+  # tree.
+  def trim_branch(loc)
+    # Raise an error if the argument is not either an array or a MoveTreeNode
+    unless (loc.is_a? Array) || (loc.is_a? MoveTreeNode)
+      raise(ArgumentError, "Argument is a #{loc.class}; should be Array or MoveTreeNode")
+    end
+
+    # Convert loc to a MoveTreeNode so that node.children.include?(loc) can
+    # find the right node.
+    loc = loc.is_a?(Array) ? MoveTreeNode.new(loc) : loc
+
+    each do |node|
+      if node.children.include?(loc)
+        node.remove_child(loc)
+        return loc
+      end
+    end
+
+    # Return nothing if the node was not found.
+    nil
+  end
+
+  ##
   # Returns an array of the Move Tree using level order
   # (for ease of writing test cases)
   def to_a
