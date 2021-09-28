@@ -96,4 +96,10 @@ RSpec.describe MoveTreeNode do
       end
     end
   end
+
+  describe '#to_s' do
+    it 'returns the node as a string' do
+      expect(node.to_s).to eq('[0, 0]: []')
+    end
+  end
 end
