@@ -85,6 +85,12 @@ RSpec.describe MoveTree do
         expect(move_tree.trim_branch!(MoveTreeNode.new([2, 7]))).to be(nil)
       end
     end
+
+    context 'when not given an array or MoveTreeNode' do
+      it 'rasies an argument error' do
+        expect(proc { move_tree.trim_branch!('root') }).to raise_error(ArgumentError)
+      end
+    end
   end
 
   describe '#to_a' do
