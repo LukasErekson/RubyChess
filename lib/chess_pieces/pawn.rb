@@ -72,12 +72,11 @@ class Pawn < ChessPiece
     return false unless other_piece.first_move?
 
     # Check beside on the right
-    beside = other_piece.position == [@position[0] , @position[1] + 1]
+    beside = other_piece.position == [@position[0], @position[1] + 1]
     # Check beside on the left
-    beside = beside || (other_piece.position ==  [@position[0], @position[1] - 1])
-    
+    beside || (other_piece.position == [@position[0], @position[1] - 1])
+
     # Return true if the other peice is beside the moving pawn
-    beside
   end
 
   ##

@@ -2,6 +2,7 @@
 
 require 'rspec'
 require_relative '../lib/chess_pieces/pawn'
+require_relative '../lib/chess_pieces/queen'
 
 RSpec.describe Pawn do
   let(:white_pawn) { described_class.new('white', [1, 0]) }
@@ -31,12 +32,29 @@ RSpec.describe Pawn do
     end
   end
 
-  describe '#has_moved?' do
-    it 'flags white pawn as having moved' do
-      expect(proc { white_pawn.move([1, 1]) }).to change(white_pawn, :move_count).to(1)
+  describe '#move' do
+    context 'calls to #move' do
+      it 'flag white pawn as having moved' do
+        expect(proc { white_pawn.move([1, 1]) }).to change(white_pawn, :move_count).to(1)
+      end
+      it 'flag black pawn as having moved' do
+        expect(proc { black_pawn.move([1, 1]) }).to change(black_pawn, :move_count).to(1)
+      end
+      it 'iterate Pawn::move_count after each move' do
+        5.times do |index|
+          white_pawn.move([1, 1])
+          expect(white_pawn.move_count).to be(index + 1)
+        end
+      end
     end
-    it 'flags black pawn as having moved' do
-      expect(proc { black_pawn.move([1, 1]) }).to change(black_pawn, :move_count).to(1)
+
+    context 'when a pawn moves to a back row' do
+      it 'returns queen for white pawn' do
+        expect(white_pawn.move([7, 1])).to eq(Queen.new('white', [7, 1]))
+      end
+      it 'returns queen for black pawn' do
+        expect(black_pawn.move([0, 1])).to eq(Queen.new('black', [0, 1]))
+      end
     end
   end
 

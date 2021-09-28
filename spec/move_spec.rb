@@ -28,7 +28,8 @@ RSpec.describe 'ChessGame#move' do
       it 'lets pawn move forward one' do
         8.times do |col|
           expect(proc {
-                   game.move([1, col], [2, col]); game.instance_variable_set(:@current_player_color, 'white')
+                   game.move([1, col], [2, col])
+                   game.instance_variable_set(:@current_player_color, 'white')
                  }).to change {
                          board[1][col]
                        }.to('  ')
@@ -38,7 +39,8 @@ RSpec.describe 'ChessGame#move' do
       it 'lets pawn move forward two' do
         8.times do |col|
           expect(proc {
-                   game.move([1, col], [3, col]); game.instance_variable_set(:@current_player_color, 'white')
+                   game.move([1, col], [3, col])
+                   game.instance_variable_set(:@current_player_color, 'white')
                  }).to change {
                          board[1][col]
                        }.to('  ')
@@ -49,32 +51,38 @@ RSpec.describe 'ChessGame#move' do
     context 'when a white knight moves' do
       it 'lets knight move to valid space' do
         expect(proc {
-                 game.move([0, 1], [2, 0]); game.instance_variable_set(:@current_player_color, 'white')
+                 game.move([0, 1], [2, 0])
+                 game.instance_variable_set(:@current_player_color, 'white')
                }).to change {
                        board[0][1]
                      }.to('  ')
         expect(proc {
-                 game.move([0, 6], [2, 5]); game.instance_variable_set(:@current_player_color, 'white')
+                 game.move([0, 6], [2, 5])
+                 game.instance_variable_set(:@current_player_color, 'white')
                }).to change {
                        board[0][6]
                      }.to('  ')
         expect(proc {
-                 game.move([2, 0], [0, 1]); game.instance_variable_set(:@current_player_color, 'white')
+                 game.move([2, 0], [0, 1])
+                 game.instance_variable_set(:@current_player_color, 'white')
                }).to change {
                        board[2][0]
                      }.to('  ')
         expect(proc {
-                 game.move([2, 5], [0, 6]); game.instance_variable_set(:@current_player_color, 'white')
+                 game.move([2, 5], [0, 6])
+                 game.instance_variable_set(:@current_player_color, 'white')
                }).to change {
                        board[2][5]
                      }.to('  ')
         expect(proc {
-                 game.move([0, 1], [2, 2]); game.instance_variable_set(:@current_player_color, 'white')
+                 game.move([0, 1], [2, 2])
+                 game.instance_variable_set(:@current_player_color, 'white')
                }).to change {
                        board[0][1]
                      }.to('  ')
         expect(proc {
-                 game.move([0, 6], [2, 7]); game.instance_variable_set(:@current_player_color, 'white')
+                 game.move([0, 6], [2, 7])
+                 game.instance_variable_set(:@current_player_color, 'white')
                }).to change {
                        board[0][6]
                      }.to('  ')

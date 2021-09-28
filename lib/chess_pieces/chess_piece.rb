@@ -6,6 +6,7 @@ require_relative 'move_tree'
 ##
 # An abstract class for a chess piece (pawn, king, rook, etc.)
 class ChessPiece
+  include Comparable
   attr_reader :name, :color, :position, :points, :move_tree
 
   ##
@@ -87,5 +88,13 @@ class ChessPiece
     end
 
     closest_move
+  end
+
+  ##
+  # Compare pieces based on their point values
+  def <=>(other)
+    return nil unless other.is_a? ChessPiece
+
+    points <=> other.points
   end
 end
