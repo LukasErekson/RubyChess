@@ -46,7 +46,7 @@ class ChessPiece
       if potential_space.all? { |coordinate| coordinate.between?(0, 7) }
         node.loc = potential_space
       else
-        @move_tree.trim_branch(node)
+        @move_tree.trim_branch!(node)
       end
     end
 
