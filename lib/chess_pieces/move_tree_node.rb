@@ -45,6 +45,6 @@ class MoveTreeNode
   def ==(other)
     return false unless other.is_a? MoveTreeNode
 
-    @loc == other.loc && @children == other.children
+    @loc == other.loc
   end
 end

@@ -42,12 +42,13 @@ class MoveTree
       raise(ArgumentError, "Argument is a #{loc.class}; should be Array or MoveTreeNode")
     end
 
-    # Convert loc to a MoveTreeNode so that node.children.include?(loc) can
+    # Convert loc to an array so that node.children.include?(loc) can
     # find the right node.
-    loc = loc.is_a?(Array) ? MoveTreeNode.new(loc) : loc
+    loc = loc.is_a?(Array) ? loc : loc.loc
 
     each do |node|
-      if node.children.include?(loc)
+      children_arr = node.children.map { |child| child.loc }
+      if children_arr.include?(loc)
         node.remove_child(loc)
         return loc
       end
