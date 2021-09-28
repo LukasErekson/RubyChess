@@ -33,16 +33,24 @@ class ChessPiece
   end
 
   ##
-  # Returns a move tree of legal move positions
+  # Returns a move tree of legal move positions.
+  #
+  # This method takes the @move_tree_template and @position attributes and
+  # uses them to create a new MoveTree object with the exact coordinates.
   def possible_moves
     row, col = @position
     @move_tree = @move_tree_template.clone || move_tree
     @move_tree.each do |node|
       r, c = node.loc
-      node.loc = [row + r, col + c]
+      potential_space = [row + r, col + c]
+      if potential_space.all? { |coordinate| coordinate.between?(0, 7) }
+        node.loc = potential_space
+      else
+        @move_tree.trim_branch(node)
+      end
     end
 
-    @move_tree = moves_in_bounds
+    @move_tree
   end
 
   ##
