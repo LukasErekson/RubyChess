@@ -36,15 +36,18 @@ RSpec.describe Pawn do
     context 'calls to #move' do
       it 'flag white pawn as having moved' do
         expect(proc { white_pawn.move([1, 1]) }).to change(white_pawn, :move_count).to(1)
+        expect(white_pawn.first_move?).to be(true)
       end
       it 'flag black pawn as having moved' do
         expect(proc { black_pawn.move([1, 1]) }).to change(black_pawn, :move_count).to(1)
+        expect(black_pawn.first_move?).to be(true)
       end
       it 'iterate Pawn::move_count after each move' do
         5.times do |index|
           white_pawn.move([1, 1])
           expect(white_pawn.move_count).to be(index + 1)
         end
+        expect(white_pawn.first_move?).to be(false)
       end
     end
 
@@ -63,7 +66,7 @@ RSpec.describe Pawn do
     let(:pawn2) { described_class.new('black', [4, 2]) }
     let(:pawn3) { described_class.new('black', [4, 3]) }
 
-    context 'when a pawn can capture the piece' do
+    context 'when a pawn can capture another pawn (standard)' do
       it 'returns true for black pawn' do
         expect(pawn1.can_capture?(pawn2)).to be(true)
       end
@@ -73,13 +76,42 @@ RSpec.describe Pawn do
       end
     end
 
-    context 'when a pawn cannot capture the piece' do
+    context 'when a pawn cannot capture another pawn (standard)' do
       it 'returns false for white pawn' do
         expect(pawn1.can_capture?(pawn3)).to be(false)
       end
 
       it 'returns false for white pawn' do
         expect(pawn3.can_capture?(pawn1)).to be(false)
+      end
+    end
+
+    context 'when En Passant applies' do
+      it 'returns true for white pawn' do
+        pawn1.move([4, 3])
+        pawn2.move([4, 4])
+        expect(pawn1.can_capture?(pawn2)).to be(true)
+      end
+      it 'returns true for black pawn' do
+        pawn2.move([3, 3])
+        pawn1.move([3, 4])
+        expect(pawn2.can_capture?(pawn1)).to be(true)
+      end
+    end
+
+    context 'when En Passant does not apply' do
+      it 'returns false for white pawn' do
+        pawn1.move([4, 3])
+        pawn2.move([5, 4])
+        pawn2.move([4, 4])
+        expect(pawn1.can_capture?(pawn2)).to be(false)
+      end
+
+      it 'returns false for black pawn' do
+        pawn2.move([3, 3])
+        pawn1.move([2, 4])
+        pawn1.move([3, 4])
+        expect(pawn2.can_capture?(pawn1)).to be(false)
       end
     end
   end
