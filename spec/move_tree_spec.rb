@@ -44,6 +44,49 @@ RSpec.describe MoveTree do
     end
   end
 
+  describe '#trim_branch!' do
+    before do
+      # Create a simple tree with 3 levels (including the root)
+      3.times { |i| move_tree.root.add_child([i + 2, 1]) }
+      move_tree.root.children[0].add_child([2, 2])
+    end
+
+    context 'when given a valid location within the tree' do
+      it 'removes a single node from the tree' do
+        expect(proc { move_tree.trim_branch!([3, 1]) }).to change(move_tree.root.children, :size).from(3).to(2)
+      end
+
+      it 'removes an entire branch (a node and its children)' do
+        move_tree.trim_branch!([2, 1])
+        expect(move_tree.to_a.include?([2, 2])).to be(false)
+      end
+  
+    end
+
+    context 'when given a valid node within the tree' do
+      it 'removes a single node from the tree' do
+        expect(proc { move_tree.trim_branch!(MoveTreeNode.new([3, 1])) }).to change(move_tree.root.children, :size).from(3).to(2)
+      end
+
+      it 'removes an entire branch (a node and its children)' do
+        move_tree.trim_branch!(MoveTreeNode.new([2, 1]))
+        expect(move_tree.to_a.include?([2, 2])).to be(false)
+      end
+    end
+
+    context 'when given a location not belonging to a node within the tree' do
+      it 'returns nil' do
+        expect(move_tree.trim_branch!([2, 7])).to be(nil)
+      end
+    end
+
+    context 'when given a node not within the tree' do
+      it 'returns nil' do
+        expect(move_tree.trim_branch!(MoveTreeNode.new([2, 7]))).to be(nil)
+      end
+    end
+  end
+
   describe '#to_a' do
     before do
       # Create a simple tree with 3 levels (including the root)
