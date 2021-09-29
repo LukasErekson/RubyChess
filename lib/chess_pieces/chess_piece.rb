@@ -54,7 +54,9 @@ class ChessPiece
   end
 
   ##
-  # Returns whether the piece can capture another piece given its position
+  # Returns whether the piece can capture another piece given its position.
+  #
+  # +other_piece+:: The ChessPiece that is the proposed target.
   def can_capture?(other_piece)
     unless other_piece.is_a? ChessPiece
       raise(ArgumentError, "other_piece is a #{other_piece.class}, but it must be a ChessPiece.")
@@ -65,7 +67,7 @@ class ChessPiece
   end
 
   ##
-  # Returns the name of the piece with a space after it
+  # Returns the name of the piece with a space after it.
   def to_s
     "#{@name} "
   end
@@ -73,6 +75,11 @@ class ChessPiece
   ##
   # Add children to move tree nodes such that each move is a child node of
   # the move that precedes it.
+  #
+  # +direction+:: An array of integers of length 2 indicating the movement in
+  #               the vertical and horizontal net changes. For just vertical
+  #               movement, direction is [1, 0]. For diagonal moves, it's
+  #               [1, 1], etc.
   def build_directional_tree_nodes(direction = [1, 0])
     vertical_movement, horizontal_movement = direction
     closest_move = MoveTreeNode.new(direction)
@@ -86,10 +93,25 @@ class ChessPiece
   end
 
   ##
-  # Compare pieces based on their point values
+  # Compare pieces based on their point values.
+  # Note: Since Bishop and Knight point values are equal, it returns -1 if
+  #       this piece is a knight and 1 if this piece is a bishop. This is an
+  #       arbitrary choice to differentiate them.
+  #
+  # +other+:: The ChessPiece object to compare against self.
   def <=>(other)
     return nil unless other.is_a? ChessPiece
 
-    points <=> other.points
+    value_comparison = @points <=> other.points
+    return value_comparison unless value_comparison.zero? && @points == 3
+
+    pieces = [@name, other.name].sort
+
+    return 0 if (pieces == ['♞'.white, '♘']) || (pieces == ['♝'.white, '♗'])
+
+    return -1 if (@name == '♞'.white) || (@name == '♘')
+
+    # This piece is a bishop and the other is a knight, so return 1.
+    1
   end
 end
