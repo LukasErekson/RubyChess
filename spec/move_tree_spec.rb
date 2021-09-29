@@ -6,6 +6,11 @@ require_relative '../lib/chess_pieces/move_tree'
 
 RSpec.describe MoveTree do
   let(:move_tree) { described_class.new([1, 1]) }
+  before do
+    # Create a simple tree with 3 levels (including the root)
+    3.times { |i| move_tree.root.add_child([i + 2, 1]) }
+    move_tree.root.children[0].add_child([2, 2])
+  end
 
   describe '#clone' do
     it 'creates a deep copy of the tree' do
@@ -17,12 +22,6 @@ RSpec.describe MoveTree do
   end
 
   describe '#each' do
-    before do
-      # Create a simple tree with 3 levels (including the root)
-      3.times { |i| move_tree.root.add_child([i + 2, 1]) }
-      move_tree.root.children.each { |node| node.add_child([2, 2]) }
-    end
-
     it 'iterates through a tree in level order' do
       i = 0
       move_tree.each do |node|
@@ -45,12 +44,6 @@ RSpec.describe MoveTree do
   end
 
   describe '#trim_branch!' do
-    before do
-      # Create a simple tree with 3 levels (including the root)
-      3.times { |i| move_tree.root.add_child([i + 2, 1]) }
-      move_tree.root.children[0].add_child([2, 2])
-    end
-
     context 'when given a valid location within the tree' do
       it 'removes a single node from the tree' do
         expect(proc { move_tree.trim_branch!([3, 1]) }).to change(move_tree.root.children, :size).from(3).to(2)
@@ -94,12 +87,6 @@ RSpec.describe MoveTree do
   end
 
   describe '#to_a' do
-    before do
-      # Create a simple tree with 3 levels (including the root)
-      3.times { |i| move_tree.root.add_child([i + 2, 1]) }
-      move_tree.root.children[0].add_child([2, 2])
-    end
-
     it 'returns an array of locations in the tree in level order' do
       expect(move_tree.to_a).to eq([[2, 1], [3, 1], [4, 1], [2, 2]])
     end
