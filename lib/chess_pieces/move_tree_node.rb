@@ -2,17 +2,26 @@
 
 ##
 # A node structure for the tree representation of a pieces potential moves.
+# See MoveTree.
 class MoveTreeNode
   attr_accessor :loc
   attr_reader :children
 
+  ##
+  # Initialize a node with its location and an empty children array.
+  #
+  # +loc+:: An integer array of length 2 denoting the location the node
+  #         represents.
   def initialize(loc)
     @loc = loc
     @children = []
   end
 
   ##
-  # Add a child to the array of children nodes
+  # Add a child to the array of children nodes.
+  #
+  # +loc+:: Either an integer array of length 2 denoting the location of the
+  #         node to add or the MoveTreeNode to add.
   def add_child(loc)
     return @children << MoveTreeNode.new(loc) if loc.is_a? Array
 
@@ -23,7 +32,10 @@ class MoveTreeNode
   end
 
   ##
-  # Removes a child from the array of children nodes
+  # Removes a child from the array of children nodes.
+  #
+  # +loc+ :: Either an integer array of length 2 denoting the location of the
+  #          node to remove or the MoveTreeNode to remove.
   def remove_child(loc)
     return @children.delete(MoveTreeNode.new(loc)) if loc.is_a? Array
 
@@ -41,7 +53,9 @@ class MoveTreeNode
   end
 
   ##
-  # Define equality between two nodes by same location and children.
+  # Define equality between two nodes by same location.
+  #
+  # +other+:: The other MoveTreeNode to compare the location for equality.
   def ==(other)
     return false unless other.is_a? MoveTreeNode
 

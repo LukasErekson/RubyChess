@@ -26,7 +26,9 @@ class ChessPiece
 
   ##
   # Updates position to be the +to+. Returns the piece with the updated
-  # location
+  # location.
+  #
+  # +to+:: An integer array of length 2 denoting the new location of the piece.
   def move(to)
     @position = to
     self

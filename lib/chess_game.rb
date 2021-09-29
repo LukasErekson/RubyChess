@@ -29,6 +29,11 @@ class ChessGame
   ##
   # Moves a piece at a given location to another location if
   # the move is valid. Raises an InvalidMoveError otherwise.
+  #
+  # +from+::  An integer array of length 2 denoting the position of the piece
+  #           to move.
+  # +to+::    An integer array of length 2 denoting the position to move the
+  #           piece at +from+ to.
   def move(from, to)
     # Raises an execption if the move isn't valid
     validate_move(from, to)
@@ -47,6 +52,11 @@ class ChessGame
   ##
   # Determines whether or not the move is a valid move
   # Raises an InvalidMoveError with a specific message if the move is invalid.
+  #
+  # +from+::  An integer array of length 2 denoting the position of the piece
+  #           to move.
+  # +to+::    An integer array of length 2 denoting the position to move the
+  #           piece at +from+ to.
   def validate_move(from, to)
     frow, fcol = from
     piece = @board[frow][fcol]
@@ -102,6 +112,8 @@ class ChessGame
   ##
   # Returns the 2 arrays of the chess pieces in the proper places based od
   # their color.
+  #
+  # +color+:: A string denoting the color of pieces to place.
   def place_pieces(color)
     pawns = place_pawns(color)
     back_row_pieces = place_back_row(color)
@@ -115,6 +127,8 @@ class ChessGame
   ##
   # Returns an array of pawns of the appropriate color on the
   # appropriate row based on +color+.
+  #
+  # +color+:: A string denoting the color of pawns to place.
   def place_pawns(color)
     pawn_row = color == 'white' ? 1 : 6
     pawns = []
@@ -125,6 +139,8 @@ class ChessGame
   ##
   # Returns an array of back row pieces of the appropriate color
   # on the appropriate row based on +color+.
+  #
+  # +color+:: A string denoting the color of pieces to place.
   def place_back_row(color)
     back_row = color == 'white' ? 0 : 7
     [Rook.new(color, [back_row, 0]),

@@ -6,7 +6,11 @@ require_relative 'chess_piece'
 # Rook piece for a game of chess
 class Rook < ChessPiece
   ##
-  # Initializes a new pawn
+  # Initializes a new rook piece with color and position.
+  #
+  # +color+::     A string denoting the color of the piece.
+  # +position+::  An integer array of length 2 denoting the location of the
+  #               piece on the board.
   def initialize(color, position)
     @move_tree_template = build_rook_move_tree
     super(color == 'white' ? '♜'.white : '♖', color, position, 5)

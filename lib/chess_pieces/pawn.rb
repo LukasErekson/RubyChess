@@ -9,7 +9,11 @@ class Pawn < ChessPiece
   attr_reader :move_count, :direction
 
   ##
-  # Initializes a new pawn
+  # Initializes a new pawn piece with color and position.
+  #
+  # +color+::     A string denoting the color of the piece.
+  # +position+::  An integer array of length 2 denoting the location of the
+  #               piece on the board.
   def initialize(color, position)
     @move_count = 0
     @direction = color == 'white' ? 1 : -1
@@ -21,6 +25,8 @@ class Pawn < ChessPiece
   ##
   # Moves the Pawn and updates @move_count
   # If the pawn reaches the back row of the opposing side, it returns a queen.
+  #
+  # +to+::An integer array of length 2 denoting the new location of the pawn.
   def move(to)
     # Remove the two space move on the Pawn's first move
     @move_tree_template.root.children[0].children.pop if @move_count.zero?
@@ -34,7 +40,8 @@ class Pawn < ChessPiece
   end
 
   ##
-  # Returns whether or not the move the Pawn is on is its first ever move.
+  # Returns whether or not the move the Pawn is on or just finished
+  # its first ever move.
   def first_move?
     @move_count <= 1
   end
@@ -43,6 +50,8 @@ class Pawn < ChessPiece
   # Returns whether the pawn can capture a piece at a given location
   # based on its current position. This only possible if the opposing
   # piece is in front of and diagonal to the current space.
+  #
+  # +other_piece+:: The ChessPiece that is the proposed target.
   def can_capture?(other_piece)
     occupied_position = other_piece.position
     in_front = occupied_position[0] == (@position[0] + @direction)
@@ -56,6 +65,8 @@ class Pawn < ChessPiece
   # Returns whether the Pawn can capture another Pawn using the rule
   # "En passant."
   # See https://en.wikipedia.org/wiki/En_passant
+  #
+  # +other_piece+:: The pawn that is the proposed target.
   def en_passant(other_piece)
     # Only applies to other Pawns
     return false unless other_piece.is_a? Pawn

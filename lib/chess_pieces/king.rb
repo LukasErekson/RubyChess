@@ -6,7 +6,11 @@ require_relative 'chess_piece'
 # King piece for a gameof chess
 class King < ChessPiece
   ##
-  # Initializes a new pawn
+  # Initializes a new king piece with color and position.
+  #
+  # +color+::     A string denoting the color of the piece.
+  # +position+::  An integer array of length 2 denoting the location of the
+  #               piece on the board.
   def initialize(color, position)
     @move_tree_template = build_king_move_tree
     super(color == 'white' ? '♚'.white : '♔', color, position, 10_000)

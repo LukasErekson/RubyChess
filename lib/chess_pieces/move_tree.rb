@@ -3,19 +3,22 @@
 require_relative 'move_tree_node'
 
 ##
-# A tree structure for the possible moves of a piece
+# A tree structure for the possible moves of a chess piece.
 class MoveTree
   include Enumerable
   attr_reader :root
 
   ##
-  # Assigns a MoveTreeNode to be the root
+  # Assigns a MoveTreeNode to be the root.
+  #
+  # +root_position+:: An integer array of length 2 representing the starting
+  #                   location for a piece.
   def initialize(root_position)
     @root = MoveTreeNode.new(root_position)
   end
 
   ##
-  # Iterates through the tree using level order
+  # Iterates through the tree using level order.
   def each(&block)
     visit_queue = [@root]
     until visit_queue.empty?
@@ -27,7 +30,7 @@ class MoveTree
   end
 
   ##
-  # Creates a deep copy of the move tree
+  # Creates a deep copy of the move tree.
   def clone
     Marshal.load(Marshal.dump(self))
   end
@@ -36,6 +39,9 @@ class MoveTree
   # Removes a node and its children from the MoveTree.
   # Returns the trimmed child if it was found and nil if it wasn't found in the
   # tree.
+  #
+  # +loc+:: A location array (2 integers) or a MoveTreeNode to remove from the
+  #         the tree.
   def trim_branch!(loc)
     # Raise an error if the argument is not either an array or a MoveTreeNode
     unless (loc.is_a? Array) || (loc.is_a? MoveTreeNode)
