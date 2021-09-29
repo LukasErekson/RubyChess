@@ -71,19 +71,6 @@ class ChessPiece
   end
 
   ##
-  # Filters move tree, eliminating any that are outside
-  # a typical 8 x 8 chess board.
-  def moves_in_bounds
-    @move_tree.each do |node|
-      node.children.each do |child|
-        node.remove_child(child) unless child.loc.all? { |coordinate| coordinate.between?(0, 7) }
-      end
-    end
-
-    @move_tree
-  end
-
-  ##
   # Add children to move tree nodes such that each move is a child node of
   # the move that precedes it.
   def build_directional_tree_nodes(direction = [1, 0])
