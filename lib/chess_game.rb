@@ -34,7 +34,7 @@ class ChessGame
   #           to move.
   # +to+::    An integer array of length 2 denoting the position to move the
   #           piece at +from+ to.
-  def move(from, to)
+  def make_move(from, to)
     # Raises an execption if the move isn't valid
     validate_move(from, to)
 
@@ -44,6 +44,7 @@ class ChessGame
     trow, tcol = to
     @board[trow][tcol] = piece.move(to)
     @board[frow][fcol] = BLANK_SQUARE
+
 
     # Change whose turn it is
     change_turn
@@ -69,10 +70,9 @@ class ChessGame
 
     trow, tcol = to
     to_space = @board[trow][tcol]
-    return nil unless @board[trow][tcol].is_a? ChessPiece
+    return nil unless to_space.is_a? ChessPiece
 
     raise(InvalidMoveError, 'You cannot capture your own piece.') unless to_space.color != @current_player_color
-
     raise(InvalidMoveError, 'You cannot capture this piece.') unless piece.can_capture?(to_space)
   end
 
@@ -103,7 +103,7 @@ class ChessGame
   def setup_board
     # Build the empty board
     rows = place_pieces('white')
-    rows += Array.new(4, Array.new(8, BLANK_SQUARE))
+    rows += Array.new(4) { Array.new(8, BLANK_SQUARE) }
     rows += place_pieces('black')
 
     rows
