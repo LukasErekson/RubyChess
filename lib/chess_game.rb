@@ -65,7 +65,7 @@ class ChessGame
 
     raise(InvalidMoveError, "You cannot move opponent's piece at #{from}") unless piece.color == @current_player_color
 
-    possible_moves = piece.possible_moves.to_a
+    possible_moves = legal_moves(piece)
     raise(InvalidMoveError, "You cannot move from #{from} to #{to}.") unless possible_moves.include?(to)
 
     trow, tcol = to
@@ -74,6 +74,54 @@ class ChessGame
 
     raise(InvalidMoveError, 'You cannot capture your own piece.') unless to_space.color != @current_player_color
     raise(InvalidMoveError, 'You cannot capture this piece.') unless piece.can_capture?(to_space)
+  end
+
+  ##
+  # Returns an array of the legal moves that the piece can make.
+  # This will prevent pieces from going through other pieces (except for the
+  # knight, of course). It does so by iterating through +chess_piece+'s move
+  # tree in level order, dequeing any nodes that are invalid.
+  #
+  # +chess_piece+:: The ChessPiece to find the legal moves of.
+  def legal_moves(chess_piece)
+    return pawn_legal_moves(chess_piece) if chess_piece.is_a? Pawn
+
+    # TODO : Iterate through the move tree, trimming wherever there is a piece
+    # in the place of the board. If the piece can capture that piece, then
+    # trim of its children. If it cannot capture that piece, then trim it as
+    # well.
+  end
+
+
+  ##
+  # Returns an array of legal moves that a pawn can make. Since a pawn can only
+  # move diagonally if it can capture a piece, it is its own special case.
+  #
+  # +pawn+:: The pawn to find the legal moves of.
+  def pawn_legal_moves(pawn)
+    # Check if pawn can capture right diagonal piece
+    r_diag_loc = pawn.move_tree.children[1].loc
+    r_diag_piece = @board[r_diag_loc[0], r_diag_loc[1]]
+    pawn.move_tree.trim_branch!(r_diag_loc) unless pawn.can_capture?(r_diag_piece)
+    
+    # Check if pawn can capture left diagonal piece
+    l_diag_loc = pawn.move_tree.children[2].loc
+    l_diag_piece = @board[l_diag_loc[0], l_diag_loc[1]]
+    pawn.move_tree.trim_branch!(l_diag_loc) unless pawn.can_capture?(l_diag_piece)
+
+    # Check if the two spaces ahead of an unmoved pawn is occupied
+    unless pawn.move_tree.children[0].children.empty?
+      front_loc = pawn.move_tree.children[0].children[0].loc
+      front_piece = @board[front_loc[0], front_loc[1]]
+      pawn.move_tree.trim_branch!(front_loc) if front_piece.is_a? ChessPiece
+    end
+
+    # Check if there is a piece immediately in front of the pawn
+    front_loc = pawn.move_tree.children[0].loc
+    front_piece = @board[front_loc[0], front_loc[1]]
+    pawn.move_tree.trim_branch!(front_loc) if front_piece.is_a? ChessPiece
+
+    pawn.move_tree.to_a
   end
 
   ##
