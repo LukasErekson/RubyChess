@@ -19,7 +19,7 @@ class Pawn < ChessPiece
     @direction = color == 'white' ? 1 : -1
     @back_row = color == 'white' ? 7 : 0
     @move_tree_template = build_pawn_move_tree
-    super(color == 'white' ? '♟'.white : '♙', color, position, 1)
+    super(color == 'white' ? '♙'.white : '♙', color, position, 1)
   end
 
   ##
@@ -53,6 +53,10 @@ class Pawn < ChessPiece
   #
   # +other_piece+:: The ChessPiece that is the proposed target.
   def can_capture?(other_piece)
+    return false unless other_piece.is_a? ChessPiece
+    
+    return false if other_piece.color == @color
+
     occupied_position = other_piece.position
     in_front = occupied_position[0] == (@position[0] + @direction)
     diagonal = [@position[1] + 1, @position[1] - 1].include?(occupied_position[1])
