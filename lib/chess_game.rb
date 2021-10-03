@@ -85,10 +85,6 @@ class ChessGame
   def legal_moves(chess_piece)
     return pawn_legal_moves(chess_piece) if chess_piece.is_a? Pawn
 
-    # TODO : Iterate through the move tree, trimming wherever there is a piece
-    # in the place of the board. If the piece can capture that piece, then
-    # trim of its children. If it cannot capture that piece, then trim it as
-    # well.
     move_tree = chess_piece.possible_moves
     legal_moves_array = []
     visit_queue = move_tree.root.children
