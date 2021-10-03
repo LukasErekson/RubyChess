@@ -9,7 +9,7 @@ Dir.children('./lib/chess_pieces').each { |piece_file| require_relative "../lib/
 
 ##
 # Creates a board placing pieces using a location => piece hash.
-def setup_board(loc_to_piece_hash={})
+def setup_board(loc_to_piece_hash = {})
   board = Array.new(8) { Array.new(8, ChessGame::BLANK_SQUARE) }
 
   loc_to_piece_hash.each do |loc, piece|
@@ -23,7 +23,6 @@ end
 RSpec.describe 'ChessGame#make_move' do
   let(:game) { ChessGame.new }
   let(:board) { game.instance_variable_get(:@board) }
-  
 
   describe 'standard setup' do
     context 'when moving pawns' do
@@ -45,15 +44,13 @@ RSpec.describe 'ChessGame#make_move' do
     context 'when moving knights' do
       it 'lets the left knights move' do
         expect(proc { game.make_move([0, 1], [2, 2]) }).not_to raise_error
-        expect(proc {game.make_move([7, 1], [5, 2])}).not_to raise_error
+        expect(proc { game.make_move([7, 1], [5, 2]) }).not_to raise_error
       end
 
       it 'lets the right knights move ' do
         expect(proc { game.make_move([0, 6], [2, 5]) }).not_to raise_error
-        expect(proc {game.make_move([7, 6], [5, 5])}).not_to raise_error
+        expect(proc { game.make_move([7, 6], [5, 5]) }).not_to raise_error
       end
     end
   end
-
-
 end

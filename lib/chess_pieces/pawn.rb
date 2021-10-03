@@ -54,7 +54,7 @@ class Pawn < ChessPiece
   # +other_piece+:: The ChessPiece that is the proposed target.
   def can_capture?(other_piece)
     return false unless other_piece.is_a? ChessPiece
-    
+
     return false if other_piece.color == @color
 
     occupied_position = other_piece.position

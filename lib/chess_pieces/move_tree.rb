@@ -53,7 +53,7 @@ class MoveTree
     loc = loc.is_a?(Array) ? loc : loc.loc
 
     each do |node|
-      children_arr = node.children.map { |child| child.loc }
+      children_arr = node.children.map(&:loc)
       if children_arr.include?(loc)
         node.remove_child(loc)
         return loc

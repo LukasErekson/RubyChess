@@ -53,12 +53,13 @@ RSpec.describe MoveTree do
         move_tree.trim_branch!([2, 1])
         expect(move_tree.to_a.include?([2, 2])).to be(false)
       end
-  
     end
 
     context 'when given a valid node within the tree' do
       it 'removes a single node from the tree' do
-        expect(proc { move_tree.trim_branch!(MoveTreeNode.new([3, 1])) }).to change(move_tree.root.children, :size).from(3).to(2)
+        expect(proc {
+                 move_tree.trim_branch!(MoveTreeNode.new([3, 1]))
+               }).to change(move_tree.root.children, :size).from(3).to(2)
       end
 
       it 'removes an entire branch (a node and its children)' do
