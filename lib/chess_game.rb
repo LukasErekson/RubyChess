@@ -94,14 +94,11 @@ class ChessGame
       space = @board[row][col]
       # If it's a chess piece, check if it can capture.
       if space.is_a? ChessPiece
-        # If the piece can capture it, don't remove that space.
-        move_tree.trim_branch!([row, col]) unless chess_piece.can_capture?(space)
-
-        # If the piece can't capture it, still don't add any of its children to
-        # the visit queue.
-        next
+        # If the piece can capture it, add it as a valid space, but don't
+        # add any of its children to visit_queue.
+        next unless chess_piece.can_capture?(space)
       else
-        # If there's not piece, it can continue along the move_tree.
+        # If there's not piece, it can continue along the move tree.
         current_node.children.each { |child| visit_queue << child }
       end
       # Append legal move locations
