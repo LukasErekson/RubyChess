@@ -45,11 +45,17 @@ class ChessPiece
     @move_tree.each do |node|
       r, c = node.loc
       potential_space = [row + r, col + c]
-      if potential_space.all? { |coordinate| coordinate.between?(0, 7) }
-        node.loc = potential_space
-      else
-        @move_tree.trim_branch!(node)
-      end
+      node.loc = potential_space
+    end
+
+    move_tree_in_bounds
+  end
+
+  ##
+  # Returns and assigns @move_tree with all moves in bounds
+  def move_tree_in_bounds
+    @move_tree.each do |node|
+      @move_tree.trim_branch!(node) unless node.loc.all? { |coord| coord.between?(0, 7) }
     end
 
     @move_tree
@@ -85,7 +91,7 @@ class ChessPiece
   def build_directional_tree_nodes(direction = [1, 0])
     vertical_movement, horizontal_movement = direction
     closest_move = MoveTreeNode.new(direction)
-    (2..8).each do |spaces|
+    (2..7).each do |spaces|
       current_child = closest_move
       (spaces - 2).times { current_child = current_child.children[0] }
       current_child.add_child([spaces * vertical_movement, spaces * horizontal_movement])
