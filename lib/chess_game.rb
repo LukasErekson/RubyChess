@@ -104,7 +104,6 @@ class ChessGame
       # Append legal move locations
       legal_moves_array << current_node.loc
     end
-
     legal_moves_array
   end
 
