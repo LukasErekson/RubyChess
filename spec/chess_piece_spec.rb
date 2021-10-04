@@ -52,4 +52,134 @@ RSpec.describe ChessPiece do
       end
     end
   end
+
+  describe '#build_directional_tree_nodes' do
+    context 'when given vertical direction' do
+      it 'returns positive 7 available spaces' do
+        space_node = abstract_piece.build_directional_tree_nodes([1, 0])
+        move_tree = MoveTree.new([0, 0])
+        move_tree.root.add_child(space_node)
+        abstract_piece.instance_variable_set(:@move_tree, move_tree)
+        expected_output = (1..7).map { |row| [row, 0] }
+        expect(abstract_piece.possible_moves.to_a).to eq(expected_output)
+      end
+
+      it 'returns negative 7 available spaces' do
+        space_node = abstract_piece.build_directional_tree_nodes([-1, 0])
+        abstract_piece.instance_variable_set(:@position, [7, 7])
+        move_tree = MoveTree.new([7, 7])
+        move_tree.root.add_child(space_node)
+        abstract_piece.instance_variable_set(:@move_tree, move_tree)
+        expected_output = (1..7).map { |row| [7 - row, 7] }
+        expect(abstract_piece.possible_moves.to_a).to eq(expected_output)
+      end
+    end
+
+    context 'when given horizontal direction' do
+      it 'returns positve 7 available spaces' do
+        space_node = abstract_piece.build_directional_tree_nodes([0, 1])
+        move_tree = MoveTree.new([0, 0])
+        move_tree.root.add_child(space_node)
+        abstract_piece.instance_variable_set(:@move_tree, move_tree)
+        expected_output = (1..7).map { |col| [0, col] }
+        expect(abstract_piece.possible_moves.to_a).to eq(expected_output)
+      end
+
+      it 'returns negative 7 available spaces' do
+        space_node = abstract_piece.build_directional_tree_nodes([0, -1])
+        abstract_piece.instance_variable_set(:@position, [7, 7])
+        move_tree = MoveTree.new([7, 7])
+        move_tree.root.add_child(space_node)
+        abstract_piece.instance_variable_set(:@move_tree, move_tree)
+        expected_output = (1..7).map { |col| [7, 7 - col] }
+        expect(abstract_piece.possible_moves.to_a).to eq(expected_output)
+      end
+    end
+
+    context 'when given positive right-diagonal direction' do
+      it 'gives 7 diagonal spaces' do
+        space_node = abstract_piece.build_directional_tree_nodes([1, 1])
+        move_tree = MoveTree.new([0, 0])
+        move_tree.root.add_child(space_node)
+        abstract_piece.instance_variable_set(:@move_tree, move_tree)
+        expected_output = (1..7).map { |val| [val, val] }
+        expect(abstract_piece.possible_moves.to_a).to eq(expected_output)
+      end
+
+      it 'gives 0 spaces at [7, 7]' do
+        space_node = abstract_piece.build_directional_tree_nodes([1, 1])
+        abstract_piece.instance_variable_set(:@position, [7, 7])
+        move_tree = MoveTree.new([7, 7])
+        move_tree.root.add_child(space_node)
+        abstract_piece.instance_variable_set(:@move_tree, move_tree)
+        expected_output = []
+        expect(abstract_piece.possible_moves.to_a).to eq(expected_output)
+      end
+    end
+
+    context 'when given negative right-diagonal direction' do
+      it 'gives 0 spaces at [0, 0]' do
+        space_node = abstract_piece.build_directional_tree_nodes([-1, -1])
+        move_tree = MoveTree.new([0, 0])
+        move_tree.root.add_child(space_node)
+        abstract_piece.instance_variable_set(:@move_tree, move_tree)
+        expected_output = []
+        expect(abstract_piece.possible_moves.to_a).to eq(expected_output)
+      end
+
+      it 'gives 7 diagonal spaces at [7, 7]' do
+        space_node = abstract_piece.build_directional_tree_nodes([-1, -1])
+        abstract_piece.instance_variable_set(:@position, [7, 7])
+        move_tree = MoveTree.new([7, 7])
+        move_tree.root.add_child(space_node)
+        abstract_piece.instance_variable_set(:@move_tree, move_tree)
+        expected_output = (1..7).map { |val| [7 - val, 7 - val] }
+        expect(abstract_piece.possible_moves.to_a).to eq(expected_output)
+      end
+    end
+
+    context 'when given positive left-diagonal direction' do
+      it 'gives 7 diagonal spaces at [7, 0]' do
+        space_node = abstract_piece.build_directional_tree_nodes([-1, 1])
+        move_tree = MoveTree.new([7, 0])
+        abstract_piece.instance_variable_set(:@position, [7, 0])
+        move_tree.root.add_child(space_node)
+        abstract_piece.instance_variable_set(:@move_tree, move_tree)
+        expected_output = (1..7).map { |val| [7 - val, val] }
+        expect(abstract_piece.possible_moves.to_a).to eq(expected_output)
+      end
+
+      it 'gives 0 spaces at [0, 7]' do
+        space_node = abstract_piece.build_directional_tree_nodes([-1, -1])
+        abstract_piece.instance_variable_set(:@position, [0, 7])
+        move_tree = MoveTree.new([0, 7])
+        move_tree.root.add_child(space_node)
+        abstract_piece.instance_variable_set(:@move_tree, move_tree)
+        expected_output = []
+        expect(abstract_piece.possible_moves.to_a).to eq(expected_output)
+      end
+    end
+
+    context 'when given negative left-diagonal direction' do
+      it 'gives 0 spaces at [7, 0]' do
+        space_node = abstract_piece.build_directional_tree_nodes([-1, -1])
+        move_tree = MoveTree.new([7, 0])
+        abstract_piece.instance_variable_set(:@position, [7, 0])
+        move_tree.root.add_child(space_node)
+        abstract_piece.instance_variable_set(:@move_tree, move_tree)
+        expected_output = []
+        expect(abstract_piece.possible_moves.to_a).to eq(expected_output)
+      end
+
+      it 'gives 0 diagonal spaces at [0, 7]' do
+        space_node = abstract_piece.build_directional_tree_nodes([-1, -1])
+        abstract_piece.instance_variable_set(:@position, [0, 7])
+        move_tree = MoveTree.new([0, 7])
+        move_tree.root.add_child(space_node)
+        abstract_piece.instance_variable_set(:@move_tree, move_tree)
+        expected_output = []
+        expect(abstract_piece.possible_moves.to_a).to eq(expected_output)
+      end
+    end
+  end
 end
