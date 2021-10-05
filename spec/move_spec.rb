@@ -56,18 +56,25 @@ RSpec.describe 'ChessGame#make_move' do
 
   describe 'inidividual pieces' do
     context 'queens' do
-      it 'allows queens to move vertically' do
+      it 'allowed to move vertically' do
         queens = { [0, 0] => Queen.new('white', [0, 0]), [7, 7] => Queen.new('black', [7, 7]) }
         game.instance_variable_set(:@board, setup_board(queens))
         expect(proc { game.make_move([0, 0], [7, 0]) }).not_to raise_error
         expect(proc { game.make_move([7, 7], [0, 7]) }).not_to raise_error
       end
 
-      it 'allows queens to move horizontally' do
+      it 'allowed to move horizontally' do
         queens = { [0, 0] => Queen.new('white', [0, 0]), [7, 7] => Queen.new('black', [7, 7]) }
         game.instance_variable_set(:@board, setup_board(queens))
         expect(proc { game.make_move([0, 0], [0, 7]) }).not_to raise_error
         expect(proc { game.make_move([7, 7], [7, 0]) }).not_to raise_error
+      end
+
+      it 'allowed to move diagonally to the left'do
+        queens = { [0, 0] => Queen.new('white', [0, 0]), [0, 1] => Queen.new('black', [0, 1]) }
+        game.instance_variable_set(:@board, setup_board(queens))
+        expect(proc { game.make_move([0, 0], [7, 7]) }).not_to raise_error
+        expect(proc { game.make_move([0, 1], [6, 7]) }).not_to raise_error
       end
     end
   end
