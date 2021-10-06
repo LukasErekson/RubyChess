@@ -65,7 +65,7 @@ class ChessGame
     raise(InvalidMoveError, "You cannot move opponent's piece at #{from}") unless piece.color == @current_player_color
 
     possible_moves = legal_moves(piece)
-    raise(InvalidMoveError, "You cannot move from #{from} to #{to}.") unless possible_moves.include?(to)
+    raise(InvalidMoveError, "Your #{piece.class} cannot move from #{from} to #{to}.") unless possible_moves.include?(to)
 
     trow, tcol = to
     to_space = @board[trow][tcol]
