@@ -20,62 +20,63 @@ def setup_board(loc_to_piece_hash = {})
   board
 end
 
-RSpec.describe 'ChessGame#make_move' do
+RSpec.describe 'ChessGame#make_move and its sub-methods' do
   let(:game) { ChessGame.new }
   let(:board) { game.instance_variable_get(:@board) }
 
-  describe 'standard setup' do
-    context 'when moving pawns' do
-      it 'lets them move 1 space on their first turn' do
-        8.times do |col|
-          expect(proc { game.make_move([1, col], [2, col]) }).not_to raise_error
-          expect(proc { game.make_move([6, col], [5, col]) }).not_to raise_error
-        end
-      end
-
-      it 'lets them move 2 spaces on their first turn' do
-        8.times do |col|
-          expect(proc { game.make_move([1, col], [3, col]) }).not_to raise_error
-          expect(proc { game.make_move([6, col], [4, col]) }).not_to raise_error
-        end
+  describe 'ChessGame#validate_move' do
+    context 'when there is no piece at from' do
+      it 'raises an InvalidMoveError' do
+        expect(proc { game.validate_move([3, 3], [2, 3]) }).to raise_error(InvalidMoveError)
       end
     end
-
-    context 'when moving knights' do
-      it 'lets the left knights move' do
-        expect(proc { game.make_move([0, 1], [2, 2]) }).not_to raise_error
-        expect(proc { game.make_move([7, 1], [5, 2]) }).not_to raise_error
+    context 'when one tries to move an opponent\'s piece' do
+      it 'raises an InvalidMoveError on white\'s turn' do
+        expect(proc { game.validate_move([7, 7], [6, 7]) }).to raise_error(InvalidMoveError)
       end
-
-      it 'lets the right knights move ' do
-        expect(proc { game.make_move([0, 6], [2, 5]) }).not_to raise_error
-        expect(proc { game.make_move([7, 6], [5, 5]) }).not_to raise_error
+      it 'raises an InvalidMoveError on black\'s turn' do
+        game.instance_variable_set(:@current_player_color, 'black')
+        expect(proc { game.validate_move([1, 1], [2, 1]) }).to raise_error(InvalidMoveError)
+      end
+    end
+    context 'when one tries to make an illegal move' do
+      it 'raises an InvalidMoveError for move outside of move tree' do
+        expect(proc { game.validate_move([1, 1], [5, 1]) } ).to raise_error(InvalidMoveError)
+      end
+      it 'raises an InvalidMoveError for a piece that is blocked by another' do
+        expect(proc { game.validate_move([0, 0], [1, 0]) } ).to raise_error(InvalidMoveError)
       end
     end
   end
 
-  describe 'inidividual pieces' do
-    context 'queens' do
-      it 'allowed to move vertically' do
-        queens = { [0, 0] => Queen.new('white', [0, 0]), [7, 7] => Queen.new('black', [7, 7]) }
-        game.instance_variable_set(:@board, setup_board(queens))
-        expect(proc { game.make_move([0, 0], [7, 0]) }).not_to raise_error
-        expect(proc { game.make_move([7, 7], [0, 7]) }).not_to raise_error
+  describe 'ChessGame#legal_moves' do
+    context 'with the standard setup' do
+      it 'each pawn has 2 legal moves' do
+        pieces_array = board.flatten.filter { |space| space.is_a? ChessPiece}
+        pieces_array.filter { |piece| piece.is_a? Pawn }.each do |pawn|
+          expect(game.legal_moves(pawn).length).to eq(2)
+        end
       end
-
-      it 'allowed to move horizontally' do
-        queens = { [0, 0] => Queen.new('white', [0, 0]), [7, 7] => Queen.new('black', [7, 7]) }
-        game.instance_variable_set(:@board, setup_board(queens))
-        expect(proc { game.make_move([0, 0], [0, 7]) }).not_to raise_error
-        expect(proc { game.make_move([7, 7], [7, 0]) }).not_to raise_error
+      it 'each knight has 2 legal moves' do
+        pieces_array = board.flatten.filter { |space| space.is_a? ChessPiece}
+        pieces_array.filter { |piece| piece.is_a? Knight }.each do |knight|
+          expect(game.legal_moves(knight).length).to eq(2)
+        end
       end
-
-      it 'allowed to move diagonally to the left'do
-        queens = { [0, 0] => Queen.new('white', [0, 0]), [0, 1] => Queen.new('black', [0, 1]) }
-        game.instance_variable_set(:@board, setup_board(queens))
-        expect(proc { game.make_move([0, 0], [7, 7]) }).not_to raise_error
-        expect(proc { game.make_move([0, 1], [6, 7]) }).not_to raise_error
+      it 'every other piece has no legal moves' do
+        pieces_array = board.flatten.filter { |space| space.is_a? ChessPiece}
+        pieces_array.reject { |piece| (piece.is_a? Knight) || (piece.is_a? Pawn) }.each do |piece|
+          expect(game.legal_moves(piece).length).to eq(0)
+        end
       end
     end
+
+    # TODO : Test other contexts using setup_board
   end
+
+  describe '#make_move' do
+    # TODO : Test things like the board updating, changing the king's position
+    # variables correctly, etc.
+  end
+
 end
