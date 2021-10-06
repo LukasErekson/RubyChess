@@ -9,7 +9,7 @@ RSpec.describe ChessPiece do
 
   describe '#to_s' do
     it 'outputs the string with name, color, and location' do
-      expect(abstract_piece.to_s).to eq('piece ')
+      expect(abstract_piece.to_s).to eq("\e[0;37;49mpiece \e[0m")
     end
   end
 
