@@ -24,6 +24,7 @@ class ChessGame
   def initialize
     @board = setup_board
     @current_player_color = 'white'
+    @king_locs = { white: [0, 4], black: [7, 4] }
   end
 
   ##
@@ -45,12 +46,15 @@ class ChessGame
     @board[trow][tcol] = piece.move(to)
     @board[frow][fcol] = BLANK_SQUARE
 
+    @king_locs[@current_player_color.to_sym] = to if piece.is_a? King
+
     # Change whose turn it is
     change_turn
   end
 
   ##
-  # Determines whether or not the move is a valid move
+  # Determines whether or not the move is a valid move. If the move is valid,
+  # it returns that space on the board.
   # Raises an InvalidMoveError with a specific message if the move is invalid.
   #
   # +from+::  An integer array of length 2 denoting the position of the piece
@@ -68,11 +72,7 @@ class ChessGame
     raise(InvalidMoveError, "Your #{piece.class} cannot move from #{from} to #{to}.") unless possible_moves.include?(to)
 
     trow, tcol = to
-    to_space = @board[trow][tcol]
-    return nil unless to_space.is_a? ChessPiece
-
-    raise(InvalidMoveError, 'You cannot capture your own piece.') unless to_space.color != @current_player_color
-    raise(InvalidMoveError, 'You cannot capture this piece.') unless piece.can_capture?(to_space)
+    @board[trow][tcol]
   end
 
   ##
