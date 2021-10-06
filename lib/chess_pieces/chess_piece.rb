@@ -77,7 +77,7 @@ class ChessPiece
   ##
   # Returns the name of the piece with a space after it.
   def to_s
-    "#{@name} "
+    "#{@name} ".colorize(:color => @color.to_sym)
   end
 
   ##

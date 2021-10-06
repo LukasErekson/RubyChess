@@ -15,7 +15,7 @@ require_relative 'invalid_move_error'
 # validation of moves, and computing check/checkmate.
 class ChessGame
   WHITE_SQUARE = { background: :light_red }.freeze
-  BLACK_SQAURE = { background: :black }.freeze
+  BLACK_SQAURE = { background: :red }.freeze
   BLANK_SQUARE = '  '
 
   ##
