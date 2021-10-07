@@ -39,10 +39,14 @@ class ChessGame
     # Raises an execption if the move isn't valid
     validate_move(from, to)
 
-    # Moves the piece on the board
     frow, fcol = from
     piece = @board[frow][fcol]
     trow, tcol = to
+
+    # Capture a piece if the pawn performed En Passant
+    @board[frow][tcol] = BLANK_SQUARE if piece.is_a?(Pawn) && get_en_passant_moves(piece).include?(to)
+
+    # Move the piece on the board
     @board[trow][tcol] = piece.move(to)
     @board[frow][fcol] = BLANK_SQUARE
 
@@ -122,14 +126,14 @@ class ChessGame
     unless r_diag.nil?
       r_diag_loc = r_diag.loc
       r_diag_piece = @board[r_diag_loc[0]][r_diag_loc[1]]
-      pawn.move_tree.trim_branch!(r_diag_loc) unless (r_diag_piece.is_a? ChessPiece) && pawn.can_capture?(r_diag_piece)
+      pawn.move_tree.trim_branch!(r_diag_loc) unless pawn.can_capture?(r_diag_piece)
     end
 
     unless l_diag.nil?
       # Check if pawn can capture left diagonal piece
       l_diag_loc = l_diag.loc
       l_diag_piece = @board[l_diag_loc[0]][l_diag_loc[1]]
-      pawn.move_tree.trim_branch!(l_diag_loc) unless (l_diag_piece.is_a? ChessPiece) && pawn.can_capture?(l_diag_piece)
+      pawn.move_tree.trim_branch!(l_diag_loc) unless pawn.can_capture?(l_diag_piece)
     end
 
     # Check if the two spaces ahead of an unmoved pawn is occupied
@@ -144,7 +148,28 @@ class ChessGame
     front_piece = @board[front_loc[0]][front_loc[1]]
     pawn.move_tree.trim_branch!(front_loc) if front_piece.is_a? ChessPiece
 
-    pawn.move_tree.to_a
+    pawn.move_tree.to_a + get_en_passant_moves(pawn)
+  end
+
+  ##
+  # Returns an array of the valid En Passant moves for a given pawn
+  #
+  # +pawn+:: The pawn that is proposed to move.
+  def get_en_passant_moves(pawn)
+    # Check spaces beside the pawn for En Passant
+    pawn_row, pawn_col = pawn.position
+    r_piece_loc = [pawn_row + pawn.direction, pawn_col + 1]
+    r_piece = @board[pawn_row][pawn_col + 1]
+
+    l_piece_loc = [pawn_row + pawn.direction, pawn_col - 1]
+    l_piece = @board[pawn_row][pawn_col - 1]
+    en_passant_moves = []
+
+    en_passant_moves << r_piece_loc if (r_piece.is_a? Pawn) && pawn.can_capture?(r_piece)
+
+    en_passant_moves << l_piece_loc if (l_piece.is_a? Pawn) && pawn.can_capture?(l_piece)
+
+    en_passant_moves
   end
 
   ##
@@ -161,7 +186,7 @@ class ChessGame
       string_stream << "\n"
     end
 
-    string_stream << '    a b c d e f g h '
+    string_stream << '   a b c d e f g h '
 
     string_stream.string
   end
