@@ -101,7 +101,7 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
     # TODO : Test things like the board updating, changing the king's position
     # variables correctly, etc.
 
-    it 'lets a pawn perform En Passant' do
+    it 'captures a pawn using En Passant' do
       # Set up the pawns on the board
       pawn = Pawn.new('white', [3, 3])
       capture_pawn = Pawn.new('black', [6, 2])
