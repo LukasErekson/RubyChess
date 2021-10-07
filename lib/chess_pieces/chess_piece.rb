@@ -71,7 +71,7 @@ class ChessPiece
     return false if other_piece.color == @color
 
     # Most pieces can capture if they can move there. Pawns are the exception.
-    @move_tree.to_a.include?(other_piece.position)
+    possible_moves.to_a.include?(other_piece.position)
   end
 
   ##

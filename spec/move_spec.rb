@@ -71,6 +71,29 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
       end
     end
 
+    context 'when a piece is in the way of another' do
+      it 'lets the rook capture an enemy piece' do
+        rook = Rook.new('white', [0, 0])
+        pawn = Pawn.new('black', [5, 0])
+        current_board = [rook, pawn].each_with_object({}) do |piece, hash|
+          hash[piece.position] = piece
+        end
+        game.instance_variable_set(:@board, setup_board(current_board))
+        expect(game.legal_moves(rook)).not_to be_include([6, 0])
+        expect(game.legal_moves(rook)).to be_include([5, 0])
+      end
+      it 'does not let the rook capture its own piece' do
+        rook = Rook.new('white', [0, 0])
+        pawn = Pawn.new('white', [5, 0])
+        current_board = [rook, pawn].each_with_object({}) do |piece, hash|
+          hash[piece.position] = piece
+        end
+        game.instance_variable_set(:@board, setup_board(current_board))
+        expect(game.legal_moves(rook)).not_to be_include([6, 0])
+        expect(game.legal_moves(rook)).not_to be_include([5, 0])
+      end
+    end
+
     # TODO : Test other contexts using setup_board
     context 'individual pieces' do
       it 'lets a pawn capture a piece to its diagonal' do
