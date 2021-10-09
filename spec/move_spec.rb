@@ -96,6 +96,19 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
 
     # TODO : Test other contexts using setup_board
     context 'individual pieces' do
+      it 'allows a king to capture a pawn-turned queen' do
+        king = King.new('black', [7, 3])
+        rook = Rook.new('black', [7, 4])
+        pawn = Pawn.new('white', [6, 5])
+        current_board = [pawn, rook, king].each_with_object({}) do |piece, hash|
+          hash[piece.position] = piece
+        end
+        game.instance_variable_set(:@board, setup_board(current_board))
+        expect(game.legal_moves(pawn)).to be_include([7, 4])
+        game.make_move([6, 5], [7, 4])
+        expect(game.legal_moves(king)).to be_include([7, 4])
+        game.make_move([7, 3], [7, 4])
+      end
       it 'lets a pawn capture a piece to its diagonal' do
         pawn = Pawn.new('white', [1, 1])
         current_board = { [1, 1] => pawn, [2, 0] => Bishop.new('black', [2, 0]) }
@@ -133,7 +146,7 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
       end
       game.instance_variable_set(:@board, setup_board(current_board))
 
-      # Makemove to make En Passant legal
+      # Make move to make En Passant legal
       game.make_move([3, 3], [4, 3])
       game.make_move([6, 2], [4, 2])
       expect(proc { game.make_move([4, 3], [5, 2]) }).to change { board[4][2] }.to(ChessGame::BLANK_SQUARE)
