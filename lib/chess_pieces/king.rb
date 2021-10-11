@@ -16,6 +16,8 @@ class King < ChessPiece
     super(color == 'white' ? '♚'.white : '♔', color, position, 10_000)
   end
 
+  # TODO : Allow Rooks and Kings to castle under the right conditions
+
   protected
 
   ##
