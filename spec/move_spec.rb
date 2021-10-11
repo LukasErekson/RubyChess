@@ -152,4 +152,36 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
       expect(proc { game.make_move([4, 3], [5, 2]) }).to change { board[4][2] }.to(ChessGame::BLANK_SQUARE)
     end
   end
+
+  describe '#check_check' do
+    context 'when a king is not in check' do
+      it 'returns nil' do
+        expect(game.check_check).to eq(nil)
+      end
+    end
+
+    context 'when the black king is in check' do
+      it 'returns the pawn that puts it in check' do
+        pawn = Pawn.new('white', [3, 3])
+        king = King.new('black', [4, 4])
+        current_board = [pawn, king].each_with_object({}) do |piece, hash|
+          hash[piece.position] = piece
+        end
+        game.instance_variable_set(:@board, setup_board(current_board))
+        game.instance_variable_set(:@king_locs, { black: [4, 4] })
+        expect(game.check_check).to eq(pawn)
+      end
+
+      it 'returns the bishop that puts it in check' do
+        bishop = Bishop.new('white', [0, 0])
+        king = King.new('black', [7, 7])
+        current_board = [bishop, king].each_with_object({}) do |piece, hash|
+          hash[piece.position] = piece
+        end
+        game.instance_variable_set(:@board, setup_board(current_board))
+        game.instance_variable_set(:@king_locs, { black: [7, 7] })
+        expect(game.check_check).to eq(bishop)
+      end
+    end
+  end
 end
