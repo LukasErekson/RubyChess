@@ -2,6 +2,7 @@
 
 require 'colorize'
 require 'stringio'
+require 'yaml'
 require_relative 'chess_pieces/pawn'
 require_relative 'chess_pieces/rook'
 require_relative 'chess_pieces/knight'
@@ -17,6 +18,8 @@ class ChessGame
   WHITE_SQUARE = { background: :light_red }.freeze
   BLACK_SQAURE = { background: :red }.freeze
   BLANK_SQUARE = '  '
+  BOARD_TO_COORDINATES = {'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3,
+                          'e' => 4, 'f' => 5, 'g' => 6, 'h' => 7 }.freeze
 
   ##
   # Creates instance variables and sets up the board for
@@ -25,6 +28,117 @@ class ChessGame
     @board = setup_board
     @current_player_color = 'white'
     @king_locs = { white: [0, 4], black: [7, 4] }
+    @move_history = []
+    @game_winner = nil
+  end
+
+  ##
+  # Runs the main game loop for a chess game, which is comprised
+  # of several stages:
+  # 1. Parse player input
+  # 2. Attempt to make a move
+  # 3. Check for check/checkmate
+  # 4. Repeat until game over or saved
+  def play
+    while @game_winner.nil?
+      puts self
+      puts "It's #{@current_player_color}'s turn."
+      input_command = player_input
+      return nil if input_command.nil?
+
+      case input_command.size
+      when 2
+        from, to = input_command
+      end
+
+      begin
+        make_move(from, to)
+      rescue InvalidMoveError => e
+        puts e.message
+        next
+      rescue StandardError => e
+        puts 'Something went wrong'
+        puts e.message
+      end
+    end
+  end
+
+  ##
+  # Accepts player input and either returns the components needed to input a
+  # move or saves the game.
+  def player_input
+    input = gets.chomp
+    case player_input_type(input)
+    when 'move'
+      parse_move(input)
+    when 'help'
+      print_help_menu
+      'help_menu'
+    when 'save'
+      save_game
+    end
+  end
+
+  ##
+  # Parses a move input string to determine the type of input given. The
+  # different suppored moves are:
+  # 1. A string of length 4 indicating the start space and the end space.
+  # - e.g 'a2a4' would return [[0, 1], [0, 3]]
+  # TODO : Add more supported moves
+  #
+  # +input+:: The raw player input
+  def parse_move(input)
+    case input.size
+    when 4
+      from = convert_coordinates(input[0..1])
+      to = convert_coordinates(input[2..3])
+      [from, to]
+    end
+  end
+
+  ##
+  # Converts algebraic notation space names to coordinates corresponding with
+  # @board.
+  #
+  # +coord_str+:: A string of length 2 that has encoded within it the column
+  # and row of a space on the chess board. For example, passing in 'a4' would
+  # return [0, 3].
+  def convert_coordinates(coord_str)
+    [(coord_str[1].to_i - 1), BOARD_TO_COORDINATES[coord_str[0]]]
+  end
+
+  ##
+  # Returns the type of player input, whether they input a game-ending command
+  # or a move command.
+  #
+  # +input+:: String of the player input to parse and determine the type of
+  # input.
+  def player_input_type(input)
+    %w[save quit exit end].each { |end_word| return 'save' if input.include?(end_word) }
+
+    %w[help tutorial ?].each { |help_word| return 'help' if input.include?(help_word) }
+
+    'move'
+  end
+
+  ##
+  # Saves the game by dumping the object into a YAML file.
+  def save_game
+    puts 'Please input a name for the save file.'
+    file_name = gets.chomp
+    while File.exist?(file_name)
+      puts "#{filename} already exists; please choose a different name."
+      file_name = gets.chomp
+    end
+    save_file = File.new(file_name, 'w')
+    save_file.write(YAML.dump(self))
+    save_file.close
+  end
+
+  ##
+  #  Prints the help menu complete with tutorial and move explanations
+  def print_help_menu
+    puts 'TODO : Please Implement'
   end
 
   ##
@@ -170,6 +284,33 @@ class ChessGame
     en_passant_moves << l_piece_loc if (l_piece.is_a? Pawn) && pawn.can_capture?(l_piece)
 
     en_passant_moves
+  end
+
+  ##
+  # Checks whether a king is currently in check. If it is, it returns the piece
+  # that puts it in check and nil otherwise.
+  def check_check
+    white_pieces, black_pieces = board_pieces_by_color
+    # If black king is in check
+    white_pieces.each do |piece|
+      return piece if legal_moves(piece).include? @king_locs[:black]
+    end
+    # If white king is in check
+    black_pieces.each do |piece|
+      return piece if legal_moves(piece).include? @king_locs[:white]
+    end
+
+    nil
+  end
+
+  ##
+  # Returns an array with 2 arrays, the first of which is all the white pieces
+  # and the second is all the black pieces.
+  def board_pieces_by_color
+    pieces = @board.flatten.filter { |space| space.is_a? ChessPiece }
+    white_pieces = pieces.filter { |piece| piece.color == 'white' }
+    black_pieces = pieces.filter { |piece| piece.color == 'black' }
+    [white_pieces, black_pieces]
   end
 
   ##
