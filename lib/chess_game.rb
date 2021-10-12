@@ -18,8 +18,9 @@ class ChessGame
   WHITE_SQUARE = { background: :light_red }.freeze
   BLACK_SQAURE = { background: :red }.freeze
   BLANK_SQUARE = '  '
-  BOARD_TO_COORDINATES = {'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3,
-                          'e' => 4, 'f' => 5, 'g' => 6, 'h' => 7 }.freeze
+  BOARD_TO_COORDINATES = { 'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3,
+                           'e' => 4, 'f' => 5, 'g' => 6, 'h' => 7 }.freeze
+  COORDINATES_TO_BOARD = BOARD_TO_COORDINATES.each_with_object({}) { |pair, obj| obj[pair[1]] = pair[0] }.freeze
 
   ##
   # Creates instance variables and sets up the board for
@@ -54,10 +55,10 @@ class ChessGame
       begin
         make_move(from, to)
       rescue InvalidMoveError => e
+        puts 'Invalid move!'
         puts e.message
         next
       rescue StandardError => e
-        puts 'Something went wrong'
         puts e.message
       end
     end
@@ -68,6 +69,8 @@ class ChessGame
   # move or saves the game.
   def player_input
     input = gets.chomp
+    input&.downcase
+
     case player_input_type(input)
     when 'move'
       parse_move(input)
@@ -105,6 +108,16 @@ class ChessGame
   # return [0, 3].
   def convert_coordinates(coord_str)
     [(coord_str[1].to_i - 1), BOARD_TO_COORDINATES[coord_str[0]]]
+  end
+
+  ##
+  # Converts coordinates into algebraic notation space names. Inverse method
+  # of +convert_coordinates+.
+  #
+  # +coord_arr+:: An array of integers of length 2 corresponding to the row and
+  # column of the space on +@board+.
+  def convert_algebraic_coordinates(coord_arr)
+    "#{COORDINATES_TO_BOARD[coord_arr[1]]}#{coord_arr[0] + 1}"
   end
 
   ##
@@ -156,6 +169,7 @@ class ChessGame
     frow, fcol = from
     piece = @board[frow][fcol]
     trow, tcol = to
+    other_space = @board[trow][tcol]
 
     # Capture a piece if the pawn performed En Passant
     @board[frow][tcol] = BLANK_SQUARE if piece.is_a?(Pawn) && get_en_passant_moves(piece).include?(to)
@@ -165,6 +179,20 @@ class ChessGame
     @board[frow][fcol] = BLANK_SQUARE
 
     @king_locs[@current_player_color.to_sym] = to if piece.is_a? King
+
+    # Check for check
+    check_piece = check_check
+
+    unless check_piece.nil?
+      puts 'Check.'
+      # Move keeps/makes their own king in check.
+      if check_piece.color != @current_player_color
+        # Undo the move
+        @board[frow][fcol] = piece.move(to)
+        @board[trow][tcol] = other_space
+        raise(InvalidMoveError, "Moving that #{piece.class} leaves your king in check!")
+      end
+    end
 
     # Change whose turn it is
     change_turn
@@ -182,12 +210,18 @@ class ChessGame
   def validate_move(from, to)
     frow, fcol = from
     piece = @board[frow][fcol]
-    raise(InvalidMoveError, "No piece at #{from}") unless piece.is_a? ChessPiece
+    raise(InvalidMoveError, "No piece at #{convert_algebraic_coordinates(from)}") unless piece.is_a? ChessPiece
 
-    raise(InvalidMoveError, "You cannot move opponent's piece at #{from}") unless piece.color == @current_player_color
+    unless piece.color == @current_player_color
+      raise(InvalidMoveError,
+            "You cannot move opponent's piece at #{convert_algebraic_coordinates(from)}")
+    end
 
     possible_moves = legal_moves(piece)
-    raise(InvalidMoveError, "Your #{piece.class} cannot move from #{from} to #{to}.") unless possible_moves.include?(to)
+    unless possible_moves.include?(to)
+      raise(InvalidMoveError,
+            "Your #{piece.class} cannot move from #{convert_algebraic_coordinates(from)} to #{convert_algebraic_coordinates(to)}.")
+    end
 
     trow, tcol = to
     @board[trow][tcol]
