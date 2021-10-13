@@ -31,6 +31,7 @@ class ChessGame
     @king_locs = { white: [0, 4], black: [7, 4] }
     @move_history = []
     @game_winner = nil
+    @check_in_play = false
   end
 
   ##
@@ -41,9 +42,10 @@ class ChessGame
   # 3. Check for check/checkmate
   # 4. Repeat until game over or saved
   def play
+    puts self
     while @game_winner.nil?
-      puts self
       puts "It's #{@current_player_color}'s turn."
+
       input_command = player_input
       return nil if input_command.nil?
 
@@ -54,6 +56,7 @@ class ChessGame
 
       begin
         make_move(from, to)
+        puts self
       rescue InvalidMoveError => e
         puts 'Invalid move!'
         puts e.message
@@ -61,7 +64,16 @@ class ChessGame
       rescue StandardError => e
         puts e.message
       end
+
+      # Exit early if checkmate
+      next unless @check_in_play && out_of_check_moves.nil?
+
+      @game_winner = @current_player_color == 'white' ? 'black' : 'white'
+      puts 'Checkmate!'
+      next
     end
+
+    @game_winner
   end
 
   ##
@@ -70,13 +82,11 @@ class ChessGame
   def player_input
     input = gets.chomp
     input&.downcase
-
     case player_input_type(input)
     when 'move'
       parse_move(input)
     when 'help'
       print_help_menu
-      'help_menu'
     when 'save'
       save_game
     end
@@ -152,6 +162,8 @@ class ChessGame
   #  Prints the help menu complete with tutorial and move explanations
   def print_help_menu
     puts 'TODO : Please Implement'
+
+    'help_menu'
   end
 
   ##
@@ -183,14 +195,18 @@ class ChessGame
     # Check for check
     check_piece = check_check
 
+    @check_in_play = !check_check.nil?
+
     unless check_piece.nil?
-      puts 'Check.'
+
       # Move keeps/makes their own king in check.
       if check_piece.color != @current_player_color
         # Undo the move
-        @board[frow][fcol] = piece.move(to)
+        @board[frow][fcol] = piece.move(from)
         @board[trow][tcol] = other_space
         raise(InvalidMoveError, "Moving that #{piece.class} leaves your king in check!")
+      else
+        puts 'Check!'
       end
     end
 
@@ -338,6 +354,23 @@ class ChessGame
   end
 
   ##
+  # Returns an array of moves that will allow the current player to be out of
+  # check. If the list is empty, nil is returned instead.
+  def out_of_check_moves
+    player_pieces = board_pieces_by_color[@current_player_color == 'white' ? 0 : 1]
+    valid_moves = []
+    player_pieces.each do |piece|
+      legal_moves(piece).each do |move|
+        valid_moves << forecast_move(piece.loc, move)
+      rescue StandardError
+        next
+      end
+    end
+
+    valid_moves.empty? ? nil : valid_moves
+  end
+
+  ##
   # Returns an array with 2 arrays, the first of which is all the white pieces
   # and the second is all the black pieces.
   def board_pieces_by_color
@@ -428,5 +461,44 @@ class ChessGame
   # Changes whose turn it is by switching between 'black' and 'white'.
   def change_turn
     @current_player_color = @current_player_color == 'white' ? 'black' : 'white'
+  end
+
+  ##
+  # Moves a piece at a given location to another location, checks if the the
+  # move leaves the current player's king in check, returns the piece to its
+  # original spot, and returns the move if valid.
+  #
+  # +from+::  An integer array of length 2 denoting the position of the piece
+  #           to move.
+  # +to+::    An integer array of length 2 denoting the position to move the
+  #           piece at +from+ to.
+  def forecast_move(from, to)
+    # Raises an execption if the move isn't valid
+    validate_move(from, to)
+
+    frow, fcol = from
+    piece = @board[frow][fcol]
+    trow, tcol = to
+    other_space = @board[trow][tcol]
+
+    # Move the piece on the board
+    @board[trow][tcol] = piece.move(to)
+    @board[frow][fcol] = BLANK_SQUARE
+
+    @king_locs[@current_player_color.to_sym] = to if piece.is_a? King
+
+    # Check for check
+    check_piece = check_check
+
+    unless check_piece.nil? || check_piece.color == @current_player_color
+      raise(InvalidMoveError, "Moving that #{piece.class} leaves your king in check!")
+    end
+
+    # Undo the move
+    @king_locs[@current_player_color.to_sym] = from if piece.is_a? King
+    @board[frow][fcol] = piece.move(from)
+    @board[trow][tcol] = other_space
+
+    to
   end
 end
