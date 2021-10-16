@@ -165,11 +165,11 @@ class ChessGame
   def save_game
     puts 'Please input a name for the save file.'
     file_name = gets.chomp
-    while File.exist?(file_name)
-      puts "#{file_name} already exists; please choose a different name."
+    while File.exist?("saves/#{file_name}")
+      puts "saves/#{file_name} already exists; please choose a different name."
       file_name = gets.chomp
     end
-    save_file = File.new(file_name, 'w')
+    save_file = File.new("saves/#{file_name}", 'w')
     save_file.write(YAML.dump(self))
     save_file.close
   end
