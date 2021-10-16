@@ -32,6 +32,7 @@ class ChessPiece
   #
   # @param [Array<Integer>] to An integer array of length 2 denoting the new
   #                            location of the piece.
+  # @return [ChessPiece]
   def move(to)
     @position = to
     self
