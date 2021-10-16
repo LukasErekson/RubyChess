@@ -41,6 +41,8 @@ class ChessGame
   # 2. Attempt to make a move
   # 3. Check for check/checkmate
   # 4. Repeat until game over or saved
+  #
+  # @return [String] @game_winner The winner of the game if there is one.
   def play
     puts self
     while @game_winner.nil?
@@ -79,6 +81,9 @@ class ChessGame
   ##
   # Accepts player input and either returns the components needed to input a
   # move or saves the game.
+  #
+  # @return [Array<Array<Integer>>] An array of arrays of length 2 representing
+  #                                 +from+ and +to+ to pass into #make_move.
   def player_input
     input = gets.chomp
     input&.downcase
@@ -99,7 +104,10 @@ class ChessGame
   # - e.g 'a2a4' would return [[0, 1], [0, 3]]
   # TODO : Add more supported moves
   #
-  # +input+:: The raw player input
+  # @param [String] input The raw player input
+  #
+  # @return [Array<Array<Integer>>] An array of arrays of length 2 representing
+  #                                 +from+ and +to+ to pass into #make_move.
   def parse_move(input)
     case input.size
     when 4
@@ -113,9 +121,12 @@ class ChessGame
   # Converts algebraic notation space names to coordinates corresponding with
   # @board.
   #
-  # +coord_str+:: A string of length 2 that has encoded within it the column
-  # and row of a space on the chess board. For example, passing in 'a4' would
-  # return [0, 3].
+  # @param [String] coord_str A string of length 2 that has encoded within it
+  #                           the column and row of a space on the chess board.
+  # @return [Array<Integer>] An array of integers of length 2 denoting the row
+  #                          and column positions corresponding to @board.
+  #
+  # For example, passing in 'a4' would return [0, 3].
   def convert_coordinates(coord_str)
     [(coord_str[1].to_i - 1), BOARD_TO_COORDINATES[coord_str[0]]]
   end
@@ -124,8 +135,12 @@ class ChessGame
   # Converts coordinates into algebraic notation space names. Inverse method
   # of +convert_coordinates+.
   #
-  # +coord_arr+:: An array of integers of length 2 corresponding to the row and
-  # column of the space on +@board+.
+  # @param [Array<Integer>] coord_arr An array of integers of length 2
+  #                                   corresponding to the row and column of
+  #                                   the space on +@board+.
+  #
+  # @return [String] The string corresponding to the row and column name of the
+  #                  space of the board using algebraic notation.
   def convert_algebraic_coordinates(coord_arr)
     "#{COORDINATES_TO_BOARD[coord_arr[1]]}#{coord_arr[0] + 1}"
   end
@@ -134,8 +149,9 @@ class ChessGame
   # Returns the type of player input, whether they input a game-ending command
   # or a move command.
   #
-  # +input+:: String of the player input to parse and determine the type of
-  # input.
+  # @param [String] input String of the player input to parse and determine the
+  #                       type of input.
+  # @return [String] The type of player input; 'save', 'help', or 'move'.
   def player_input_type(input)
     %w[save quit exit end].each { |end_word| return 'save' if input.include?(end_word) }
 
@@ -160,6 +176,8 @@ class ChessGame
 
   ##
   #  Prints the help menu complete with tutorial and move explanations
+  #
+  # @return [String] 'help_menu' after printing the help menu.
   def print_help_menu
     puts 'TODO : Please Implement'
 
@@ -170,10 +188,10 @@ class ChessGame
   # Moves a piece at a given location to another location if
   # the move is valid. Raises an InvalidMoveError otherwise.
   #
-  # +from+::  An integer array of length 2 denoting the position of the piece
-  #           to move.
-  # +to+::    An integer array of length 2 denoting the position to move the
-  #           piece at +from+ to.
+  # @param [Array<Integer>] from  An integer array of length 2 denoting the
+  #                               position of the piece to move.
+  # @param [Array<Integer>] to    An integer array of length 2 denoting the
+  #                               position to move the piece at +from+ to.
   def make_move(from, to)
     # Raises an execption if the move isn't valid
     validate_move(from, to)
@@ -219,10 +237,10 @@ class ChessGame
   # it returns that space on the board.
   # Raises an InvalidMoveError with a specific message if the move is invalid.
   #
-  # +from+::  An integer array of length 2 denoting the position of the piece
-  #           to move.
-  # +to+::    An integer array of length 2 denoting the position to move the
-  #           piece at +from+ to.
+  # @param [Array<Integer>] from  An integer array of length 2 denoting the
+  #                               position of the piece to move.
+  # @param [Array<Integer>] to    An integer array of length 2 denoting the
+  #                               position to move the piece at +from+ to.
   def validate_move(from, to)
     frow, fcol = from
     piece = @board[frow][fcol]
@@ -249,7 +267,9 @@ class ChessGame
   # knight, of course). It does so by iterating through +chess_piece+'s move
   # tree in level order, dequeing any nodes that are invalid.
   #
-  # +chess_piece+:: The ChessPiece to find the legal moves of.
+  # @param [ChessPiece] chess_piece The ChessPiece to find the legal moves of.
+  # @return [Array<Array<Integer>>] Array of legal move spaces that the piece
+  #                                  can move to.
   def legal_moves(chess_piece)
     return pawn_legal_moves(chess_piece) if chess_piece.is_a? Pawn
 
@@ -279,7 +299,9 @@ class ChessGame
   # Returns an array of legal moves that a pawn can make. Since a pawn can only
   # move diagonally if it can capture a piece, it is its own special case.
   #
-  # +pawn+:: The pawn to find the legal moves of.
+  # @param [Pawn] pawn The pawn to find the legal moves of.
+  # @return [Array<Array<Integer>>] Array of legal move spaces that the pawn
+  #                                  can move to.
   def pawn_legal_moves(pawn)
     # Assign the move tree for pawn
     pawn.possible_moves
@@ -318,7 +340,9 @@ class ChessGame
   ##
   # Returns an array of the valid En Passant moves for a given pawn
   #
-  # +pawn+:: The pawn that is proposed to move.
+  # @param [Pawn] pawn The pawn to find the En Passant moves of.
+  # @return [Array<Array<Integer>>] Array of legal move spaces that the pawn
+  #                                  can move to where En Passant applies.
   def get_en_passant_moves(pawn)
     # Check spaces beside the pawn for En Passant
     pawn_row, pawn_col = pawn.position
@@ -339,6 +363,9 @@ class ChessGame
   ##
   # Checks whether a king is currently in check. If it is, it returns the piece
   # that puts it in check and nil otherwise.
+  #
+  # @return [ChessPiece or nil] The piece that puts a king in check and
+  #                             nil otherwise.
   def check_check
     white_pieces, black_pieces = board_pieces_by_color
     # If black king is in check
@@ -356,6 +383,9 @@ class ChessGame
   ##
   # Returns an array of moves that will allow the current player to be out of
   # check. If the list is empty, nil is returned instead.
+  #
+  # @return [Array<Array<Integer>> or nil] Array of valid moves unless it's
+  #                                        empty.
   def out_of_check_moves
     player_pieces = board_pieces_by_color[@current_player_color == 'white' ? 0 : 1]
     valid_moves = []
@@ -373,6 +403,9 @@ class ChessGame
   ##
   # Returns an array with 2 arrays, the first of which is all the white pieces
   # and the second is all the black pieces.
+  #
+  # @return [Array<Array<ChessPieces>>] Array of arrays for white and black
+  #                                     pieces.
   def board_pieces_by_color
     pieces = @board.flatten.filter { |space| space.is_a? ChessPiece }
     white_pieces = pieces.filter { |piece| piece.color == 'white' }
@@ -383,6 +416,8 @@ class ChessGame
   ##
   # Returns a string of a board with pieces and appropriately
   # shaded spaces.
+  #
+  # @return [String] The chess board.
   def to_s
     string_stream = StringIO.new
     8.downto(1) do |row|
@@ -404,8 +439,9 @@ class ChessGame
   ##
   # Returns an array that sets the board up for the
   # start of the game.
+  #
+  # @return [Array<Array>] The chess board represented as an array.
   def setup_board
-    # Build the empty board
     rows = place_pieces('white')
     rows += Array.new(4) { Array.new(8, BLANK_SQUARE) }
     rows += place_pieces('black')
@@ -417,7 +453,9 @@ class ChessGame
   # Returns the 2 arrays of the chess pieces in the proper places based od
   # their color.
   #
-  # +color+:: A string denoting the color of pieces to place.
+  # @param [String] color A string denoting the color of pieces to place.
+  # @return [Array<Array<ChessPiece>>] The two rows of chess pieces for the
+  #                                    standard setup of the chess board.
   def place_pieces(color)
     pawns = place_pawns(color)
     back_row_pieces = place_back_row(color)
@@ -432,7 +470,8 @@ class ChessGame
   # Returns an array of pawns of the appropriate color on the
   # appropriate row based on +color+.
   #
-  # +color+:: A string denoting the color of pawns to place.
+  # @param [String] color A string denoting the color of pawns to place.
+  # @return [Array<Pawn>] Row of pawns to place on the board.
   def place_pawns(color)
     pawn_row = color == 'white' ? 1 : 6
     pawns = []
@@ -444,7 +483,8 @@ class ChessGame
   # Returns an array of back row pieces of the appropriate color
   # on the appropriate row based on +color+.
   #
-  # +color+:: A string denoting the color of pieces to place.
+  # @param [String] color A string denoting the color of pieces to place.
+  # @return [Array<ChessPiece>] The row of chess pieces in the standard setup.
   def place_back_row(color)
     back_row = color == 'white' ? 0 : 7
     [Rook.new(color, [back_row, 0]),
@@ -459,6 +499,9 @@ class ChessGame
 
   ##
   # Changes whose turn it is by switching between 'black' and 'white'.
+  #
+  # @return [String] @current_player_color The current player color whose turn
+  #                                        it is.
   def change_turn
     @current_player_color = @current_player_color == 'white' ? 'black' : 'white'
   end
@@ -468,10 +511,10 @@ class ChessGame
   # move leaves the current player's king in check, returns the piece to its
   # original spot, and returns the move if valid.
   #
-  # +from+::  An integer array of length 2 denoting the position of the piece
-  #           to move.
-  # +to+::    An integer array of length 2 denoting the position to move the
-  #           piece at +from+ to.
+  # @param [Array<Integer>] from  An integer array of length 2 denoting the
+  #                               position of the piece to move.
+  # @param [Array<Integer>] to    An integer array of length 2 denoting the
+  #                               position to move the piece at +from+ to.
   def forecast_move(from, to)
     # Raises an execption if the move isn't valid
     validate_move(from, to)

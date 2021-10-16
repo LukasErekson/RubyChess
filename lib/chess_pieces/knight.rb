@@ -8,9 +8,9 @@ class Knight < ChessPiece
   ##
   # Initializes a new knight piece with color and position.
   #
-  # +color+::     A string denoting the color of the piece.
-  # +position+::  An integer array of length 2 denoting the location of the
-  #               piece on the board.
+  # @param [String]         color     A string denoting the color of the piece.
+  # @param [Array<Integer>] position  An integer array of length 2 denoting the
+  #                                   location of the piece on the board.
   def initialize(color, position)
     @move_tree_template = build_knight_move_tree
     super(color == 'white' ? '♞'.white : '♘', color, position, 3)
@@ -20,6 +20,8 @@ class Knight < ChessPiece
   # Builds the Knight move tree. The Knight can move in an L shape in any
   # direction as long as the board permits. The permutations given represent
   # the 8 spaces a Knight may move to.
+  #
+  # @return [MoveTree] move_tree_template A move tree template for the knight.
   def build_knight_move_tree
     move_tree = MoveTree.new([0, 0])
     # Get all possible net changes for a knight

@@ -8,9 +8,9 @@ class King < ChessPiece
   ##
   # Initializes a new king piece with color and position.
   #
-  # +color+::     A string denoting the color of the piece.
-  # +position+::  An integer array of length 2 denoting the location of the
-  #               piece on the board.
+  # @param [String]         color     A string denoting the color of the piece.
+  # @param [Array<Integer>] position  An integer array of length 2 denoting the
+  #                                   location of the piece on the board.
   def initialize(color, position)
     @move_tree_template = build_king_move_tree
     super(color == 'white' ? '♚'.white : '♔', color, position, 10_000)
@@ -23,6 +23,8 @@ class King < ChessPiece
   ##
   # Builds a king move tree where the king can move in any direction up to
   # one space.
+  #
+  # @return [MoveTree] move_tree_template A move tree template for the king.
   def build_king_move_tree
     move_tree_template = MoveTree.new([0, 0])
 

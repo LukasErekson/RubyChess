@@ -10,8 +10,8 @@ class MoveTreeNode
   ##
   # Initialize a node with its location and an empty children array.
   #
-  # +loc+:: An integer array of length 2 denoting the location the node
-  #         represents.
+  # @param [Array<Integer>] loc An integer array of length 2 denoting the
+  #                             location the node represents.
   def initialize(loc)
     @loc = loc
     @children = []
@@ -20,8 +20,9 @@ class MoveTreeNode
   ##
   # Add a child to the array of children nodes.
   #
-  # +loc+:: Either an integer array of length 2 denoting the location of the
-  #         node to add or the MoveTreeNode to add.
+  # @param [Array<Integer>] loc An integer array of length 2 denoting the
+  #                             location of the node to add.
+  # @raises [ArgumentError] if +loc+ isn't an Array or MoveTreeNode.
   def add_child(loc)
     return @children << MoveTreeNode.new(loc) if loc.is_a? Array
 
@@ -34,8 +35,10 @@ class MoveTreeNode
   ##
   # Removes a child from the array of children nodes.
   #
-  # +loc+ :: Either an integer array of length 2 denoting the location of the
-  #          node to remove or the MoveTreeNode to remove.
+  # @param [Array<Integer>] loc An integer array of length 2 denoting the
+  #                             location of the node to remove, or a
+  #                             MoveTreeNode object with the loc to match.
+  # @raises [ArgumentError] if +loc+ isn't an Array or MoveTreeNode.
   def remove_child(loc)
     return @children.delete(MoveTreeNode.new(loc)) if loc.is_a? Array
 
@@ -46,8 +49,10 @@ class MoveTreeNode
   end
 
   ##
-  # Returns a astring representation of the node using its location
+  # Returns a string representation of the node using its location
   # and a list of its children.
+  #
+  # @returns [String] String with the node's location and children.
   def to_s
     "#{@loc}: #{@children}"
   end
@@ -55,7 +60,9 @@ class MoveTreeNode
   ##
   # Define equality between two nodes by same location.
   #
-  # +other+:: The other MoveTreeNode to compare the location for equality.
+  # @param [MoveTreeNode] other The other MoveTreeNode to compare the location
+  #                             for equality.
+  # @return [true] if the locations match, false otherwise.
   def ==(other)
     return false unless other.is_a? MoveTreeNode
 
