@@ -166,7 +166,7 @@ class ChessGame
     puts 'Please input a name for the save file.'
     file_name = gets.chomp
     while File.exist?(file_name)
-      puts "#{filename} already exists; please choose a different name."
+      puts "#{file_name} already exists; please choose a different name."
       file_name = gets.chomp
     end
     save_file = File.new(file_name, 'w')
@@ -179,7 +179,16 @@ class ChessGame
   #
   # @return [String] 'help_menu' after printing the help menu.
   def print_help_menu
-    puts 'TODO : Please Implement'
+    puts <<~HELP_MENU
+      To move a piece, type the two character location of the piece and then the
+      two character location of where you want it to move. For example, if you
+      want to move the pawn at a2 forward two spaces, type a2a4.
+
+      To save the game, type 'save', 'exit', or 'quit', and you will be prompted
+      to name the save file.
+
+      To get this menu back, simply type 'help', 'tutorial' or '?'.
+    HELP_MENU
 
     'help_menu'
   end
