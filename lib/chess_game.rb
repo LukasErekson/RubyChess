@@ -400,7 +400,7 @@ class ChessGame
     valid_moves = []
     player_pieces.each do |piece|
       legal_moves(piece).each do |move|
-        valid_moves << forecast_move(piece.loc, move)
+        valid_moves << forecast_move(piece.position, move)
       rescue StandardError
         next
       end
@@ -542,14 +542,14 @@ class ChessGame
     # Check for check
     check_piece = check_check
 
-    unless check_piece.nil? || check_piece.color == @current_player_color
-      raise(InvalidMoveError, "Moving that #{piece.class} leaves your king in check!")
-    end
-
     # Undo the move
     @king_locs[@current_player_color.to_sym] = from if piece.is_a? King
     @board[frow][fcol] = piece.move(from)
     @board[trow][tcol] = other_space
+
+    unless check_piece.nil? || check_piece.color == @current_player_color
+      raise(InvalidMoveError, "Moving that #{piece.class} leaves your king in check!")
+    end
 
     to
   end
