@@ -384,7 +384,7 @@ class ChessGame
   # Returns an array of moves that will allow the current player to be out of
   # check. If the list is empty, nil is returned instead.
   #
-  # @return [Array<Array<Integer>> or nil] Array of valid moves unless it's 
+  # @return [Array<Array<Integer>> or nil] Array of valid moves unless it's
   #                                        empty.
   def out_of_check_moves
     player_pieces = board_pieces_by_color[@current_player_color == 'white' ? 0 : 1]

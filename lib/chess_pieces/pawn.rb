@@ -26,7 +26,7 @@ class Pawn < ChessPiece
   # Moves the Pawn and updates @move_count
   # If the pawn reaches the back row of the opposing side, it returns a queen.
   #
-  # @param [Array<Integer>] An integer array of length 2 denoting the new 
+  # @param [Array<Integer>] An integer array of length 2 denoting the new
   #                         location of the pawn.
   # @return [Pawn or Queen] A pawn if the pawn moves or a Queen if the pawn
   #                         reaches the end of the board.
