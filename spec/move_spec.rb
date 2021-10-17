@@ -184,4 +184,63 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
       end
     end
   end
+
+  describe '#out_of_check_moves' do
+    context 'when the king can get out of check by moving out of the way' do
+      it 'returns moves the white king can make' do
+        king_white = King.new('white', [0, 0])
+        bishop_black = Bishop.new('black', [3, 3])
+        current_board = [king_white, bishop_black].each_with_object({}) do |piece, hash|
+          hash[piece.position] = piece
+        end
+        game.instance_variable_set(:@board, setup_board(current_board))
+        game.instance_variable_set(:@king_locs, { white: [0, 0] })
+        expect(game.out_of_check_moves).to eq([[0, 1], [1, 0]])
+      end
+      it 'returns moves the black king can make' do
+        King_black = King.new('black', [7, 7])
+        Rook_white = Rook.new('white', [6, 0])
+        current_board = [King_black, Rook_white].each_with_object({}) do |piece, hash|
+          hash[piece.position] = piece
+        end
+        game.instance_variable_set(:@board, setup_board(current_board))
+        game.instance_variable_set(:@king_locs, { black: [7, 7] })
+        game.make_move([6, 0], [7, 0])
+        expect(game.out_of_check_moves).to eq([[6, 6], [6, 7]])
+      end
+    end
+
+    context 'when the player can move a piece (not the king) to get out of check' do
+      it 'returns move that blocks it' do
+        king_white = King.new('white', [0, 0])
+        # Convoluted setup so that only one block is possible.
+        bishop_white1 = Bishop.new('white', [1, 0])
+        bishop_white2 = Bishop.new('white', [0, 1])
+        bishop_white3 = Bishop.new('white', [1, 3])
+        bishop_black = Bishop.new('black', [3, 3])
+        current_board = [king_white, bishop_black, bishop_white1, bishop_white2,
+                         bishop_white3].each_with_object({}) do |piece, hash|
+          hash[piece.position] = piece
+        end
+        game.instance_variable_set(:@board, setup_board(current_board))
+        game.instance_variable_set(:@king_locs, { white: [0, 0] })
+        expect(game.out_of_check_moves).to eq([[2, 2]])
+      end
+    end
+
+    context 'when it is checkmate' do
+      it 'returns nil' do
+        king_white = King.new('white', [0, 0])
+        bishop_white1 = Bishop.new('white', [1, 0])
+        bishop_white2 = Bishop.new('white', [0, 1])
+        bishop_black = Bishop.new('black', [3, 3])
+        current_board = [king_white, bishop_black, bishop_white1, bishop_white2].each_with_object({}) do |piece, hash|
+          hash[piece.position] = piece
+        end
+        game.instance_variable_set(:@board, setup_board(current_board))
+        game.instance_variable_set(:@king_locs, { white: [0, 0] })
+        expect(game.out_of_check_moves).to eq(nil)
+      end
+    end
+  end
 end
