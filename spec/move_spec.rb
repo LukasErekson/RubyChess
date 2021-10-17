@@ -198,9 +198,9 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
         expect(game.out_of_check_moves).to eq([[0, 1], [1, 0]])
       end
       it 'returns moves the black king can make' do
-        King_black = King.new('black', [7, 7])
-        Rook_white = Rook.new('white', [6, 0])
-        current_board = [King_black, Rook_white].each_with_object({}) do |piece, hash|
+        king_black = King.new('black', [7, 7])
+        rook_white = Rook.new('white', [6, 0])
+        current_board = [king_black, rook_white].each_with_object({}) do |piece, hash|
           hash[piece.position] = piece
         end
         game.instance_variable_set(:@board, setup_board(current_board))
