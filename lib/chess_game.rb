@@ -58,6 +58,7 @@ class ChessGame
 
       begin
         make_move(from, to)
+        @move_history << "#{convert_algebraic_coordinates(from)}#{convert_algebraic_coordinates(to)}"
         puts self
       rescue InvalidMoveError => e
         puts 'Invalid move!'
@@ -429,12 +430,17 @@ class ChessGame
   # @return [String] The chess board.
   def to_s
     string_stream = StringIO.new
+    history_offset = @move_history.size
     8.downto(1) do |row|
       string_stream << " #{row} "
       @board[row - 1].each_with_index do |col, col_num|
         bg_color = (row - 1) % 2 == col_num % 2 ? BLACK_SQAURE : WHITE_SQUARE
         string_stream << col.to_s.colorize(bg_color)
       end
+      string_stream << "\t"
+      move_index = 8 - row + (history_offset - 8)
+      move_index = 8 - row if (history_offset - 8).negative?
+      string_stream << "#{move_index + 1}. #{@move_history[move_index]}"
       string_stream << "\n"
     end
 
