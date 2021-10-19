@@ -195,7 +195,7 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
         end
         game.instance_variable_set(:@board, setup_board(current_board))
         game.instance_variable_set(:@king_locs, { white: [0, 0] })
-        expect(game.out_of_check_moves).to eq([[0, 1], [1, 0]])
+        expect(game.out_of_check_moves).to eq({[0, 0]=>[[0, 1], [1, 0]]})
       end
       it 'returns moves the black king can make' do
         king_black = King.new('black', [7, 7])
@@ -206,7 +206,7 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
         game.instance_variable_set(:@board, setup_board(current_board))
         game.instance_variable_set(:@king_locs, { black: [7, 7] })
         game.make_move([6, 0], [7, 0])
-        expect(game.out_of_check_moves).to eq([[6, 6], [6, 7]])
+        expect(game.out_of_check_moves).to eq({[7, 7]=>[[6, 6], [6, 7]]})
       end
     end
 
@@ -224,7 +224,7 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
         end
         game.instance_variable_set(:@board, setup_board(current_board))
         game.instance_variable_set(:@king_locs, { white: [0, 0] })
-        expect(game.out_of_check_moves).to eq([[2, 2]])
+        expect(game.out_of_check_moves).to eq({[1, 3]=>[[2, 2]]})
       end
     end
 

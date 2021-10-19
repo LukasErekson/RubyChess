@@ -391,21 +391,23 @@ class ChessGame
   end
 
   ##
-  # Returns an array of moves that will allow the current player to be out of
+  # Returns an hash of moves that will allow the current player to be out of
   # check. If the list is empty, nil is returned instead.
   #
-  # @return [Array<Array<Integer>> or nil] Array of valid moves unless it's
-  #                                        empty.
+  # @return [Hash <Array, Array> or nil] Array of valid moves unless it's empty.
   def out_of_check_moves
     player_pieces = board_pieces_by_color[@current_player_color == 'white' ? 0 : 1]
-    valid_moves = []
+    valid_moves = {}
     player_pieces.each do |piece|
+      valid_moves[piece.position] = []
       legal_moves(piece).each do |move|
-        valid_moves << forecast_move(piece.position, move)
+        valid_moves[piece.position] << forecast_move(piece.position, move)
       rescue StandardError
         next
       end
     end
+
+    valid_moves.filter! { |_key, val| !val.empty? }
 
     valid_moves.empty? ? nil : valid_moves
   end
