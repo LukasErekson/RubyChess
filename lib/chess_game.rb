@@ -191,7 +191,18 @@ class ChessGame
       To get this menu back, simply type 'help', 'tutorial' or '?'.
     HELP_MENU
 
+    print_out_of_check_moves if @check_in_play
+
     'help_menu'
+  end
+
+  ##
+  # Prints the moves that the current player can make to get out of check.
+  def print_out_of_check_moves
+    puts 'Here are potential moves to get out of of check:'
+    out_of_check_moves.each do |from_loc, to_loc_array|
+      puts "#{convert_algebraic_coordinates(from_loc)} => #{to_loc_array.map { |to| convert_algebraic_coordinates(to) }}"
+    end
   end
 
   ##
