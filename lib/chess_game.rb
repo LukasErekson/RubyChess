@@ -246,6 +246,7 @@ class ChessGame
         raise(InvalidMoveError, "Moving that #{piece.class} leaves your king in check!")
       else
         puts 'Check!'
+        puts 'Type "help" to get a list of moves to get out of check!'
       end
     end
 
