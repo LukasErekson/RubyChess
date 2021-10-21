@@ -201,7 +201,9 @@ class ChessGame
   def print_out_of_check_moves
     puts 'Here are potential moves to get out of of check:'
     out_of_check_moves.each do |from_loc, to_loc_array|
-      puts "#{convert_algebraic_coordinates(from_loc)} => #{to_loc_array.map { |to| convert_algebraic_coordinates(to) }}"
+      puts "#{convert_algebraic_coordinates(from_loc)} => #{to_loc_array.map do |to|
+                                                              convert_algebraic_coordinates(to)
+                                                            end }"
     end
   end
 
