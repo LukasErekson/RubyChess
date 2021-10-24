@@ -56,4 +56,30 @@ RSpec.describe ChessGame do
       end
     end
   end
+
+  describe '#player_input_type' do
+    context 'when trying to end the game' do
+      %w[save quit exit end].each do |save_word|
+        it "returns \"save\" when given \"#{save_word}\"" do
+          expect(game.player_input_type(save_word)).to eq('save')
+        end
+      end
+    end
+
+    context 'when trying to access the tutorial' do
+      %w[help tutorial ?].each do |help_word|
+        it "returns \"help\" when given \"#{help_word}\"" do
+          expect(game.player_input_type(help_word)).to eq('help')
+        end
+      end
+    end
+
+    context 'when given any other string' do
+      %w[this is an example a2a4 h8g3].each do |str_input|
+        it "returns \"move\" when given \"#{str_input}\"" do
+          expect(game.player_input_type(str_input)).to eq('move')
+        end
+      end
+    end
+  end
 end
