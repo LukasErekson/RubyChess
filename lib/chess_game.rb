@@ -103,6 +103,8 @@ class ChessGame
   # different suppored moves are:
   # 1. A string of length 4 indicating the start space and the end space.
   # - e.g 'a2a4' would return [[0, 1], [0, 3]]
+  # 2. A string of length 8 in the form of "[start] to [end]"
+  # - e.g 'a2 to a4' would return [[0, 1], [0, 3]]
   # TODO : Add more supported moves
   #
   # @param [String] input The raw player input
@@ -114,6 +116,10 @@ class ChessGame
     when 4
       from = convert_coordinates(input[0..1])
       to = convert_coordinates(input[2..3])
+      [from, to]
+    when 8
+      from = convert_coordinates(input[0..1])
+      to = convert_coordinates(input[-2..-1])
       [from, to]
     end
   end
@@ -183,7 +189,7 @@ class ChessGame
     puts <<~HELP_MENU
       To move a piece, type the two character location of the piece and then the
       two character location of where you want it to move. For example, if you
-      want to move the pawn at a2 forward two spaces, type a2a4.
+      want to move the pawn at a2 forward two spaces, type "a2a4" or "a2 to a4".
 
       To save the game, type 'save', 'exit', or 'quit', and you will be prompted
       to name the save file.

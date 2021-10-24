@@ -34,4 +34,26 @@ RSpec.describe ChessGame do
       end
     end
   end
+
+  describe '#parse_move' do
+    context 'when given input in the form of "{from_space}{to_space}' do
+      it 'returns proper coordinates for "a2a4"' do
+        expect(game.parse_move('a2a4')).to eq([[1, 0], [3, 0]])
+      end
+
+      it 'returns proper coordinates for "h8e2"' do
+        expect(game.parse_move('h8e2')).to eq([[7, 7], [1, 4]])
+      end
+    end
+
+    context 'when given input in the form of "{from_space} to {to_space}' do
+      it 'returns proper coordinates for "a2a4"' do
+        expect(game.parse_move('a2 to a4')).to eq([[1, 0], [3, 0]])
+      end
+
+      it 'returns proper coordinates for "h8e2"' do
+        expect(game.parse_move('h8 to e2')).to eq([[7, 7], [1, 4]])
+      end
+    end
+  end
 end
