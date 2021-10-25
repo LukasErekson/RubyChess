@@ -13,10 +13,25 @@ class King < ChessPiece
   #                                   location of the piece on the board.
   def initialize(color, position)
     @move_tree_template = build_king_move_tree
+    @moved = false
     super(color == 'white' ? '♚'.white : '♔', color, position, 10_000)
   end
 
-  # TODO : Allow Rooks and Kings to castle under the right conditions
+  ##
+  # Flags a king as having moved after the first move
+  def move(to)
+    @moved = true
+    super(to)
+  end
+
+  ##
+  # Returns whether or not the king has moved before for the purpose of
+  # whether or not the king can castle or not.
+  #
+  # @return [Boolean] @moved Whether or not the king has moved.
+  def moved?
+    @moved
+  end
 
   protected
 
