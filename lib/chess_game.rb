@@ -300,7 +300,7 @@ class ChessGame
     possible_moves = legal_moves(piece)
     unless possible_moves.include?(to)
       # Check if it's trying to castle the king
-      if piece.is_a?(King) && (to[1].between?(piece.position[1] - 2, piece.position[1] + 2) && !piece.moved?)
+      if piece.is_a?(King) && !piece.moved? && can_castle?(from, to)
         @castle_king = true
       else
         raise(InvalidMoveError,
@@ -319,9 +319,9 @@ class ChessGame
   #                               position of the piece to move.
   # @param [Array<Integer>] to    An integer array of length 2 denoting the
   #                               position to move the piece at +from+ to.
-  # @return [Boolean] whether the king cna make the castle move or not.
+  # @return [Boolean] whether the king can make the castle move or not.
   def can_castle?(from, to)
-    return false unless from[0] == to[0]
+    return false unless from[0] == to[0] && to[1].between?(from[1] - 2, from[1] + 2)
 
     tcol = to[1]
     fcol = from[1]
