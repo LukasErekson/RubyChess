@@ -32,6 +32,7 @@ class ChessGame
     @move_history = []
     @game_winner = nil
     @check_in_play = false
+    @castle_king = false
   end
 
   ##
@@ -237,7 +238,22 @@ class ChessGame
     @board[trow][tcol] = piece.move(to)
     @board[frow][fcol] = BLANK_SQUARE
 
-    @king_locs[@current_player_color.to_sym] = to if piece.is_a? King
+    # If a piece is a king, do special checks
+    if piece.is_a? King
+      @king_locs[@current_player_color.to_sym] = to
+
+      # Check if the king is being castled
+      if @castle_king
+        @castle_king = false
+        if tcol == fcol - 2
+          @board[trow][tcol + 1] = @board[trow][0]
+          @board[trow][0] = BLANK_SQUARE
+        else
+          @board[trow][tcol - 1] = @board[trow][7]
+          @board[trow][7] = BLANK_SQUARE
+        end
+      end
+    end
 
     # Check for check
     check_piece = check_check
@@ -283,12 +299,41 @@ class ChessGame
 
     possible_moves = legal_moves(piece)
     unless possible_moves.include?(to)
-      raise(InvalidMoveError,
-            "Your #{piece.class} cannot move from #{convert_algebraic_coordinates(from)} to #{convert_algebraic_coordinates(to)}.")
+      # Check if it's trying to castle the king
+      if piece.is_a?(King) && (to[1].between?(piece.position[1] - 2, piece.position[1] + 2) && !piece.moved?)
+        @castle_king = true
+      else
+        raise(InvalidMoveError,
+              "Your #{piece.class} cannot move from #{convert_algebraic_coordinates(from)} to #{convert_algebraic_coordinates(to)}.")
+      end
     end
 
     trow, tcol = to
     @board[trow][tcol]
+  end
+
+  ##
+  # Returns whether or not a king can make the castle move or not
+  #
+  # @param [Array<Integer>] from  An integer array of length 2 denoting the
+  #                               position of the piece to move.
+  # @param [Array<Integer>] to    An integer array of length 2 denoting the
+  #                               position to move the piece at +from+ to.
+  # @return [Boolean] whether the king cna make the castle move or not.
+  def can_castle?(from, to)
+    return false unless from[0] == to[0]
+
+    tcol = to[1]
+    fcol = from[1]
+    row = from[0]
+    case fcol - tcol
+    when 2 # Moving left, check all the left spaces are empty
+      @board[row][0].is_a?(Rook) && @board[row][1] == BLANK_SQUARE && @board[row][2] == BLANK_SQUARE && @board[row][3] == BLANK_SQUARE
+    when -2 # Moving right
+      @board[row][7].is_a?(Rook) && @board[row][6] == BLANK_SQUARE && @board[row][5] == BLANK_SQUARE
+    else
+      false
+    end
   end
 
   ##
