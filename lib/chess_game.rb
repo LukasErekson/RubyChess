@@ -244,12 +244,13 @@ class ChessGame
 
       # Check if the king is being castled
       if @castle_king
+        # Reset the flag for the other player's king
         @castle_king = false
         if tcol == fcol - 2
-          @board[trow][tcol + 1] = @board[trow][0]
+          @board[trow][tcol + 1] = @board[trow][0].move([trow, tcol + 1])
           @board[trow][0] = BLANK_SQUARE
         else
-          @board[trow][tcol - 1] = @board[trow][7]
+          @board[trow][tcol - 1] = @board[trow][7].move([trow, tcol - 1])
           @board[trow][7] = BLANK_SQUARE
         end
       end
