@@ -243,4 +243,74 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
       end
     end
   end
+
+  describe '#can_castle?' do
+    # Using just the standard setup
+    context 'when multiple pieces are in the way on the left' do
+      it 'returns false for white' do
+        expect(game.can_castle?([0, 4], [0, 2])).to be(false)
+      end
+
+      it 'returns false for black' do
+        expect(game.can_castle?([7, 4], [7, 2])).to be(false)
+      end
+    end
+
+    # Using just the standard setup
+    context 'when multiple pieces ar in the way on the right' do
+      it 'returns false for white' do
+        expect(game.can_castle?([0, 4], [0, 6])).to be(false)
+      end
+
+      it 'returns false for black' do
+        expect(game.can_castle?([7, 4], [7, 6])).to be(false)
+      end
+    end
+
+    context 'when one piece is in the way' do
+      it 'returns false for white' do
+        king = King.new('white', [0, 4])
+        bishop = Bishop.new('white', [0, 2])
+        rook = Rook.new('white', [0, 0])
+        current_board = [king, bishop, rook].each_with_object({}) do |piece, hash|
+          hash[piece.position] = piece
+        end
+        game.instance_variable_set(:@board, setup_board(current_board))
+        expect(game.can_castle?([0, 4], [0, 2])).to be(false)
+      end
+
+      it 'returns false for black' do
+        king = King.new('black', [7, 4])
+        bishop = Bishop.new('black', [7, 5])
+        rook = Rook.new('black', [7, 7])
+        current_board = [king, bishop, rook].each_with_object({}) do |piece, hash|
+          hash[piece.position] = piece
+        end
+        game.instance_variable_set(:@board, setup_board(current_board))
+        expect(game.can_castle?([7, 4], [7, 6])).to be(false)
+      end
+    end
+
+    context 'when the king can castle' do
+      it 'returns true for white' do
+        king = King.new('white', [0, 4])
+        rook = Rook.new('white', [0, 7])
+        current_board = [king, rook].each_with_object({}) do |piece, hash|
+          hash[piece.position] = piece
+        end
+        game.instance_variable_set(:@board, setup_board(current_board))
+        expect(game.can_castle?([0, 4], [0, 6])).to be(true)
+      end
+
+      it 'returns true for black' do
+        king = King.new('black', [7, 4])
+        rook = Rook.new('black', [7, 0])
+        current_board = [king, rook].each_with_object({}) do |piece, hash|
+          hash[piece.position] = piece
+        end
+        game.instance_variable_set(:@board, setup_board(current_board))
+        expect(game.can_castle?([7, 4], [7, 2])).to be(true)
+      end
+    end
+  end
 end
