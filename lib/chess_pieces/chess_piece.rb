@@ -133,7 +133,10 @@ class ChessPiece
 
     pieces = [@name, other.name].sort
 
-    return 0 if (pieces == ['♞'.white, '♘']) || (pieces == ['♝'.white, '♗'])
+    both_knights = ['♞'.white, '♘'].repeated_combination(2).any? { |combo| pieces == combo }
+    both_bishops = ['♝'.white, '♗'].repeated_combination(2).any? { |combo| pieces == combo }
+
+    return 0 if both_knights || both_bishops
 
     return -1 if (@name == '♞'.white) || (@name == '♘')
 
