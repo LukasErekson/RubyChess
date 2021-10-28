@@ -2,6 +2,9 @@
 
 require_relative 'chess_piece'
 require_relative 'queen'
+require_relative 'rook'
+require_relative 'bishop'
+require_relative 'knight'
 
 ##
 # Pawn piece for a game of chess
@@ -36,8 +39,11 @@ class Pawn < ChessPiece
 
     @move_count += 1
 
-    # Pawn becomes a queen
-    return Queen.new(@color, to) if to[0] == @back_row
+    if to[0] == @back_row
+      piece_type = new_piece_type
+      # Pawn becomes a new piece
+      return piece_type.new(@color, to)
+    end
 
     super(to)
   end
@@ -70,6 +76,46 @@ class Pawn < ChessPiece
   end
 
   protected
+
+  ##
+  # Prompt the user for input to determine what piece to return when the pawn
+  # advances to the last square
+  #
+  # @return [Class] The type of piece the pawn is turning into.
+  def new_piece_type
+    puts 'Your pawn is being promoted! What peice would you like it to become?'
+    print_piece_types
+    player_input = $stdin.gets
+    player_input = player_input&.chomp
+    player_input = player_input&.downcase
+
+    return Queen if %w[1 queen q].include?(player_input)
+
+    return Rook if %w[2 rook r].include?(player_input)
+
+    return Bishop if %w[3 bishop b].include?(player_input)
+
+    return Knight if %w[4 knight k].include?(player_input)
+
+    raise(StandardError, "'#{player_input}' is not a valid input.")
+  rescue StandardError => e
+    puts e.message
+    puts 'Please select an option from the menu.'
+    retry
+  end
+
+  ##
+  # Prints the menu for pieces the pawn can become.
+  def print_piece_types
+    puts <<~PAWN_MENU
+      Please select one of the following options:
+      1. Queen (Q) ♛     3. Bishop (B) ♝
+      2. Rook (R) ♜      4. Knight (K) ♞
+
+      You may use the number, letter, or name to select the piece.
+      e.g - "1", "Queen", or "Q" all select the queen.
+    PAWN_MENU
+  end
 
   ##
   # Returns whether the Pawn can capture another Pawn using the rule

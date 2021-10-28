@@ -105,7 +105,11 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
         end
         game.instance_variable_set(:@board, setup_board(current_board))
         expect(game.legal_moves(pawn)).to be_include([7, 4])
+        $stdin = StringIO.new("1\n")
+        $stdout = StringIO.new
         game.make_move([6, 5], [7, 4])
+        $stdin = STDIN
+        $stdout = STDOUT
         expect(game.legal_moves(king)).to be_include([7, 4])
         game.make_move([7, 3], [7, 4])
       end

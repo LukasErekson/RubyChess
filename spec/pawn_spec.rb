@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rspec'
+require 'stringio'
 require_relative '../lib/chess_pieces/pawn'
 require_relative '../lib/chess_pieces/queen'
 
@@ -52,11 +53,37 @@ RSpec.describe Pawn do
     end
 
     context 'when a pawn moves to a back row' do
+      before do
+        $stdout = StringIO.new
+      end
+      after do
+        $stdin = STDIN
+        $stdout = STDOUT
+      end
+
       it 'returns queen for white pawn' do
+        $stdin = StringIO.new("1\n")
         expect(white_pawn.move([7, 1])).to eq(Queen.new('white', [7, 1]))
       end
+
       it 'returns queen for black pawn' do
+        $stdin = StringIO.new("1\n")
         expect(black_pawn.move([0, 1])).to eq(Queen.new('black', [0, 1]))
+      end
+
+      it 'returns rook for black pawn' do
+        $stdin = StringIO.new("R\n")
+        expect(black_pawn.move([0, 1])).to eq(Rook.new('black', [0, 1]))
+      end
+
+      it 'returns bishop for black pawn' do
+        $stdin = StringIO.new("BISHOP\n")
+        expect(black_pawn.move([0, 1])).to eq(Bishop.new('black', [0, 1]))
+      end
+
+      it 'returns knight for black pawn' do
+        $stdin = StringIO.new("K\n")
+        expect(black_pawn.move([0, 1])).to eq(Knight.new('black', [0, 1]))
       end
     end
   end
