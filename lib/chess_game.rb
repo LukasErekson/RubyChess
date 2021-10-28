@@ -91,7 +91,7 @@ class ChessGame
   #                                 +from+ and +to+ to pass into #make_move.
   def player_input
     input = gets.chomp
-    input&.downcase
+    input = input&.downcase
     case player_input_type(input)
     when 'move'
       parse_move(input)
