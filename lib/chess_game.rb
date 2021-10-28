@@ -69,12 +69,15 @@ class ChessGame
         puts e.message
       end
 
-      # Exit early if checkmate
-      next unless @check_in_play && out_of_check_moves.nil?
-
-      @game_winner = @current_player_color == 'white' ? 'black' : 'white'
-      puts 'Checkmate!'
-      next
+      # Check whether the game is over or not
+      case check_game_over
+      when 'Checkmate'
+        @game_winner = @current_player_color == 'white' ? 'black' : 'white'
+        puts 'Checkmate!'
+      when 'Stalemate'
+        @game_winner = 'Stalemate'
+        puts 'It\'s a draw!'
+      end
     end
 
     @game_winner
@@ -335,6 +338,22 @@ class ChessGame
     else
       false
     end
+  end
+
+  ##
+  # Determines whether the game ends with a checkmate or stalemate.
+  #
+  # @return [String] "Checkmate" for a game over, "Stalemate" for a draw, and
+  #                  "continue" otherwise.
+  def check_game_over
+    # Checkmate condition
+    return 'Checkmate' if @check_in_play && out_of_check_moves.nil?
+
+    # Stalemate condition
+    return 'Stalemate' if !@check_in_play && out_of_check_moves.nil?
+
+    # Neither conidtions met
+    'continue'
   end
 
   ##

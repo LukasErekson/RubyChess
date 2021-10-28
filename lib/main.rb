@@ -20,7 +20,8 @@ def main
     when 1
       game = ChessGame.new
       winner = game.play
-      puts "#{winner} wins! Play again?" unless winner.nil?
+      puts "#{winner} wins! Play again?" unless winner.nil? || winner -= 'Stalemate'
+      puts 'Looks like it\'s a stalemate! Play again?' if winner == 'Stalemate'
       next
     when 2
       'Load saved game'
