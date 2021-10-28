@@ -242,7 +242,7 @@ class ChessGame
     @board[frow][fcol] = BLANK_SQUARE
 
     # If a piece is a king, do special checks
-    if piece.is_a? King
+    if piece.is_a?(King)
       @king_locs[@current_player_color.to_sym] = to
 
       # Check if the king is being castled
@@ -267,7 +267,7 @@ class ChessGame
     unless check_piece.nil?
 
       # Move keeps/makes their own king in check.
-      if check_piece.color != @current_player_color
+      if check_piece.color != @current_player_color || check_piece.is_a?(King)
         # Undo the move
         @board[frow][fcol] = piece.move(from)
         @board[trow][tcol] = other_space
@@ -346,6 +346,7 @@ class ChessGame
   # @return [String] "Checkmate" for a game over, "Stalemate" for a draw, and
   #                  "continue" otherwise.
   def check_game_over
+    movable = out_of_check_moves.nil?
     # Checkmate condition
     return 'Checkmate' if @check_in_play && out_of_check_moves.nil?
 
@@ -630,17 +631,18 @@ class ChessGame
     @board[trow][tcol] = piece.move(to)
     @board[frow][fcol] = BLANK_SQUARE
 
-    @king_locs[@current_player_color.to_sym] = to if piece.is_a? King
+    @king_locs[@current_player_color.to_sym] = to if piece.is_a?(King)
 
     # Check for check
     check_piece = check_check
 
     # Undo the move
-    @king_locs[@current_player_color.to_sym] = from if piece.is_a? King
+    @king_locs[@current_player_color.to_sym] = from if piece.is_a?(King)
     @board[frow][fcol] = piece.move(from)
     @board[trow][tcol] = other_space
-
-    unless check_piece.nil? || check_piece.color == @current_player_color
+    unless check_piece.nil? || (check_piece.color == @current_player_color && !check_piece.is_a?(King))
+      # If check_piece is a King, then both kings are in check and it's an illegal
+      # move.
       raise(InvalidMoveError, "Moving that #{piece.class} leaves your king in check!")
     end
 
