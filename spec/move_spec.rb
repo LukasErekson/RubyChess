@@ -138,7 +138,6 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
   end
 
   describe '#make_move' do
-
     it 'captures a pawn using En Passant' do
       # Set up the pawns on the board
       pawn = Pawn.new('white', [3, 3])
@@ -155,7 +154,9 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
     end
 
     it 'updates the board locations' do
-      expect(proc { game.make_move([1, 1], [3, 1]) }).to change { board[1][1] }.to(ChessGame::BLANK_SQUARE).and change { board[3][1].is_a?(Pawn) }.to(true)
+      expect(proc { game.make_move([1, 1], [3, 1]) }).to change { board[1][1] }.to(ChessGame::BLANK_SQUARE).and change {
+                                                                                                                  board[3][1].is_a?(Pawn)
+                                                                                                                }.to(true)
     end
 
     it 'updates the king locations' do
@@ -165,7 +166,7 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
         hash[piece.position] = piece
       end
       game.instance_variable_set(:@board, setup_board(current_board))
-      game.instance_variable_set(:@king_locs, { white:[3, 3], black:[6, 2]})
+      game.instance_variable_set(:@king_locs, { white: [3, 3], black: [6, 2] })
       king_locs = game.instance_variable_get(:@king_locs)
 
       expect(proc { game.make_move([3, 3], [3, 4]) }).to change { king_locs[:white] }.to([3, 4])

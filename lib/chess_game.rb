@@ -50,7 +50,11 @@ class ChessGame
       puts "It's #{@current_player_color}'s turn."
 
       input_command = player_input
-      return nil if input_command.nil?
+
+      if input_command.nil?
+        puts 'Please input a legal move. Type "help" for an example.'
+        next
+      end
 
       case input_command.size
       when 2
@@ -234,6 +238,14 @@ class ChessGame
     trow, tcol = to
     other_space = @board[trow][tcol]
 
+    # Keep track of move_counts for Pawns and Kings
+    case piece
+    when King
+      reset_move_count = piece.moved?
+    when Pawn
+      reset_move_count = piece.move_count
+    end
+
     # Capture a piece if the pawn performed En Passant
     @board[frow][tcol] = BLANK_SQUARE if piece.is_a?(Pawn) && get_en_passant_moves(piece).include?(to)
 
@@ -271,6 +283,13 @@ class ChessGame
         # Undo the move
         @board[frow][fcol] = piece.move(from)
         @board[trow][tcol] = other_space
+        # Undo movement for tracking ones
+        case piece
+        when King
+          piece.moved = reset_move_count
+        when Pawn
+          piece.move_count -= 2
+        end
         raise(InvalidMoveError, "Moving that #{piece.class} leaves your king in check!")
       else
         puts 'Check!'
@@ -627,6 +646,9 @@ class ChessGame
     trow, tcol = to
     other_space = @board[trow][tcol]
 
+    # Keep track of move_counts for Kings
+    has_moved = piece.moved? if piece.is_a?(King)
+
     # Move the piece on the board
     @board[trow][tcol] = piece.move(to)
     @board[frow][fcol] = BLANK_SQUARE
@@ -640,6 +662,15 @@ class ChessGame
     @king_locs[@current_player_color.to_sym] = from if piece.is_a?(King)
     @board[frow][fcol] = piece.move(from)
     @board[trow][tcol] = other_space
+
+    # Undo movement for tracking ones
+    case piece
+    when King
+      piece.moved = has_moved
+    when Pawn
+      piece.move_count -= 2
+    end
+
     unless check_piece.nil? || (check_piece.color == @current_player_color && !check_piece.is_a?(King))
       # If check_piece is a King, then both kings are in check and it's an illegal
       # move.
