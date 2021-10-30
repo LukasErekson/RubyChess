@@ -9,7 +9,8 @@ require_relative 'knight'
 ##
 # Pawn piece for a game of chess
 class Pawn < ChessPiece
-  attr_reader :move_count, :direction
+  attr_reader :direction
+  attr_accessor :move_count
 
   ##
   # Initializes a new pawn piece with color and position.
@@ -26,6 +27,14 @@ class Pawn < ChessPiece
   end
 
   ##
+  # Possible moves rewrite for the pawn
+  def possible_moves
+    # Remove the two space move on the Pawn's first move
+    @move_tree_template = @move_count.zero? ? build_pawn_move_tree_first_move : build_pawn_move_tree
+    super
+  end
+
+  ##
   # Moves the Pawn and updates @move_count
   # If the pawn reaches the back row of the opposing side, it returns a queen.
   #
@@ -34,9 +43,6 @@ class Pawn < ChessPiece
   # @return [Pawn or Queen] A pawn if the pawn moves or a Queen if the pawn
   #                         reaches the end of the board.
   def move(to)
-    # Remove the two space move on the Pawn's first move
-    @move_tree_template.root.children[0].children.pop if @move_count.zero?
-
     @move_count += 1
 
     if to[0] == @back_row
@@ -143,13 +149,32 @@ class Pawn < ChessPiece
   # diagonally to capture an enemy piece.
   #
   # @return [MoveTree] move_tree_template A move tree template for the pawn.
-  def build_pawn_move_tree
+  def build_pawn_move_tree_first_move
     move_tree = MoveTree.new([0, 0])
 
     # Create changes based on @direction because pawns can only move one
     # direction.
     move_tree.root.add_child([@direction, 0])
     move_tree.root.children[0].add_child([2 * @direction, 0])
+    move_tree.root.add_child([@direction, 1])
+    move_tree.root.add_child([@direction, -1])
+
+    move_tree
+  end
+
+  ##
+  # Builds the Pawn move tree without the two-space forward move.
+  # The pawn can move forward 2 spaces on its first move, but otherwise can
+  # only move one space forward. The Pawn may also move diagonally to capture
+  # an enemy piece.
+  #
+  # @return [MoveTree] move_tree_template A move tree template for the pawn.
+  def build_pawn_move_tree
+    move_tree = MoveTree.new([0, 0])
+
+    # Create changes based on @direction because pawns can only move one
+    # direction.
+    move_tree.root.add_child([@direction, 0])
     move_tree.root.add_child([@direction, 1])
     move_tree.root.add_child([@direction, -1])
 

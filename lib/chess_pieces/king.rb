@@ -5,6 +5,8 @@ require_relative 'chess_piece'
 ##
 # King piece for a gameof chess
 class King < ChessPiece
+  attr_writer :moved
+
   ##
   # Initializes a new king piece with color and position.
   #
