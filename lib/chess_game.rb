@@ -365,12 +365,12 @@ class ChessGame
   # @return [String] "Checkmate" for a game over, "Stalemate" for a draw, and
   #                  "continue" otherwise.
   def check_game_over
-    movable = out_of_check_moves.nil?
+    immovable = out_of_check_moves.nil?
     # Checkmate condition
-    return 'Checkmate' if @check_in_play && out_of_check_moves.nil?
+    return 'Checkmate' if @check_in_play && immovable
 
     # Stalemate condition
-    return 'Stalemate' if !@check_in_play && out_of_check_moves.nil?
+    return 'Stalemate' if !@check_in_play && immovable
 
     # Neither conidtions met
     'continue'
