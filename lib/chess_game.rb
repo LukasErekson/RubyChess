@@ -54,6 +54,8 @@ class ChessGame
       if input_command.nil?
         puts 'Please input a legal move. Type "help" for an example.'
         next
+      elsif input_command == 'save'
+        break
       end
 
       case input_command.size
@@ -81,6 +83,8 @@ class ChessGame
       when 'Stalemate'
         @game_winner = 'Stalemate'
         puts 'It\'s a draw!'
+      else
+        @game_winner = nil
       end
     end
 
@@ -187,6 +191,8 @@ class ChessGame
     save_file = File.new("saves/#{file_name}", 'w')
     save_file.write(YAML.dump(self))
     save_file.close
+
+    'save'
   end
 
   ##
