@@ -220,7 +220,7 @@ class ChessGame
   # Prints the moves that the current player can make to get out of check.
   def print_out_of_check_moves
     puts 'Here are potential moves to get out of of check:'
-    out_of_check_moves.each do |from_loc, to_loc_array|
+    available_moves.each do |from_loc, to_loc_array|
       puts "#{convert_algebraic_coordinates(from_loc)} => #{to_loc_array.map do |to|
                                                               convert_algebraic_coordinates(to)
                                                             end }"
@@ -371,7 +371,7 @@ class ChessGame
   # @return [String] "Checkmate" for a game over, "Stalemate" for a draw, and
   #                  "continue" otherwise.
   def check_game_over
-    immovable = out_of_check_moves.nil?
+    immovable = available_moves.nil?
     # Checkmate condition
     return 'Checkmate' if @check_in_play && immovable
 
@@ -506,7 +506,7 @@ class ChessGame
   # check. If the list is empty, nil is returned instead.
   #
   # @return [Hash <Array, Array> or nil] Array of valid moves unless it's empty.
-  def out_of_check_moves
+  def available_moves
     player_pieces = board_pieces_by_color[@current_player_color == 'white' ? 0 : 1]
     valid_moves = {}
     player_pieces.each do |piece|
@@ -521,6 +521,17 @@ class ChessGame
     valid_moves.filter! { |_key, val| !val.empty? }
 
     valid_moves.empty? ? nil : valid_moves
+  end
+
+  ##
+  # Chooses a random move from the list of available moves.
+  #
+  # @return [Array<Array<Integer>>] [from, to]
+  def random_move
+    move_hash = available_moves
+    from = move_hash.keys.sample
+    to = move_hash[from].sample
+    [from, to]
   end
 
   ##
