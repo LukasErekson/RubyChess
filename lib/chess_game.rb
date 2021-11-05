@@ -25,7 +25,7 @@ class ChessGame
   ##
   # Creates instance variables and sets up the board for
   # the start of the game.
-  def initialize
+  def initialize(white_player='human', black_player='human')
     @board = setup_board
     @current_player_color = 'white'
     @king_locs = { white: [0, 4], black: [7, 4] }
@@ -33,6 +33,7 @@ class ChessGame
     @game_winner = nil
     @check_in_play = false
     @castle_king = false
+    @players = { 'white' => white_player, 'black' => black_player }
   end
 
   ##
@@ -49,7 +50,14 @@ class ChessGame
     while @game_winner.nil?
       puts "It's #{@current_player_color}'s turn."
 
-      input_command = player_input
+      case @players[@current_player_color]
+      when 'human'
+        input_command = player_input
+      when 'random'
+        input_command = random_move
+      else
+        input_command = random_move
+      end
 
       if input_command.nil?
         puts 'Please input a legal move. Type "help" for an example.'
