@@ -264,7 +264,12 @@ class ChessGame
     @board[frow][tcol] = BLANK_SQUARE if piece.is_a?(Pawn) && get_en_passant_moves(piece).include?(to)
 
     # Move the piece on the board
-    @board[trow][tcol] = piece.move(to)
+    if piece.is_a?(Pawn)
+      @board[trow][tcol] = piece.move(to, @players[@current_player_color])
+    else
+      @board[trow][tcol] = piece.move(to)
+    end
+    
     @board[frow][fcol] = BLANK_SQUARE
 
     # If a piece is a king, do special checks
@@ -675,7 +680,11 @@ class ChessGame
     has_moved = piece.moved? if piece.is_a?(King)
 
     # Move the piece on the board
-    @board[trow][tcol] = piece.move(to)
+    if piece.is_a?(Pawn)
+      @board[trow][tcol] = piece.move(to, @players[@current_player_color])
+    else
+      @board[trow][tcol] = piece.move(to)
+    end
     @board[frow][fcol] = BLANK_SQUARE
 
     @king_locs[@current_player_color.to_sym] = to if piece.is_a?(King)

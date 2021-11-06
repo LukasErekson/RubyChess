@@ -42,11 +42,11 @@ class Pawn < ChessPiece
   #                         location of the pawn.
   # @return [Pawn or Queen] A pawn if the pawn moves or a Queen if the pawn
   #                         reaches the end of the board.
-  def move(to)
+  def move(to, player_type = 'human')
     @move_count += 1
 
     if to[0] == @back_row
-      piece_type = new_piece_type
+      piece_type = new_piece_type(player_type)
       # Pawn becomes a new piece
       return piece_type.new(@color, to)
     end
@@ -88,12 +88,19 @@ class Pawn < ChessPiece
   # advances to the last square
   #
   # @return [Class] The type of piece the pawn is turning into.
-  def new_piece_type
-    puts 'Your pawn is being promoted! What peice would you like it to become?'
-    print_piece_types
-    player_input = $stdin.gets
-    player_input = player_input&.chomp
-    player_input = player_input&.downcase
+  def new_piece_type(player_type = 'human')
+    case player_type
+    when 'human'
+      puts 'Your pawn is being promoted! What peice would you like it to become?'
+      print_piece_types
+      player_input = $stdin.gets
+      player_input = player_input&.chomp
+      player_input = player_input&.downcase
+    when 'random'
+      player_input = %w[1, 2, 3, 4].sample
+    else
+      player_input = '1'
+    end
 
     return Queen if %w[1 queen q].include?(player_input)
 
