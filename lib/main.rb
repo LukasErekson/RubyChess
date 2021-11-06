@@ -9,8 +9,11 @@ def main
       Welcome to RubyChess! Please select one of the following options:
 
       1. Start a new game of Human vs. Human
-      2. Load a previously saved game
-      3. Exit or quit
+      2. Start a new game of Human vs. Computer
+      3. Start a new game of Computer vs. Human
+      4. Start a new game of Computer vs. Computer
+      5. Load a previously saved game
+      6. Exit or quit
     MAIN_MENU
 
     player_input = gets.chomp
@@ -18,23 +21,26 @@ def main
 
     case player_input&.to_i
     when 1
-      game = ChessGame.new
-      winner = game.play
-      puts "#{winner} wins! Play again?" unless winner.nil? || winner == 'Stalemate'
-      puts 'Looks like it\'s a stalemate! Play again?' if winner == 'Stalemate'
-      next
+      game = ChessGame.new('human', 'human')
     when 2
-      'Load saved game'
+      game = ChessGame.new('human', 'computer')
+    when 3
+      game = ChessGame.new('computer', 'human')
+    when 4
+      game = ChessGame.new('computer', 'computer')
+    when 5
+      puts 'Load saved game'
       game_file = File.new(load_game, 'r')
       game = YAML.safe_load(game_file)
       game_file.close
-      winner = game.play
-      puts "#{winner} wins! Play again?" unless winner.nil?
-      next
     else
-      'Thank you! Have a nice day.'
+      puts 'Thank you! Have a nice day.'
       break
     end
+    winner = game.play
+    puts "#{winner} wins! Play again?" unless winner.nil? || winner == 'Stalemate'
+    puts 'Looks like it\'s a stalemate! Play again?' if winner == 'Stalemate'
+    next
   end
 end
 
