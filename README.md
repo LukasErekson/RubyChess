@@ -6,10 +6,11 @@ A Ruby implementation of Chess to be played in the terminal.
 2. [Requirements](#requirements)
 3. [Installing & Playing](#installing-and-playing)
     - [Gameplay](#gameplay)
-4. [Developing & Contributing](#developing-and-contributing)
+4. [Documentation](#documentation)
+5. [Developing & Contributing](#developing-and-contributing)
     - [Testing](#testing)
     - [Contributing](#contributing)
-5. [Purpose](#purpose)
+6. [Purpose](#purpose)
 
 ## Features
 This implementation features all the standard rules of chess, including some things such as castling the king, the situational move En Passant, and pawn promotion to a player's choice of pieces. It also allows players to quit a game early, saving the state of the board and turn history in the `saves` folder as a YAML file.
@@ -32,6 +33,9 @@ The basic gist of the gameplay consits of typing in the location of the piece yo
 - `a2 to a4`
 
 To exit the game early, type `quit`, and you will be prompted to give a name for the save file before the program exits to the main menu.
+
+## Doucmentation
+Be sure to check out the RDoc generated documentation by clicking [here](https://lukaserekson.github.io/RubyChess/docs/).
 
 ## Developing and Contributing
 ### Testing
