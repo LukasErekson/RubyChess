@@ -92,7 +92,7 @@ class ChessGame
         @game_winner = 'Stalemate'
         puts 'It\'s a draw!'
       else
-        @game_winner = nil
+        @game_winner = board_pieces_by_color.map(&:size) == [1, 1] ? 'stalemate' : nil
       end
     end
 
