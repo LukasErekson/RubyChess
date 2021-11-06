@@ -16,8 +16,7 @@ class Pawn < ChessPiece
   # Initializes a new pawn piece with color and position.
   #
   # @param [String]         color     A string denoting the color of the piece.
-  # @param [Array<Integer>] position  An integer array of length 2 denoting the
-  #                                   location of the piece on the board.
+  # @param [Array<Integer>] position  An integer array of length 2 denoting the location of the piece on the board.
   def initialize(color, position)
     @move_count = 0
     @direction = color == 'white' ? 1 : -1
@@ -38,10 +37,7 @@ class Pawn < ChessPiece
   # Moves the Pawn and updates @move_count
   # If the pawn reaches the back row of the opposing side, it returns a queen.
   #
-  # @param [Array<Integer>] An integer array of length 2 denoting the new
-  #                         location of the pawn.
-  # @return [Pawn or Queen] A pawn if the pawn moves or a Queen if the pawn
-  #                         reaches the end of the board.
+  # @param [Array<Integer>] An integer array of length 2 denoting the new location of the pawn. A pawn if the pawn moves or a Queen if the pawn reaches the end of the board.
   def move(to, player_type = 'human')
     @move_count += 1
 

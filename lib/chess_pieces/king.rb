@@ -11,8 +11,7 @@ class King < ChessPiece
   # Initializes a new king piece with color and position.
   #
   # @param [String]         color     A string denoting the color of the piece.
-  # @param [Array<Integer>] position  An integer array of length 2 denoting the
-  #                                   location of the piece on the board.
+  # @param [Array<Integer>] position  An integer array of length 2 denoting the location of the piece on the board.
   def initialize(color, position)
     @move_tree_template = build_king_move_tree
     @moved = false

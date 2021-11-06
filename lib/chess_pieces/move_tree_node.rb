@@ -10,8 +10,7 @@ class MoveTreeNode
   ##
   # Initialize a node with its location and an empty children array.
   #
-  # @param [Array<Integer>] loc An integer array of length 2 denoting the
-  #                             location the node represents.
+  # @param [Array<Integer>] loc An integer array of length 2 denoting the location the node represents.
   def initialize(loc)
     @loc = loc
     @children = []
@@ -20,8 +19,7 @@ class MoveTreeNode
   ##
   # Add a child to the array of children nodes.
   #
-  # @param [Array<Integer>] loc An integer array of length 2 denoting the
-  #                             location of the node to add.
+  # @param [Array<Integer>] loc An integer array of length 2 denoting the location of the node to add.
   # @raises [ArgumentError] if +loc+ isn't an Array or MoveTreeNode.
   def add_child(loc)
     return @children << MoveTreeNode.new(loc) if loc.is_a? Array
@@ -35,9 +33,7 @@ class MoveTreeNode
   ##
   # Removes a child from the array of children nodes.
   #
-  # @param [Array<Integer>] loc An integer array of length 2 denoting the
-  #                             location of the node to remove, or a
-  #                             MoveTreeNode object with the loc to match.
+  # @param [Array<Integer>] loc An integer array of length 2 denoting the location of the node to remove, or a MoveTreeNode object with the loc to match.
   # @raises [ArgumentError] if +loc+ isn't an Array or MoveTreeNode.
   def remove_child(loc)
     return @children.delete(MoveTreeNode.new(loc)) if loc.is_a? Array
@@ -60,8 +56,7 @@ class MoveTreeNode
   ##
   # Define equality between two nodes by same location.
   #
-  # @param [MoveTreeNode] other The other MoveTreeNode to compare the location
-  #                             for equality.
+  # @param [MoveTreeNode] other The other MoveTreeNode to compare the location for equality.
   # @return [true] if the locations match, false otherwise.
   def ==(other)
     return false unless other.is_a? MoveTreeNode

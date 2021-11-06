@@ -14,10 +14,7 @@ class ChessPiece
   #
   # @param [String]         name      The name of the piece.
   # @param [String]         color     What side the piece is on.
-  # @param [Array<Integer>] position  An array of length two representing the
-  #                                   row and column ([row, col]).
-  # @param [Integer]        points    An integer indicating how many points
-  #                                   the piece is worth.
+  # @param [Array<Integer>] position  An array of length two representing the row and column ([row, col]). An integer indicating how many points the piece is worth.
   def initialize(name, color, position, points)
     @name = name
     @color = color
@@ -30,8 +27,7 @@ class ChessPiece
   # Updates position to be the +to+. Returns the piece with the updated
   # location.
   #
-  # @param [Array<Integer>] to An integer array of length 2 denoting the new
-  #                            location of the piece.
+  # @param [Array<Integer>] to An integer array of length 2 denoting the new location of the piece.
   # @return [ChessPiece]
   def move(to)
     @position = to
@@ -44,8 +40,7 @@ class ChessPiece
   # This method takes the @move_tree_template and @position attributes and
   # uses them to create a new MoveTree object with the exact coordinates.
   #
-  # @return [MoveTree] A move tree of moves based on the current position that
-  #                    are currently in bounds.
+  # @return [MoveTree] A move tree of moves based on the current position that are currently in bounds.
   def possible_moves
     row, col = @position
     @move_tree = @move_tree_template.clone || move_tree
@@ -61,8 +56,7 @@ class ChessPiece
   ##
   # Returns and assigns @move_tree with all moves in bounds
   #
-  # @return[MoveTree] A move tree of moves that are within the bounds of the
-  #                   8 x 8 chess board.
+  # @return[MoveTree] A move tree of moves that are within the bounds of the 8 x 8 chess board.
   def move_tree_in_bounds
     @move_tree.each do |node|
       @move_tree.trim_branch!(node) unless node.loc.all? { |coord| coord.between?(0, 7) }
@@ -97,13 +91,7 @@ class ChessPiece
   # Add children to move tree nodes such that each move is a child node of
   # the move that precedes it.
   #
-  # @param [Array<Integer>] direction An array of integers of length 2
-  #                                   indicating the movement in
-  #                                   the vertical and horizontal net changes.
-  #                                   For just vertical movement, direction is
-  #                                   [1, 0]. For diagonal moves, it's [1, 1].
-  # @return [MoveTreeNode] The MoveTreeNode that has as its children all the
-  #                        spaces in the given direction.
+  # @param [Array<Integer>] direction An array of integers of length 2 indicating the movement in the vertical and horizontal net changes. For just vertical movement, direction is [1, 0]. For diagonal moves, it's [1, 1]. The MoveTreeNode that has as its children all the spaces in the given direction.
   def build_directional_tree_nodes(direction = [1, 0])
     vertical_movement, horizontal_movement = direction
     closest_move = MoveTreeNode.new(direction)
@@ -118,13 +106,10 @@ class ChessPiece
 
   ##
   # Compare pieces based on their point values.
-  # Note: Since Bishop and Knight point values are equal, it returns -1 if
-  #       this piece is a knight and 1 if this piece is a bishop. This is an
-  #       arbitrary choice to differentiate them.
+  # Note: Since Bishop and Knight point values are equal, it returns -1 if this piece is a knight and 1 if this piece is a bishop. This is an arbitrary choice to differentiate them.
   #
   # @param [ChessPiece] other The ChessPiece object to compare against self.
-  # @returns [Integer] 0 if the pieces are equal in point values, 1 if self has
-  #                    a greater point value, and -1 otherwise.
+  # @returns [Integer] 0 if the pieces are equal in point values, 1 if self has a greater point value, and -1 otherwise.
   def <=>(other)
     return nil unless other.is_a? ChessPiece
 

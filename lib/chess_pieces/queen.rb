@@ -9,8 +9,7 @@ class Queen < ChessPiece
   # Initializes a new queen piece with color and position.
   #
   # @param [String]         color     A string denoting the color of the piece.
-  # @param [Array<Integer>] position  An integer array of length 2 denoting the
-  #                                   location of the piece on the board.
+  # @param [Array<Integer>] position  An integer array of length 2 denoting the location of the piece on the board.
   def initialize(color, position)
     @move_tree_template = build_queen_move_tree
     super(color == 'white' ? '♛'.white : '♕', color, position, 9)

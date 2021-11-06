@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Queen - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="ChessPiece.html">ChessPiece</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-build_queen_move_tree">#build_queen_move_tree</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Queen">
+  <h1 id="class-Queen" class="class">
+    class Queen
+  </h1>
+
+  <section class="description">
+    
+<p><a href="Queen.html"><code>Queen</code></a> piece for a game of chess</p>
+
+  </section>
+
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(color, position)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Initializes a new queen piece with color and position.</p>
+
+<p>@param [String]         color     A string denoting the color of the piece. @param [Array&lt;Integer&gt;] position  An integer array of length 2 denoting the location of the piece on the board.</p>
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="ChessPiece.html#method-c-new"><code>ChessPiece::new</code></a>
+            </div>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/chess_pieces/queen.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">color</span>, <span class="ruby-identifier">position</span>)
+  <span class="ruby-ivar">@move_tree_template</span> = <span class="ruby-identifier">build_queen_move_tree</span>
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">color</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;white&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;♛&#39;</span>.<span class="ruby-identifier">white</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;♕&#39;</span>, <span class="ruby-identifier">color</span>, <span class="ruby-identifier">position</span>, <span class="ruby-value">9</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Protected Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-build_queen_move_tree" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">build_queen_move_tree</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Builds the Queen&#39;s move tree. The <a href="Queen.html"><code>Queen</code></a> can move in any direction as far as the board permits.</p>
+
+<p>@return [MoveTree] move_tree_template A move tree template for the <a href="Queen.html"><code>Queen</code></a>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="build_queen_move_tree-source">
+            <pre><span class="ruby-comment"># File lib/chess_pieces/queen.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_queen_move_tree</span>
+  <span class="ruby-identifier">move_tree_template</span> = <span class="ruby-constant">MoveTree</span>.<span class="ruby-identifier">new</span>([<span class="ruby-value">0</span>, <span class="ruby-value">0</span>])
+  <span class="ruby-comment"># Get directions</span>
+  <span class="ruby-identifier">directions</span> = [<span class="ruby-value">-1</span>, <span class="ruby-value">0</span>, <span class="ruby-value">1</span>].<span class="ruby-identifier">repeated_permutation</span>(<span class="ruby-value">2</span>).<span class="ruby-identifier">to_a</span>
+  <span class="ruby-identifier">directions</span>.<span class="ruby-identifier">delete</span>([<span class="ruby-value">0</span>, <span class="ruby-value">0</span>])
+
+  <span class="ruby-identifier">directions</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">direction</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">move_tree_template</span>.<span class="ruby-identifier">root</span>.<span class="ruby-identifier">add_child</span>(<span class="ruby-identifier">build_directional_tree_nodes</span>(<span class="ruby-identifier">direction</span>))
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">move_tree_template</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

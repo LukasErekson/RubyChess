@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ChessGame - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-available_moves">#available_moves</a>
+    
+    <li ><a href="#method-i-board_pieces_by_color">#board_pieces_by_color</a>
+    
+    <li ><a href="#method-i-can_castle-3F">#can_castle?</a>
+    
+    <li ><a href="#method-i-change_turn">#change_turn</a>
+    
+    <li ><a href="#method-i-check_check">#check_check</a>
+    
+    <li ><a href="#method-i-check_game_over">#check_game_over</a>
+    
+    <li ><a href="#method-i-convert_algebraic_coordinates">#convert_algebraic_coordinates</a>
+    
+    <li ><a href="#method-i-convert_coordinates">#convert_coordinates</a>
+    
+    <li ><a href="#method-i-forecast_move">#forecast_move</a>
+    
+    <li ><a href="#method-i-get_en_passant_moves">#get_en_passant_moves</a>
+    
+    <li ><a href="#method-i-legal_moves">#legal_moves</a>
+    
+    <li ><a href="#method-i-make_move">#make_move</a>
+    
+    <li ><a href="#method-i-parse_move">#parse_move</a>
+    
+    <li ><a href="#method-i-pawn_legal_moves">#pawn_legal_moves</a>
+    
+    <li ><a href="#method-i-place_back_row">#place_back_row</a>
+    
+    <li ><a href="#method-i-place_pawns">#place_pawns</a>
+    
+    <li ><a href="#method-i-place_pieces">#place_pieces</a>
+    
+    <li ><a href="#method-i-play">#play</a>
+    
+    <li ><a href="#method-i-player_input">#player_input</a>
+    
+    <li ><a href="#method-i-player_input_type">#player_input_type</a>
+    
+    <li ><a href="#method-i-print_help_menu">#print_help_menu</a>
+    
+    <li ><a href="#method-i-print_out_of_check_moves">#print_out_of_check_moves</a>
+    
+    <li ><a href="#method-i-random_move">#random_move</a>
+    
+    <li ><a href="#method-i-save_game">#save_game</a>
+    
+    <li ><a href="#method-i-setup_board">#setup_board</a>
+    
+    <li ><a href="#method-i-to_s">#to_s</a>
+    
+    <li ><a href="#method-i-validate_move">#validate_move</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ChessGame">
+  <h1 id="class-ChessGame" class="class">
+    class ChessGame
+  </h1>
+
+  <section class="description">
+    
+<p>A chess game that contains the game board, rules, validation of moves, and computing check/checkmate.</p>
+
+  </section>
+
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="BLACK_SQAURE">BLACK_SQAURE
+        
+        <dd>
+        
+      
+        <dt id="BLANK_SQUARE">BLANK_SQUARE
+        
+        <dd>
+        
+      
+        <dt id="BOARD_TO_COORDINATES">BOARD_TO_COORDINATES
+        
+        <dd>
+        
+      
+        <dt id="COORDINATES_TO_BOARD">COORDINATES_TO_BOARD
+        
+        <dd>
+        
+      
+        <dt id="WHITE_SQUARE">WHITE_SQUARE
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(white_player=&#39;human&#39;, black_player=&#39;human&#39;)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates instance variables and sets up the board for the start of the game.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">white_player</span>=<span class="ruby-string">&#39;human&#39;</span>, <span class="ruby-identifier">black_player</span>=<span class="ruby-string">&#39;human&#39;</span>)
+  <span class="ruby-ivar">@board</span> = <span class="ruby-identifier">setup_board</span>
+  <span class="ruby-ivar">@current_player_color</span> = <span class="ruby-string">&#39;white&#39;</span>
+  <span class="ruby-ivar">@king_locs</span> = { <span class="ruby-value">white:</span> [<span class="ruby-value">0</span>, <span class="ruby-value">4</span>], <span class="ruby-value">black:</span> [<span class="ruby-value">7</span>, <span class="ruby-value">4</span>] }
+  <span class="ruby-ivar">@move_history</span> = []
+  <span class="ruby-ivar">@game_winner</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@check_in_play</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@castle_king</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@players</span> = { <span class="ruby-string">&#39;white&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">white_player</span>, <span class="ruby-string">&#39;black&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">black_player</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-available_moves" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">available_moves</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an hash of moves that will allow the current player to be out of check. If the list is empty, nil is returned instead.</p>
+
+<p>@return [Hash &lt;Array, Array&gt; or nil] Array of valid moves unless it&#39;s empty.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="available_moves-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 503</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">available_moves</span>
+  <span class="ruby-identifier">player_pieces</span> = <span class="ruby-identifier">board_pieces_by_color</span>[<span class="ruby-ivar">@current_player_color</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;white&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-value">0</span> <span class="ruby-operator">:</span> <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">valid_moves</span> = {}
+  <span class="ruby-identifier">player_pieces</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">piece</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">valid_moves</span>[<span class="ruby-identifier">piece</span>.<span class="ruby-identifier">position</span>] = []
+    <span class="ruby-identifier">legal_moves</span>(<span class="ruby-identifier">piece</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">move</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">valid_moves</span>[<span class="ruby-identifier">piece</span>.<span class="ruby-identifier">position</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">forecast_move</span>(<span class="ruby-identifier">piece</span>.<span class="ruby-identifier">position</span>, <span class="ruby-identifier">move</span>)
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span>
+      <span class="ruby-keyword">next</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">valid_moves</span>.<span class="ruby-identifier">filter!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_key</span>, <span class="ruby-identifier">val</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span><span class="ruby-identifier">val</span>.<span class="ruby-identifier">empty?</span> }
+
+  <span class="ruby-identifier">valid_moves</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">valid_moves</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-board_pieces_by_color" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">board_pieces_by_color</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an array with 2 arrays, the first of which is all the white pieces and the second is all the black pieces.</p>
+
+<p>@return [Array&lt;Array&lt;ChessPieces&gt;&gt;] Array of arrays for white and black pieces.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="board_pieces_by_color-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 536</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">board_pieces_by_color</span>
+  <span class="ruby-identifier">pieces</span> = <span class="ruby-ivar">@board</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">filter</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">space</span><span class="ruby-operator">|</span> <span class="ruby-identifier">space</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">ChessPiece</span> }
+  <span class="ruby-identifier">white_pieces</span> = <span class="ruby-identifier">pieces</span>.<span class="ruby-identifier">filter</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">piece</span><span class="ruby-operator">|</span> <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">color</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;white&#39;</span> }
+  <span class="ruby-identifier">black_pieces</span> = <span class="ruby-identifier">pieces</span>.<span class="ruby-identifier">filter</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">piece</span><span class="ruby-operator">|</span> <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">color</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;black&#39;</span> }
+  [<span class="ruby-identifier">white_pieces</span>, <span class="ruby-identifier">black_pieces</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-can_castle-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">can_castle?</span><span
+            class="method-args">(from, to)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns whether or not a king can make the castle move or not</p>
+
+<p>@param [Array&lt;Integer&gt;] from  An integer array of length 2 denoting the position of the piece to move. @param [Array&lt;Integer&gt;] to    An integer array of length 2 denoting the position to move the piece at <code>from</code> to. @return [Boolean] whether the king can make the castle move or not.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="can_castle-3F-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 351</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">can_castle?</span>(<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">from</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">to</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">to</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">between?</span>(<span class="ruby-identifier">from</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">-</span> <span class="ruby-value">2</span>, <span class="ruby-identifier">from</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">+</span> <span class="ruby-value">2</span>)
+
+  <span class="ruby-identifier">tcol</span> = <span class="ruby-identifier">to</span>[<span class="ruby-value">1</span>]
+  <span class="ruby-identifier">fcol</span> = <span class="ruby-identifier">from</span>[<span class="ruby-value">1</span>]
+  <span class="ruby-identifier">row</span> = <span class="ruby-identifier">from</span>[<span class="ruby-value">0</span>]
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">fcol</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">tcol</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">2</span> <span class="ruby-comment"># Moving left, check all the left spaces are empty</span>
+    <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">row</span>][<span class="ruby-value">0</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Rook</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">row</span>][<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-constant">BLANK_SQUARE</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">row</span>][<span class="ruby-value">2</span>] <span class="ruby-operator">==</span> <span class="ruby-constant">BLANK_SQUARE</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">row</span>][<span class="ruby-value">3</span>] <span class="ruby-operator">==</span> <span class="ruby-constant">BLANK_SQUARE</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">-2</span> <span class="ruby-comment"># Moving right</span>
+    <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">row</span>][<span class="ruby-value">7</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Rook</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">row</span>][<span class="ruby-value">6</span>] <span class="ruby-operator">==</span> <span class="ruby-constant">BLANK_SQUARE</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">row</span>][<span class="ruby-value">5</span>] <span class="ruby-operator">==</span> <span class="ruby-constant">BLANK_SQUARE</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-check_check" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_check</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Checks whether a king is currently in check. If it is, it returns the piece that puts it in check and nil otherwise.</p>
+
+<p>@return [ChessPiece or nil] The piece that puts a king in check and nil otherwise.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="check_check-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 484</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_check</span>
+  <span class="ruby-identifier">white_pieces</span>, <span class="ruby-identifier">black_pieces</span> = <span class="ruby-identifier">board_pieces_by_color</span>
+  <span class="ruby-comment"># If black king is in check</span>
+  <span class="ruby-identifier">white_pieces</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">piece</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">piece</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">legal_moves</span>(<span class="ruby-identifier">piece</span>).<span class="ruby-identifier">include?</span> <span class="ruby-ivar">@king_locs</span>[<span class="ruby-value">:black</span>]
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># If white king is in check</span>
+  <span class="ruby-identifier">black_pieces</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">piece</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">piece</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">legal_moves</span>(<span class="ruby-identifier">piece</span>).<span class="ruby-identifier">include?</span> <span class="ruby-ivar">@king_locs</span>[<span class="ruby-value">:white</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-check_game_over" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_game_over</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Determines whether the game ends with a checkmate or stalemate.</p>
+
+<p>@return [String] “Checkmate” for a game over, “Stalemate” for a draw, and “continue” otherwise.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="check_game_over-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 371</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_game_over</span>
+  <span class="ruby-identifier">immovable</span> = <span class="ruby-identifier">available_moves</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-comment"># Checkmate condition</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;Checkmate&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@check_in_play</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">immovable</span>
+
+  <span class="ruby-comment"># Stalemate condition</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;Stalemate&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@check_in_play</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">immovable</span>
+
+  <span class="ruby-comment"># Neither conidtions met</span>
+  <span class="ruby-string">&#39;continue&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-convert_algebraic_coordinates" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">convert_algebraic_coordinates</span><span
+            class="method-args">(coord_arr)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Converts coordinates into algebraic notation space names. Inverse method of <code>convert_coordinates</code>.</p>
+
+<p>@param [Array&lt;Integer&gt;] coord_arr An array of integers of length 2 corresponding to the row and column of the space on +@board+.</p>
+
+<p>@return [String] The string corresponding to the row and column name of the space of the board using algebraic notation.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="convert_algebraic_coordinates-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 164</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert_algebraic_coordinates</span>(<span class="ruby-identifier">coord_arr</span>)
+  <span class="ruby-node">&quot;#{COORDINATES_TO_BOARD[coord_arr[1]]}#{coord_arr[0] + 1}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-convert_coordinates" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">convert_coordinates</span><span
+            class="method-args">(coord_str)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Converts algebraic notation space names to coordinates corresponding with @board.</p>
+
+<p>@param [String] coord_str A string of length 2 that has encoded within it the column and row of a space on the chess board. @return [Array&lt;Integer&gt;] An array of integers of length 2 denoting the row and column positions corresponding to @board.</p>
+
+<p>For example, passing in &#39;a4&#39; would return [0, 3].</p>
+          
+          
+
+          
+          <div class="method-source-code" id="convert_coordinates-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert_coordinates</span>(<span class="ruby-identifier">coord_str</span>)
+  [(<span class="ruby-identifier">coord_str</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>), <span class="ruby-constant">BOARD_TO_COORDINATES</span>[<span class="ruby-identifier">coord_str</span>[<span class="ruby-value">0</span>]]]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_en_passant_moves" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_en_passant_moves</span><span
+            class="method-args">(pawn)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an array of the valid En Passant moves for a given pawn</p>
+
+<p>@param [Pawn] pawn The pawn to find the En Passant moves of. @return [Array&lt;Array&lt;Integer&gt;&gt;] Array of legal move spaces that the pawn can move to where En Passant applies.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="get_en_passant_moves-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 462</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_en_passant_moves</span>(<span class="ruby-identifier">pawn</span>)
+  <span class="ruby-comment"># Check spaces beside the pawn for En Passant</span>
+  <span class="ruby-identifier">pawn_row</span>, <span class="ruby-identifier">pawn_col</span> = <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">position</span>
+  <span class="ruby-identifier">r_piece_loc</span> = [<span class="ruby-identifier">pawn_row</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">direction</span>, <span class="ruby-identifier">pawn_col</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">r_piece</span> = <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">pawn_row</span>][<span class="ruby-identifier">pawn_col</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>]
+
+  <span class="ruby-identifier">l_piece_loc</span> = [<span class="ruby-identifier">pawn_row</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">direction</span>, <span class="ruby-identifier">pawn_col</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">l_piece</span> = <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">pawn_row</span>][<span class="ruby-identifier">pawn_col</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">en_passant_moves</span> = []
+
+  <span class="ruby-identifier">en_passant_moves</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r_piece_loc</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">r_piece</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Pawn</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">can_capture?</span>(<span class="ruby-identifier">r_piece</span>)
+
+  <span class="ruby-identifier">en_passant_moves</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">l_piece_loc</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">l_piece</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Pawn</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">can_capture?</span>(<span class="ruby-identifier">l_piece</span>)
+
+  <span class="ruby-identifier">en_passant_moves</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-legal_moves" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">legal_moves</span><span
+            class="method-args">(chess_piece)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an array of the legal moves that the piece can make. This will prevent pieces from going through other pieces (except for the knight, of course). It does so by iterating through <code>chess_piece</code>&#39;s move tree in level order, dequeing any nodes that are invalid.</p>
+
+<p>@param [ChessPiece] chess_piece The <a href="ChessPiece.html"><code>ChessPiece</code></a> to find the legal moves of. @return [Array&lt;Array&lt;Integer&gt;&gt;] Array of legal move spaces that the piece can move to.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="legal_moves-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 391</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">legal_moves</span>(<span class="ruby-identifier">chess_piece</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">pawn_legal_moves</span>(<span class="ruby-identifier">chess_piece</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">chess_piece</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Pawn</span>
+
+  <span class="ruby-identifier">move_tree</span> = <span class="ruby-identifier">chess_piece</span>.<span class="ruby-identifier">possible_moves</span>
+  <span class="ruby-identifier">legal_moves_array</span> = []
+  <span class="ruby-identifier">visit_queue</span> = <span class="ruby-identifier">move_tree</span>.<span class="ruby-identifier">root</span>.<span class="ruby-identifier">children</span>
+  <span class="ruby-keyword">until</span> <span class="ruby-identifier">visit_queue</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">current_node</span> = <span class="ruby-identifier">visit_queue</span>.<span class="ruby-identifier">shift</span>
+    <span class="ruby-identifier">row</span>, <span class="ruby-identifier">col</span> = <span class="ruby-identifier">current_node</span>.<span class="ruby-identifier">loc</span>
+    <span class="ruby-identifier">space</span> = <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">row</span>][<span class="ruby-identifier">col</span>]
+    <span class="ruby-comment"># If it&#39;s a chess piece, check if it can capture.</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">space</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">ChessPiece</span>
+      <span class="ruby-comment"># If the piece can capture it, add it as a valid space, but don&#39;t</span>
+      <span class="ruby-comment"># add any of its children to visit_queue.</span>
+      <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">chess_piece</span>.<span class="ruby-identifier">can_capture?</span>(<span class="ruby-identifier">space</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-comment"># If there&#39;s not piece, it can continue along the move tree.</span>
+      <span class="ruby-identifier">current_node</span>.<span class="ruby-identifier">children</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">child</span><span class="ruby-operator">|</span> <span class="ruby-identifier">visit_queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">child</span> }
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-comment"># Append legal move locations</span>
+    <span class="ruby-identifier">legal_moves_array</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">current_node</span>.<span class="ruby-identifier">loc</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">legal_moves_array</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-make_move" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">make_move</span><span
+            class="method-args">(from, to)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Moves a piece at a given location to another location if the move is valid. Raises an <a href="InvalidMoveError.html"><code>InvalidMoveError</code></a> otherwise.</p>
+
+<p>@param [Array&lt;Integer&gt;] from  An integer array of length 2 denoting the position of the piece to move. @param [Array&lt;Integer&gt;] to    An integer array of length 2 denoting the position to move the piece at <code>from</code> to.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="make_move-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 236</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">make_move</span>(<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>)
+  <span class="ruby-comment"># Raises an execption if the move isn&#39;t valid</span>
+  <span class="ruby-identifier">validate_move</span>(<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>)
+
+  <span class="ruby-identifier">frow</span>, <span class="ruby-identifier">fcol</span> = <span class="ruby-identifier">from</span>
+  <span class="ruby-identifier">piece</span> = <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">frow</span>][<span class="ruby-identifier">fcol</span>]
+  <span class="ruby-identifier">trow</span>, <span class="ruby-identifier">tcol</span> = <span class="ruby-identifier">to</span>
+  <span class="ruby-identifier">other_space</span> = <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">trow</span>][<span class="ruby-identifier">tcol</span>]
+
+  <span class="ruby-comment"># Keep track of move_counts for Pawns and Kings</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">piece</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">King</span>
+    <span class="ruby-identifier">reset_move_count</span> = <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">moved?</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Pawn</span>
+    <span class="ruby-identifier">reset_move_count</span> = <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">move_count</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Capture a piece if the pawn performed En Passant</span>
+  <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">frow</span>][<span class="ruby-identifier">tcol</span>] = <span class="ruby-constant">BLANK_SQUARE</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Pawn</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">get_en_passant_moves</span>(<span class="ruby-identifier">piece</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">to</span>)
+
+  <span class="ruby-comment"># Move the piece on the board</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Pawn</span>)
+    <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">trow</span>][<span class="ruby-identifier">tcol</span>] = <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">move</span>(<span class="ruby-identifier">to</span>, <span class="ruby-ivar">@players</span>[<span class="ruby-ivar">@current_player_color</span>])
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">trow</span>][<span class="ruby-identifier">tcol</span>] = <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">move</span>(<span class="ruby-identifier">to</span>)
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">frow</span>][<span class="ruby-identifier">fcol</span>] = <span class="ruby-constant">BLANK_SQUARE</span>
+
+  <span class="ruby-comment"># If a piece is a king, do special checks</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">King</span>)
+    <span class="ruby-ivar">@king_locs</span>[<span class="ruby-ivar">@current_player_color</span>.<span class="ruby-identifier">to_sym</span>] = <span class="ruby-identifier">to</span>
+
+    <span class="ruby-comment"># Check if the king is being castled</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@castle_king</span>
+      <span class="ruby-comment"># Reset the flag for the other player&#39;s king</span>
+      <span class="ruby-ivar">@castle_king</span> = <span class="ruby-keyword">false</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">tcol</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">fcol</span> <span class="ruby-operator">-</span> <span class="ruby-value">2</span>
+        <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">trow</span>][<span class="ruby-identifier">tcol</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>] = <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">trow</span>][<span class="ruby-value">0</span>].<span class="ruby-identifier">move</span>([<span class="ruby-identifier">trow</span>, <span class="ruby-identifier">tcol</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>])
+        <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">trow</span>][<span class="ruby-value">0</span>] = <span class="ruby-constant">BLANK_SQUARE</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">trow</span>][<span class="ruby-identifier">tcol</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>] = <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">trow</span>][<span class="ruby-value">7</span>].<span class="ruby-identifier">move</span>([<span class="ruby-identifier">trow</span>, <span class="ruby-identifier">tcol</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>])
+        <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">trow</span>][<span class="ruby-value">7</span>] = <span class="ruby-constant">BLANK_SQUARE</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Check for check</span>
+  <span class="ruby-identifier">check_piece</span> = <span class="ruby-identifier">check_check</span>
+
+  <span class="ruby-ivar">@check_in_play</span> = <span class="ruby-operator">!</span><span class="ruby-identifier">check_check</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">check_piece</span>.<span class="ruby-identifier">nil?</span>
+
+    <span class="ruby-comment"># Move keeps/makes their own king in check.</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">check_piece</span>.<span class="ruby-identifier">color</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@current_player_color</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">check_piece</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">King</span>)
+      <span class="ruby-comment"># Undo the move</span>
+      <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">frow</span>][<span class="ruby-identifier">fcol</span>] = <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">move</span>(<span class="ruby-identifier">from</span>)
+      <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">trow</span>][<span class="ruby-identifier">tcol</span>] = <span class="ruby-identifier">other_space</span>
+      <span class="ruby-comment"># Undo movement for tracking ones</span>
+      <span class="ruby-keyword">case</span> <span class="ruby-identifier">piece</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">King</span>
+        <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">moved</span> = <span class="ruby-identifier">reset_move_count</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">Pawn</span>
+        <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">move_count</span> <span class="ruby-operator">-=</span> <span class="ruby-value">2</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">raise</span>(<span class="ruby-constant">InvalidMoveError</span>, <span class="ruby-node">&quot;Moving that #{piece.class} leaves your king in check!&quot;</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;Check!&#39;</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;Type &quot;help&quot; to get a list of moves to get out of check!&#39;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Change whose turn it is</span>
+  <span class="ruby-identifier">change_turn</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-parse_move" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse_move</span><span
+            class="method-args">(input)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parses a move input string to determine the type of input given. The different suppored moves are:</p>
+<ol><li>
+<p>A string of length 4 indicating the start space and the end space.</p>
+</li></ol>
+<ul><li>
+<p>e.g &#39;a2a4&#39; would return [[0, 1], [0, 3]]</p>
+</li></ul>
+<ol><li>
+<p>A string of length 8 in the form of “[start] to [end]”</p>
+</li></ol>
+<ul><li>
+<p>e.g &#39;a2 to a4&#39; would return [[0, 1], [0, 3]]</p>
+</li></ul>
+
+<p>TODO : Add more supported moves</p>
+
+<p>@param [String] input The raw player input</p>
+
+<p>@return [Array&lt;Array&lt;Integer&gt;&gt;] An array of arrays of length 2 representing <code>from</code> and <code>to</code> to pass into <a href="ChessGame.html#method-i-make_move"><code>make_move</code></a>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="parse_move-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 132</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_move</span>(<span class="ruby-identifier">input</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">input</span>.<span class="ruby-identifier">size</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">4</span>
+    <span class="ruby-identifier">from</span> = <span class="ruby-identifier">convert_coordinates</span>(<span class="ruby-identifier">input</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">1</span>])
+    <span class="ruby-identifier">to</span> = <span class="ruby-identifier">convert_coordinates</span>(<span class="ruby-identifier">input</span>[<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">3</span>])
+    [<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-value">8</span>
+    <span class="ruby-identifier">from</span> = <span class="ruby-identifier">convert_coordinates</span>(<span class="ruby-identifier">input</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">1</span>])
+    <span class="ruby-identifier">to</span> = <span class="ruby-identifier">convert_coordinates</span>(<span class="ruby-identifier">input</span>[<span class="ruby-value">-2</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>])
+    [<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-pawn_legal_moves" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pawn_legal_moves</span><span
+            class="method-args">(pawn)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an array of legal moves that a pawn can make. Since a pawn can only move diagonally if it can capture a piece, it is its own special case.</p>
+
+<p>@param [Pawn] pawn The pawn to find the legal moves of. @return [Array&lt;Array&lt;Integer&gt;&gt;] Array of legal move spaces that the pawn can move to.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="pawn_legal_moves-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 422</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pawn_legal_moves</span>(<span class="ruby-identifier">pawn</span>)
+  <span class="ruby-comment"># Assign the move tree for pawn</span>
+  <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">possible_moves</span>
+  <span class="ruby-comment"># Check if pawn can capture right diagonal piece</span>
+  <span class="ruby-identifier">r_diag</span> = <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">move_tree</span>.<span class="ruby-identifier">root</span>.<span class="ruby-identifier">children</span>[<span class="ruby-value">1</span>]
+  <span class="ruby-identifier">l_diag</span> = <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">move_tree</span>.<span class="ruby-identifier">root</span>.<span class="ruby-identifier">children</span>[<span class="ruby-value">2</span>]
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">r_diag</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">r_diag_loc</span> = <span class="ruby-identifier">r_diag</span>.<span class="ruby-identifier">loc</span>
+    <span class="ruby-identifier">r_diag_piece</span> = <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">r_diag_loc</span>[<span class="ruby-value">0</span>]][<span class="ruby-identifier">r_diag_loc</span>[<span class="ruby-value">1</span>]]
+    <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">move_tree</span>.<span class="ruby-identifier">trim_branch!</span>(<span class="ruby-identifier">r_diag_loc</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">can_capture?</span>(<span class="ruby-identifier">r_diag_piece</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">l_diag</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-comment"># Check if pawn can capture left diagonal piece</span>
+    <span class="ruby-identifier">l_diag_loc</span> = <span class="ruby-identifier">l_diag</span>.<span class="ruby-identifier">loc</span>
+    <span class="ruby-identifier">l_diag_piece</span> = <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">l_diag_loc</span>[<span class="ruby-value">0</span>]][<span class="ruby-identifier">l_diag_loc</span>[<span class="ruby-value">1</span>]]
+    <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">move_tree</span>.<span class="ruby-identifier">trim_branch!</span>(<span class="ruby-identifier">l_diag_loc</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">can_capture?</span>(<span class="ruby-identifier">l_diag_piece</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Check if the two spaces ahead of an unmoved pawn is occupied</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">move_tree</span>.<span class="ruby-identifier">root</span>.<span class="ruby-identifier">children</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">children</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">front_loc</span> = <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">move_tree</span>.<span class="ruby-identifier">root</span>.<span class="ruby-identifier">children</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">children</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">loc</span>
+    <span class="ruby-identifier">front_piece</span> = <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">front_loc</span>[<span class="ruby-value">0</span>]][<span class="ruby-identifier">front_loc</span>[<span class="ruby-value">1</span>]]
+    <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">move_tree</span>.<span class="ruby-identifier">trim_branch!</span>(<span class="ruby-identifier">front_loc</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">front_piece</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">ChessPiece</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Check if there is a piece immediately in front of the pawn</span>
+  <span class="ruby-identifier">front_loc</span> = <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">move_tree</span>.<span class="ruby-identifier">root</span>.<span class="ruby-identifier">children</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">loc</span>
+  <span class="ruby-identifier">front_piece</span> = <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">front_loc</span>[<span class="ruby-value">0</span>]][<span class="ruby-identifier">front_loc</span>[<span class="ruby-value">1</span>]]
+  <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">move_tree</span>.<span class="ruby-identifier">trim_branch!</span>(<span class="ruby-identifier">front_loc</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">front_piece</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">ChessPiece</span>
+
+  <span class="ruby-identifier">pawn</span>.<span class="ruby-identifier">move_tree</span>.<span class="ruby-identifier">to_a</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">get_en_passant_moves</span>(<span class="ruby-identifier">pawn</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-play" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">play</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Runs the main game loop for a chess game, which is comprised of several stages:</p>
+<ol><li>
+<p>Parse player input</p>
+</li><li>
+<p>Attempt to make a move</p>
+</li><li>
+<p>Check for check/checkmate</p>
+</li><li>
+<p>Repeat until game over or saved</p>
+</li></ol>
+
+<p>@return [String] @game_winner The winner of the game if there is one.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="play-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">play</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-keyword">self</span>
+  <span class="ruby-keyword">while</span> <span class="ruby-ivar">@game_winner</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;It&#39;s #{@current_player_color}&#39;s turn.&quot;</span>
+
+    <span class="ruby-keyword">case</span> <span class="ruby-ivar">@players</span>[<span class="ruby-ivar">@current_player_color</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;human&#39;</span>
+      <span class="ruby-identifier">input_command</span> = <span class="ruby-identifier">player_input</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;random&#39;</span>
+      <span class="ruby-identifier">input_command</span> = <span class="ruby-identifier">random_move</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">input_command</span> = <span class="ruby-identifier">random_move</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">input_command</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;Please input a legal move. Type &quot;help&quot; for an example.&#39;</span>
+      <span class="ruby-keyword">next</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">input_command</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;save&#39;</span>
+      <span class="ruby-keyword">break</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">input_command</span>.<span class="ruby-identifier">size</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">2</span>
+      <span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span> = <span class="ruby-identifier">input_command</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">make_move</span>(<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>)
+      <span class="ruby-ivar">@move_history</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{convert_algebraic_coordinates(from)}#{convert_algebraic_coordinates(to)}&quot;</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-keyword">self</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">InvalidMoveError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;Invalid move!&#39;</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span>
+      <span class="ruby-keyword">next</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Check whether the game is over or not</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">check_game_over</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Checkmate&#39;</span>
+      <span class="ruby-ivar">@game_winner</span> = <span class="ruby-ivar">@current_player_color</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;white&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;black&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;white&#39;</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;Checkmate!&#39;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Stalemate&#39;</span>
+      <span class="ruby-ivar">@game_winner</span> = <span class="ruby-string">&#39;Stalemate&#39;</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;It\&#39;s a draw!&#39;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@game_winner</span> = <span class="ruby-identifier">board_pieces_by_color</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:size</span>) <span class="ruby-operator">==</span> [<span class="ruby-value">1</span>, <span class="ruby-value">1</span>] <span class="ruby-operator">?</span> <span class="ruby-string">&#39;stalemate&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@game_winner</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-player_input" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">player_input</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Accepts player input and either returns the components needed to input a move or saves the game.</p>
+
+<p>@return [Array&lt;Array&lt;Integer&gt;&gt;] An array of arrays of length 2 representing <code>from</code> and <code>to</code> to pass into <a href="ChessGame.html#method-i-make_move"><code>make_move</code></a>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="player_input-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">player_input</span>
+  <span class="ruby-identifier">input</span> = <span class="ruby-identifier">gets</span>.<span class="ruby-identifier">chomp</span>
+  <span class="ruby-identifier">input</span> = <span class="ruby-identifier">input</span>&amp;.<span class="ruby-identifier">downcase</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">player_input_type</span>(<span class="ruby-identifier">input</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;move&#39;</span>
+    <span class="ruby-identifier">parse_move</span>(<span class="ruby-identifier">input</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;help&#39;</span>
+    <span class="ruby-identifier">print_help_menu</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;save&#39;</span>
+    <span class="ruby-identifier">save_game</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-player_input_type" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">player_input_type</span><span
+            class="method-args">(input)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the type of player input, whether they input a game-ending command or a move command.</p>
+
+<p>@param [String] input String of the player input to parse and determine the type of input. @return [String] The type of player input; &#39;save&#39;, &#39;help&#39;, or &#39;move&#39;.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="player_input_type-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">player_input_type</span>(<span class="ruby-identifier">input</span>)
+  <span class="ruby-node">%w[save quit exit end]</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">end_word</span><span class="ruby-operator">|</span> <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;save&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">input</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">end_word</span>) }
+
+  <span class="ruby-node">%w[help tutorial ?]</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">help_word</span><span class="ruby-operator">|</span> <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;help&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">input</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">help_word</span>) }
+
+  <span class="ruby-string">&#39;move&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-print_help_menu" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">print_help_menu</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Prints the help menu complete with tutorial and move explanations</p>
+
+<p>@return [String] &#39;help_menu&#39; after printing the help menu.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="print_help_menu-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 202</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">print_help_menu</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">&lt;&lt;~HELP_MENU</span>
+<span class="ruby-value">      To move a piece, type the two character location of the piece and then the
+      two character location of where you want it to move. For example, if you
+      want to move the pawn at a2 forward two spaces, type &quot;a2a4&quot; or &quot;a2 to a4&quot;.
+
+      To save the game, type &#39;save&#39;, &#39;exit&#39;, or &#39;quit&#39;, and you will be prompted
+      to name the save file.
+
+      To get this menu back, simply type &#39;help&#39;, &#39;tutorial&#39; or &#39;?&#39;.
+</span><span class="ruby-identifier">    HELP_MENU</span>
+
+    <span class="ruby-identifier">print_out_of_check_moves</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@check_in_play</span>
+
+    <span class="ruby-string">&#39;help_menu&#39;</span>
+  <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-print_out_of_check_moves" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">print_out_of_check_moves</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Prints the moves that the current player can make to get out of check.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="print_out_of_check_moves-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 221</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">print_out_of_check_moves</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;Here are potential moves to get out of of check:&#39;</span>
+  <span class="ruby-identifier">available_moves</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">from_loc</span>, <span class="ruby-identifier">to_loc_array</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{convert_algebraic_coordinates(from_loc)} =&gt; #{to_loc_array.map do |to|
+                                                            convert_algebraic_coordinates(to)
+                                                          end }&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-random_move" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">random_move</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Chooses a random move from the list of available moves.</p>
+
+<p>@return [Array&lt;Array&lt;Integer&gt;&gt;] [from, to]</p>
+          
+          
+
+          
+          <div class="method-source-code" id="random_move-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 524</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">random_move</span>
+  <span class="ruby-identifier">move_hash</span> = <span class="ruby-identifier">available_moves</span>
+  <span class="ruby-identifier">from</span> = <span class="ruby-identifier">move_hash</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sample</span>
+  <span class="ruby-identifier">to</span> = <span class="ruby-identifier">move_hash</span>[<span class="ruby-identifier">from</span>].<span class="ruby-identifier">sample</span>
+  [<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-save_game" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">save_game</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Saves the game by dumping the object into a YAML file.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="save_game-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 184</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save_game</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;Please input a name for the save file.&#39;</span>
+  <span class="ruby-identifier">file_name</span> = <span class="ruby-identifier">gets</span>.<span class="ruby-identifier">chomp</span>
+  <span class="ruby-keyword">while</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-node">&quot;saves/#{file_name}&quot;</span>)
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;saves/#{file_name} already exists; please choose a different name.&quot;</span>
+    <span class="ruby-identifier">file_name</span> = <span class="ruby-identifier">gets</span>.<span class="ruby-identifier">chomp</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">save_file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;saves/#{file_name}&quot;</span>, <span class="ruby-string">&#39;w&#39;</span>)
+  <span class="ruby-identifier">save_file</span>.<span class="ruby-identifier">write</span>(<span class="ruby-constant">YAML</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-keyword">self</span>))
+  <span class="ruby-identifier">save_file</span>.<span class="ruby-identifier">close</span>
+
+  <span class="ruby-string">&#39;save&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_s" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_s</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a string of a board with pieces and appropriately shaded spaces.</p>
+
+<p>@return [String] The chess board.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 548</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+  <span class="ruby-identifier">string_stream</span> = <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">history_offset</span> = <span class="ruby-ivar">@move_history</span>.<span class="ruby-identifier">size</span>
+  <span class="ruby-value">8</span>.<span class="ruby-identifier">downto</span>(<span class="ruby-value">1</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">string_stream</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; #{row} &quot;</span>
+    <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">row</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>].<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">col</span>, <span class="ruby-identifier">col_num</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">bg_color</span> = (<span class="ruby-identifier">row</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-operator">%</span> <span class="ruby-value">2</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">col_num</span> <span class="ruby-operator">%</span> <span class="ruby-value">2</span> <span class="ruby-operator">?</span> <span class="ruby-constant">BLACK_SQAURE</span> <span class="ruby-operator">:</span> <span class="ruby-constant">WHITE_SQUARE</span>
+      <span class="ruby-identifier">string_stream</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">col</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">colorize</span>(<span class="ruby-identifier">bg_color</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">string_stream</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\t&quot;</span>
+    <span class="ruby-identifier">move_index</span> = <span class="ruby-value">8</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">row</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">history_offset</span> <span class="ruby-operator">-</span> <span class="ruby-value">8</span>)
+    <span class="ruby-identifier">move_index</span> = <span class="ruby-value">8</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">row</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">history_offset</span> <span class="ruby-operator">-</span> <span class="ruby-value">8</span>).<span class="ruby-identifier">negative?</span>
+    <span class="ruby-identifier">string_stream</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{move_index + 1}. #{@move_history[move_index]}&quot;</span>
+    <span class="ruby-identifier">string_stream</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">string_stream</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;   a b c d e f g h &#39;</span>
+
+  <span class="ruby-identifier">string_stream</span>.<span class="ruby-identifier">string</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-validate_move" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">validate_move</span><span
+            class="method-args">(from, to)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Determines whether or not the move is a valid move. If the move is valid, it returns that space on the board. Raises an <a href="InvalidMoveError.html"><code>InvalidMoveError</code></a> with a specific message if the move is invalid.</p>
+
+<p>@param [Array&lt;Integer&gt;] from  An integer array of length 2 denoting the position of the piece to move. @param [Array&lt;Integer&gt;] to    An integer array of length 2 denoting the position to move the piece at <code>from</code> to.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="validate_move-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 320</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_move</span>(<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>)
+  <span class="ruby-identifier">frow</span>, <span class="ruby-identifier">fcol</span> = <span class="ruby-identifier">from</span>
+  <span class="ruby-identifier">piece</span> = <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">frow</span>][<span class="ruby-identifier">fcol</span>]
+  <span class="ruby-identifier">raise</span>(<span class="ruby-constant">InvalidMoveError</span>, <span class="ruby-node">&quot;No piece at #{convert_algebraic_coordinates(from)}&quot;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">ChessPiece</span>
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">color</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@current_player_color</span>
+    <span class="ruby-identifier">raise</span>(<span class="ruby-constant">InvalidMoveError</span>,
+          <span class="ruby-node">&quot;You cannot move opponent&#39;s piece at #{convert_algebraic_coordinates(from)}&quot;</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">possible_moves</span> = <span class="ruby-identifier">legal_moves</span>(<span class="ruby-identifier">piece</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">possible_moves</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">to</span>)
+    <span class="ruby-comment"># Check if it&#39;s trying to castle the king</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">King</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">piece</span>.<span class="ruby-identifier">moved?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">can_castle?</span>(<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>)
+      <span class="ruby-ivar">@castle_king</span> = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span>(<span class="ruby-constant">InvalidMoveError</span>,
+            <span class="ruby-node">&quot;Your #{piece.class} cannot move from #{convert_algebraic_coordinates(from)} to #{convert_algebraic_coordinates(to)}.&quot;</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">trow</span>, <span class="ruby-identifier">tcol</span> = <span class="ruby-identifier">to</span>
+  <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">trow</span>][<span class="ruby-identifier">tcol</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Protected Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-change_turn" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">change_turn</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Changes whose turn it is by switching between &#39;black&#39; and &#39;white&#39;.</p>
+
+<p>@return [String] @current_player_color The current player color whose turn it is.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="change_turn-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 635</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">change_turn</span>
+  <span class="ruby-ivar">@current_player_color</span> = <span class="ruby-ivar">@current_player_color</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;white&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;black&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;white&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-forecast_move" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">forecast_move</span><span
+            class="method-args">(from, to)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Moves a piece at a given location to another location, checks if the the move leaves the current player&#39;s king in check, returns the piece to its original spot, and returns the move if valid.</p>
+
+<p>@param [Array&lt;Integer&gt;] from  An integer array of length 2 denoting the position of the piece to move. @param [Array&lt;Integer&gt;] to    An integer array of length 2 denoting the position to move the piece at <code>from</code> to.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="forecast_move-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 646</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">forecast_move</span>(<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>)
+  <span class="ruby-comment"># Raises an execption if the move isn&#39;t valid</span>
+  <span class="ruby-identifier">validate_move</span>(<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>)
+
+  <span class="ruby-identifier">frow</span>, <span class="ruby-identifier">fcol</span> = <span class="ruby-identifier">from</span>
+  <span class="ruby-identifier">piece</span> = <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">frow</span>][<span class="ruby-identifier">fcol</span>]
+  <span class="ruby-identifier">trow</span>, <span class="ruby-identifier">tcol</span> = <span class="ruby-identifier">to</span>
+  <span class="ruby-identifier">other_space</span> = <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">trow</span>][<span class="ruby-identifier">tcol</span>]
+
+  <span class="ruby-comment"># Keep track of move_counts for Kings</span>
+  <span class="ruby-identifier">has_moved</span> = <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">moved?</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">King</span>)
+
+  <span class="ruby-comment"># Move the piece on the board</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Pawn</span>)
+    <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">trow</span>][<span class="ruby-identifier">tcol</span>] = <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">move</span>(<span class="ruby-identifier">to</span>, <span class="ruby-ivar">@players</span>[<span class="ruby-ivar">@current_player_color</span>])
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">trow</span>][<span class="ruby-identifier">tcol</span>] = <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">move</span>(<span class="ruby-identifier">to</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">frow</span>][<span class="ruby-identifier">fcol</span>] = <span class="ruby-constant">BLANK_SQUARE</span>
+
+  <span class="ruby-ivar">@king_locs</span>[<span class="ruby-ivar">@current_player_color</span>.<span class="ruby-identifier">to_sym</span>] = <span class="ruby-identifier">to</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">King</span>)
+
+  <span class="ruby-comment"># Check for check</span>
+  <span class="ruby-identifier">check_piece</span> = <span class="ruby-identifier">check_check</span>
+
+  <span class="ruby-comment"># Undo the move</span>
+  <span class="ruby-ivar">@king_locs</span>[<span class="ruby-ivar">@current_player_color</span>.<span class="ruby-identifier">to_sym</span>] = <span class="ruby-identifier">from</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">King</span>)
+  <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">frow</span>][<span class="ruby-identifier">fcol</span>] = <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">move</span>(<span class="ruby-identifier">from</span>)
+  <span class="ruby-ivar">@board</span>[<span class="ruby-identifier">trow</span>][<span class="ruby-identifier">tcol</span>] = <span class="ruby-identifier">other_space</span>
+
+  <span class="ruby-comment"># Undo movement for tracking ones</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">piece</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">King</span>
+    <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">moved</span> = <span class="ruby-identifier">has_moved</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Pawn</span>
+    <span class="ruby-identifier">piece</span>.<span class="ruby-identifier">move_count</span> <span class="ruby-operator">-=</span> <span class="ruby-value">2</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">check_piece</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">check_piece</span>.<span class="ruby-identifier">color</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@current_player_color</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">check_piece</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">King</span>))
+    <span class="ruby-comment"># If check_piece is a King, then both kings are in check and it&#39;s an illegal</span>
+    <span class="ruby-comment"># move.</span>
+    <span class="ruby-identifier">raise</span>(<span class="ruby-constant">InvalidMoveError</span>, <span class="ruby-node">&quot;Moving that #{piece.class} leaves your king in check!&quot;</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">to</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-place_back_row" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">place_back_row</span><span
+            class="method-args">(color)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an array of back row pieces of the appropriate color on the appropriate row based on <code>color</code>.</p>
+
+<p>@param [String] color A string denoting the color of pieces to place. @return [Array&lt;ChessPiece&gt;] The row of chess pieces in the standard setup.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="place_back_row-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 619</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">place_back_row</span>(<span class="ruby-identifier">color</span>)
+  <span class="ruby-identifier">back_row</span> = <span class="ruby-identifier">color</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;white&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-value">0</span> <span class="ruby-operator">:</span> <span class="ruby-value">7</span>
+  [<span class="ruby-constant">Rook</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">color</span>, [<span class="ruby-identifier">back_row</span>, <span class="ruby-value">0</span>]),
+   <span class="ruby-constant">Knight</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">color</span>, [<span class="ruby-identifier">back_row</span>, <span class="ruby-value">1</span>]),
+   <span class="ruby-constant">Bishop</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">color</span>, [<span class="ruby-identifier">back_row</span>, <span class="ruby-value">2</span>]),
+   <span class="ruby-constant">Queen</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">color</span>, [<span class="ruby-identifier">back_row</span>, <span class="ruby-value">3</span>]),
+   <span class="ruby-constant">King</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">color</span>, [<span class="ruby-identifier">back_row</span>, <span class="ruby-value">4</span>]),
+   <span class="ruby-constant">Bishop</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">color</span>, [<span class="ruby-identifier">back_row</span>, <span class="ruby-value">5</span>]),
+   <span class="ruby-constant">Knight</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">color</span>, [<span class="ruby-identifier">back_row</span>, <span class="ruby-value">6</span>]),
+   <span class="ruby-constant">Rook</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">color</span>, [<span class="ruby-identifier">back_row</span>, <span class="ruby-value">7</span>])]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-place_pawns" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">place_pawns</span><span
+            class="method-args">(color)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an array of pawns of the appropriate color on the appropriate row based on <code>color</code>.</p>
+
+<p>@param [String] color A string denoting the color of pawns to place. @return [Array&lt;Pawn&gt;] Row of pawns to place on the board.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="place_pawns-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 606</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">place_pawns</span>(<span class="ruby-identifier">color</span>)
+  <span class="ruby-identifier">pawn_row</span> = <span class="ruby-identifier">color</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;white&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">6</span>
+  <span class="ruby-identifier">pawns</span> = []
+  <span class="ruby-value">8</span>.<span class="ruby-identifier">times</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">col</span><span class="ruby-operator">|</span> <span class="ruby-identifier">pawns</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Pawn</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">color</span>, [<span class="ruby-identifier">pawn_row</span>, <span class="ruby-identifier">col</span>]) }
+  <span class="ruby-identifier">pawns</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-place_pieces" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">place_pieces</span><span
+            class="method-args">(color)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the 2 arrays of the chess pieces in the proper places based od their color.</p>
+
+<p>@param [String] color A string denoting the color of pieces to place. @return [Array&lt;Array&lt;ChessPiece&gt;&gt;] The two rows of chess pieces for the standard setup of the chess board.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="place_pieces-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 590</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">place_pieces</span>(<span class="ruby-identifier">color</span>)
+  <span class="ruby-identifier">pawns</span> = <span class="ruby-identifier">place_pawns</span>(<span class="ruby-identifier">color</span>)
+  <span class="ruby-identifier">back_row_pieces</span> = <span class="ruby-identifier">place_back_row</span>(<span class="ruby-identifier">color</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">color</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;white&#39;</span>
+    [<span class="ruby-identifier">back_row_pieces</span>, <span class="ruby-identifier">pawns</span>]
+  <span class="ruby-keyword">else</span>
+    [<span class="ruby-identifier">pawns</span>, <span class="ruby-identifier">back_row_pieces</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-setup_board" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setup_board</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an array that sets the board up for the start of the game.</p>
+
+<p>@return [Array&lt;Array&gt;] The chess board represented as an array.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="setup_board-source">
+            <pre><span class="ruby-comment"># File lib/chess_game.rb, line 576</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setup_board</span>
+  <span class="ruby-identifier">rows</span> = <span class="ruby-identifier">place_pieces</span>(<span class="ruby-string">&#39;white&#39;</span>)
+  <span class="ruby-identifier">rows</span> <span class="ruby-operator">+=</span> <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>) { <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">8</span>, <span class="ruby-constant">BLANK_SQUARE</span>) }
+  <span class="ruby-identifier">rows</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">place_pieces</span>(<span class="ruby-string">&#39;black&#39;</span>)
+
+  <span class="ruby-identifier">rows</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

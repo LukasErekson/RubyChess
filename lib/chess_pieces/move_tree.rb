@@ -11,9 +11,7 @@ class MoveTree
   ##
   # Assigns a MoveTreeNode to be the root.
   #
-  # @param [Array<Integer>] root_position An integer array of length 2
-  #                                       representing the starting location
-  #                                       for a piece.
+  # @param [Array<Integer>] root_position An integer array of length 2 representing the starting location for a piece.
   def initialize(root_position)
     @root = MoveTreeNode.new(root_position)
   end
@@ -45,8 +43,7 @@ class MoveTree
   # Returns the trimmed child if it was found and nil if it wasn't found in the
   # tree.
   #
-  # @param [Array<Integer>] loc  A location array (2 integers) or a MoveTreeNode
-  #                              to remove from the the tree.
+  # @param [Array<Integer>] loc  A location array (2 integers) or a MoveTreeNode to remove from the the tree.
   # @raise [ArgumentError] if +loc+ is not an Array or MoveTreeNode.
   def trim_branch!(loc)
     # Raise an error if the argument is not either an array or a MoveTreeNode
@@ -74,8 +71,7 @@ class MoveTree
   # Returns an array of the Move Tree using level order
   # (for ease of writing test cases)
   #
-  # @return [Array<Array<Integer>>] tree_array The array of locations of the
-  #                                            move tree.
+  # @return [Array<Array<Integer>>] tree_array The array of locations of the move tree.
   def to_a
     tree_array = []
     each { |node| tree_array << node.loc }
