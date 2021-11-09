@@ -55,12 +55,12 @@ nav {
 nav > a {
     text-decoration: none;
     color: #ef0000;
+    transition: .25s ease-in-out;
 }
 
 nav > a:hover {
     font-size: 1.2rem;
     color: #e63535;
-    transition: .25s ease-in-out;
 }
 
 code {
