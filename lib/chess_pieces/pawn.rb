@@ -38,6 +38,7 @@ class Pawn < ChessPiece
   # If the pawn reaches the back row of the opposing side, it returns a queen.
   #
   # @param [Array<Integer>] An integer array of length 2 denoting the new location of the pawn. A pawn if the pawn moves or a Queen if the pawn reaches the end of the board.
+  # @param [String] The type of player whose pawn it is. Used mainly for pawn promotion.
   def move(to, player_type = 'human')
     @move_count += 1
 
@@ -83,6 +84,8 @@ class Pawn < ChessPiece
   # Prompt the user for input to determine what piece to return when the pawn
   # advances to the last square
   #
+  # @param [String] The type of player whose pawn it is. Used mainly for pawn promotion.
+  #
   # @return [Class] The type of piece the pawn is turning into.
   def new_piece_type(player_type = 'human')
     case player_type
@@ -93,7 +96,7 @@ class Pawn < ChessPiece
       player_input = player_input&.chomp
       player_input = player_input&.downcase
     when 'random'
-      player_input = %w[1, 2, 3, 4].sample
+      player_input = %w[1 2 3 4].sample
     else
       player_input = '1'
     end
