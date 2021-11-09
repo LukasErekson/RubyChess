@@ -39,6 +39,8 @@ class Pawn < ChessPiece
   #
   # @param [Array<Integer>] An integer array of length 2 denoting the new location of the pawn. A pawn if the pawn moves or a Queen if the pawn reaches the end of the board.
   # @param [String] The type of player whose pawn it is. Used mainly for pawn promotion.
+  #
+  # @return [ChessPiece] A pawn if the pawn moves or a Queen if the pawn reaches the end of the board.
   def move(to, player_type = 'human')
     @move_count += 1
 
