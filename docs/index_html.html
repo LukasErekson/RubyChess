@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Rakefile - RDoc Documentation</title>
+<title>index.html - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -89,20 +89,43 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page Rakefile">
+<main role="main" aria-label="Page index.html">
 
-<p># frozen_string_literal: true</p>
+<p>&lt;!DOCTYPE html&gt; &lt;html lang=“en”&gt; &lt;head&gt;</p>
 
-<p>require &#39;rspec/core/rake_task&#39;</p>
+<pre>&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;RubyChess&lt;/title&gt;
 
-<p>task default: [:spec]</p>
+&lt;link rel=&quot;stylesheet&quot; href=&quot;styles/main.css&quot; /&gt;</pre>
 
-<p>desc &#39;Run the specs&#39; RSpec::Core::RakeTask.new do |t|</p>
+<p>&lt;/head&gt; &lt;body&gt;</p>
 
-<pre class="ruby"><span class="ruby-identifier">t</span>.<span class="ruby-identifier">pattern</span> = <span class="ruby-string">&#39;spec/**/*_spec.rb&#39;</span>
-</pre>
+<pre>&lt;div id=&quot;nav-container&quot;&gt;
+    &lt;nav&gt;
+        &lt;a id=&quot;logo&quot; href=&quot;https://github.com/lukaserekson/RubyChess&quot;&gt;
+            &lt;img src=&quot;images/RubyChessLogo.png&quot; style=&quot;width:3.5rem; height:3.5rem;&quot; alt=&quot;Ruby Chess&quot; /&gt;
+            &lt;h2&gt;Ruby Chess&lt;/h2&gt;
+        &lt;/a&gt;
+        &lt;!-- &lt;a href=&quot;#intro&quot;&gt;Intro&lt;/a&gt;
+        &lt;a href=&quot;#gameplay&quot;&gt;Gameplay&lt;/a&gt; --&gt;
+        &lt;a href=&quot;./docs/doc_index.html&quot;&gt;Documentation&lt;/a&gt;
+    &lt;/nav&gt;
+&lt;/div&gt;
 
-<p>end</p>
+&lt;div class=&quot;container&quot;&gt;
+    &lt;main&gt;
+        &lt;h1 id=&quot;intro&quot;&gt;Ruby Chess by Lukas Erekson&lt;/h1&gt;
+
+        &lt;p&gt;Welcome to my website about my Odin Project Ruby Basics capstone project, RubyChess. RubyChess is a terminal implementation of the game of Chess written in Ruby. All code, including over 100 test cases, is an original creation of me, Lukas Erekson.&lt;/p&gt;
+
+        &lt;p&gt;This capstone project reflects all that I have learned as part of The Odin Project&#39;s course as well as some additional material and gems that I wanted to use, including generating documentation with &lt;code&gt;RDoc&lt;/code&gt; and testing code coverage with &lt;code&gt;SimpleCov&lt;/code&gt;.&lt;/p&gt;
+        &lt;hr /&gt;
+    &lt;/main&gt;
+&lt;/div&gt;</pre>
+
+<p>&lt;/body&gt; &lt;/html&gt;</p>
 
 </main>
 

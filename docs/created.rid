@@ -1,4 +1,4 @@
-Sat, 06 Nov 2021 17:27:01 -0600
+Mon, 08 Nov 2021 19:34:20 -0700
 ./coverage/assets/0.12.3/DataTables-1.10.20/images/sort_asc.png	Sat, 06 Nov 2021 17:23:13 -0600
 ./coverage/assets/0.12.3/DataTables-1.10.20/images/sort_desc.png	Sat, 06 Nov 2021 17:23:13 -0600
 ./coverage/assets/0.12.3/DataTables-1.10.20/images/sort_both.png	Sat, 06 Nov 2021 17:23:13 -0600
@@ -29,21 +29,24 @@ Sat, 06 Nov 2021 17:27:01 -0600
 ./coverage/assets/0.12.3/colorbox/border.png	Sat, 06 Nov 2021 17:23:13 -0600
 ./coverage/assets/0.12.3/magnify.png	Sat, 06 Nov 2021 17:23:13 -0600
 ./coverage/index.html	Sat, 06 Nov 2021 17:23:13 -0600
+./styles/main.css	Sat, 06 Nov 2021 21:02:01 -0600
+./images/RubyChessLogo.png	Sat, 06 Nov 2021 21:02:01 -0600
+./images/RubyChessLogo.xcf	Sat, 06 Nov 2021 20:32:13 -0600
 ./RubyChess-workspace.code-workspace	Tue, 26 Oct 2021 21:35:01 -0600
-./lib/chess_game.rb	Sat, 06 Nov 2021 17:23:48 -0600
+./lib/chess_game.rb	Sat, 06 Nov 2021 21:02:01 -0600
 ./lib/invalid_move_error.rb	Sat, 30 Oct 2021 12:04:06 -0600
-./lib/chess_pieces/pawn.rb	Sat, 06 Nov 2021 17:26:19 -0600
-./lib/chess_pieces/move_tree.rb	Sat, 06 Nov 2021 17:23:07 -0600
-./lib/chess_pieces/chess_piece.rb	Sat, 06 Nov 2021 17:25:16 -0600
-./lib/chess_pieces/bishop.rb	Sat, 06 Nov 2021 17:23:07 -0600
-./lib/chess_pieces/queen.rb	Sat, 06 Nov 2021 17:23:07 -0600
-./lib/chess_pieces/rook.rb	Sat, 06 Nov 2021 17:23:07 -0600
-./lib/chess_pieces/knight.rb	Sat, 06 Nov 2021 17:23:07 -0600
-./lib/chess_pieces/move_tree_node.rb	Sat, 06 Nov 2021 17:23:07 -0600
-./lib/chess_pieces/king.rb	Sat, 06 Nov 2021 17:23:07 -0600
+./lib/chess_pieces/pawn.rb	Mon, 08 Nov 2021 18:45:35 -0700
+./lib/chess_pieces/move_tree.rb	Sat, 06 Nov 2021 21:02:01 -0600
+./lib/chess_pieces/chess_piece.rb	Sat, 06 Nov 2021 21:02:01 -0600
+./lib/chess_pieces/bishop.rb	Sat, 06 Nov 2021 21:02:01 -0600
+./lib/chess_pieces/queen.rb	Sat, 06 Nov 2021 21:02:01 -0600
+./lib/chess_pieces/rook.rb	Sat, 06 Nov 2021 21:02:01 -0600
+./lib/chess_pieces/knight.rb	Sat, 06 Nov 2021 21:02:01 -0600
+./lib/chess_pieces/move_tree_node.rb	Sat, 06 Nov 2021 21:02:01 -0600
+./lib/chess_pieces/king.rb	Sat, 06 Nov 2021 21:02:01 -0600
 ./lib/main.rb	Fri, 05 Nov 2021 18:17:06 -0600
 ./Gemfile	Sat, 30 Oct 2021 12:04:06 -0600
-./README.md	Fri, 05 Nov 2021 18:17:06 -0600
+./README.md	Sat, 06 Nov 2021 21:02:05 -0600
 ./Rakefile	Sat, 30 Oct 2021 12:04:06 -0600
 ./spec/move_tree_node_spec.rb	Sat, 30 Oct 2021 12:04:06 -0600
 ./spec/chess_game_spec.rb	Sat, 30 Oct 2021 12:04:06 -0600
@@ -51,5 +54,6 @@ Sat, 06 Nov 2021 17:27:01 -0600
 ./spec/move_tree_spec.rb	Sat, 30 Oct 2021 12:04:06 -0600
 ./spec/move_spec.rb	Fri, 05 Nov 2021 18:17:06 -0600
 ./spec/chess_piece_spec.rb	Sat, 30 Oct 2021 12:04:06 -0600
-./spec/spec_helper.rb	Sat, 06 Nov 2021 17:23:07 -0600
+./spec/spec_helper.rb	Sat, 06 Nov 2021 21:02:01 -0600
+./index.html	Sat, 06 Nov 2021 21:04:25 -0600
 ./Gemfile.lock	Sat, 30 Oct 2021 12:04:06 -0600

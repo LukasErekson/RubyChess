@@ -236,7 +236,7 @@
 
           
           <div class="method-source-code" id="can_capture-3F-source">
-            <pre><span class="ruby-comment"># File lib/chess_pieces/pawn.rb, line 69</span>
+            <pre><span class="ruby-comment"># File lib/chess_pieces/pawn.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">can_capture?</span>(<span class="ruby-identifier">other_piece</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other_piece</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">ChessPiece</span>
 
@@ -278,7 +278,7 @@
 
           
           <div class="method-source-code" id="first_move-3F-source">
-            <pre><span class="ruby-comment"># File lib/chess_pieces/pawn.rb, line 58</span>
+            <pre><span class="ruby-comment"># File lib/chess_pieces/pawn.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">first_move?</span>
   <span class="ruby-ivar">@move_count</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">1</span>
 <span class="ruby-keyword">end</span></pre>
@@ -307,7 +307,7 @@
           
           <p>Moves the <a href="Pawn.html"><code>Pawn</code></a> and updates @move_count If the pawn reaches the back row of the opposing side, it returns a queen.</p>
 
-<p>@param [Array&lt;Integer&gt;] An integer array of length 2 denoting the new location of the pawn. A pawn if the pawn moves or a <a href="Queen.html"><code>Queen</code></a> if the pawn reaches the end of the board.</p>
+<p>@param [Array&lt;Integer&gt;] An integer array of length 2 denoting the new location of the pawn. A pawn if the pawn moves or a <a href="Queen.html"><code>Queen</code></a> if the pawn reaches the end of the board. @param [String] The type of player whose pawn it is. Used mainly for pawn promotion.</p>
           
           
             <div class="method-calls-super">
@@ -318,7 +318,7 @@
 
           
           <div class="method-source-code" id="move-source">
-            <pre><span class="ruby-comment"># File lib/chess_pieces/pawn.rb, line 41</span>
+            <pre><span class="ruby-comment"># File lib/chess_pieces/pawn.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">move</span>(<span class="ruby-identifier">to</span>, <span class="ruby-identifier">player_type</span> = <span class="ruby-string">&#39;human&#39;</span>)
   <span class="ruby-ivar">@move_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
 
@@ -409,7 +409,7 @@
 
           
           <div class="method-source-code" id="build_pawn_move_tree-source">
-            <pre><span class="ruby-comment"># File lib/chess_pieces/pawn.rb, line 175</span>
+            <pre><span class="ruby-comment"># File lib/chess_pieces/pawn.rb, line 178</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_pawn_move_tree</span>
   <span class="ruby-identifier">move_tree</span> = <span class="ruby-constant">MoveTree</span>.<span class="ruby-identifier">new</span>([<span class="ruby-value">0</span>, <span class="ruby-value">0</span>])
 
@@ -452,7 +452,7 @@
 
           
           <div class="method-source-code" id="build_pawn_move_tree_first_move-source">
-            <pre><span class="ruby-comment"># File lib/chess_pieces/pawn.rb, line 155</span>
+            <pre><span class="ruby-comment"># File lib/chess_pieces/pawn.rb, line 158</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_pawn_move_tree_first_move</span>
   <span class="ruby-identifier">move_tree</span> = <span class="ruby-constant">MoveTree</span>.<span class="ruby-identifier">new</span>([<span class="ruby-value">0</span>, <span class="ruby-value">0</span>])
 
@@ -496,7 +496,7 @@
 
           
           <div class="method-source-code" id="en_passant-source">
-            <pre><span class="ruby-comment"># File lib/chess_pieces/pawn.rb, line 136</span>
+            <pre><span class="ruby-comment"># File lib/chess_pieces/pawn.rb, line 139</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">en_passant</span>(<span class="ruby-identifier">other_piece</span>)
   <span class="ruby-comment"># Only applies to other Pawns</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other_piece</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Pawn</span>
@@ -534,13 +534,15 @@
           
           <p>Prompt the user for input to determine what piece to return when the pawn advances to the last square</p>
 
+<p>@param [String] The type of player whose pawn it is. Used mainly for pawn promotion.</p>
+
 <p>@return [Class] The type of piece the pawn is turning into.</p>
           
           
 
           
           <div class="method-source-code" id="new_piece_type-source">
-            <pre><span class="ruby-comment"># File lib/chess_pieces/pawn.rb, line 87</span>
+            <pre><span class="ruby-comment"># File lib/chess_pieces/pawn.rb, line 90</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new_piece_type</span>(<span class="ruby-identifier">player_type</span> = <span class="ruby-string">&#39;human&#39;</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">player_type</span>
   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;human&#39;</span>
@@ -550,7 +552,7 @@
     <span class="ruby-identifier">player_input</span> = <span class="ruby-identifier">player_input</span>&amp;.<span class="ruby-identifier">chomp</span>
     <span class="ruby-identifier">player_input</span> = <span class="ruby-identifier">player_input</span>&amp;.<span class="ruby-identifier">downcase</span>
   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;random&#39;</span>
-    <span class="ruby-identifier">player_input</span> = <span class="ruby-node">%w[1, 2, 3, 4]</span>.<span class="ruby-identifier">sample</span>
+    <span class="ruby-identifier">player_input</span> = <span class="ruby-node">%w[1 2 3 4]</span>.<span class="ruby-identifier">sample</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">player_input</span> = <span class="ruby-string">&#39;1&#39;</span>
   <span class="ruby-keyword">end</span>
@@ -598,7 +600,7 @@
 
           
           <div class="method-source-code" id="print_piece_types-source">
-            <pre><span class="ruby-comment"># File lib/chess_pieces/pawn.rb, line 118</span>
+            <pre><span class="ruby-comment"># File lib/chess_pieces/pawn.rb, line 121</span>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">print_piece_types</span>
     <span class="ruby-identifier">puts</span> <span class="ruby-identifier">&lt;&lt;~PAWN_MENU</span>
 <span class="ruby-value">      Please select one of the following options:
