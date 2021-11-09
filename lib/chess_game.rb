@@ -25,7 +25,7 @@ class ChessGame
   ##
   # Creates instance variables and sets up the board for
   # the start of the game.
-  def initialize(white_player='human', black_player='human')
+  def initialize(white_player = 'human', black_player = 'human')
     @board = setup_board
     @current_player_color = 'white'
     @king_locs = { white: [0, 4], black: [7, 4] }
@@ -50,14 +50,14 @@ class ChessGame
     while @game_winner.nil?
       puts "It's #{@current_player_color}'s turn."
 
-      case @players[@current_player_color]
-      when 'human'
-        input_command = player_input
-      when 'random'
-        input_command = random_move
-      else
-        input_command = random_move
-      end
+      input_command = case @players[@current_player_color]
+                      when 'human'
+                        player_input
+                      when 'random'
+                        random_move
+                      else
+                        random_move
+                      end
 
       if input_command.nil?
         puts 'Please input a legal move. Type "help" for an example.'
@@ -254,12 +254,12 @@ class ChessGame
     @board[frow][tcol] = BLANK_SQUARE if piece.is_a?(Pawn) && get_en_passant_moves(piece).include?(to)
 
     # Move the piece on the board
-    if piece.is_a?(Pawn)
-      @board[trow][tcol] = piece.move(to, @players[@current_player_color])
-    else
-      @board[trow][tcol] = piece.move(to)
-    end
-    
+    @board[trow][tcol] = if piece.is_a?(Pawn)
+                           piece.move(to, @players[@current_player_color])
+                         else
+                           piece.move(to)
+                         end
+
     @board[frow][fcol] = BLANK_SQUARE
 
     # If a piece is a king, do special checks
@@ -656,11 +656,11 @@ class ChessGame
     has_moved = piece.moved? if piece.is_a?(King)
 
     # Move the piece on the board
-    if piece.is_a?(Pawn)
-      @board[trow][tcol] = piece.move(to, @players[@current_player_color])
-    else
-      @board[trow][tcol] = piece.move(to)
-    end
+    @board[trow][tcol] = if piece.is_a?(Pawn)
+                           piece.move(to, @players[@current_player_color])
+                         else
+                           piece.move(to)
+                         end
     @board[frow][fcol] = BLANK_SQUARE
 
     @king_locs[@current_player_color.to_sym] = to if piece.is_a?(King)
