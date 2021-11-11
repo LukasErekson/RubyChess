@@ -26,12 +26,57 @@
         <main>
             <h1 id="intro">Ruby Chess by Lukas Erekson</h1>
 
-            <p>Welcome to my website about my Odin Project Ruby Basics capstone project, RubyChess. RubyChess is a terminal implementation of the game of Chess written in Ruby. All code, including over 100 test cases, is an original creation of me, Lukas Erekson.</p>
+            <p>Welcome to my page about my Odin Project Ruby Basics capstone project, RubyChess. RubyChess is a terminal implementation of the game of Chess written in Ruby. All code, including over 100 test cases, is an original creation of me, Lukas Erekson.</p>
 
             <p>This capstone project reflects all that I have learned as part of The Odin Project's course as well as some additional material and gems that I wanted to use, including generating documentation with <code>RDoc</code> and testing code coverage with <code>SimpleCov</code>.</p>
             <hr />
+
+            <h2>Installing and Playing</h2>
+
+            <p>Ruby 2.7+ is required. The gem <code>colorize</code> also needs to be installed in order for the board and chess pieces to render correctly unless you use the RPLIT.io branch, where the needed elements are implemented locally.</p>
+
+            <p>To install and play, simply clone the main branch in your temrinal with</p>
+
+            <code>git clone https://github.com/LukasErekson/RubyChess.git</code>
+                
+            <p>Then, run <code>ruby lib/main.rb</code> in the downloaded <code>RubyChess</code> directory. A game menu will appear giving you options to start the game, load a saved game, or quit.</p>
+
+            <hr />
+
+            <h2>Playing the Game</h2>
+            
+            <p>Upon starting a new game, you will be given a standard board configuration. White always goes first.</p>
+
+            <img src="images/new-game.png" class="screenshots" style="max-width: 95%;" alt="new-game-screenshot"/>
+
+            <h3>Moving</h3>
+            <p>To make a move, type the positon of the piece you want to move and then the space to which you want to move it. For example, if you want to move the piece at <code>f1</code> to <code>c4</code>, you can type either of the following:</p>
+
+            <ul>
+                <li><code>f1c4</code></li>
+                <li><code>f1 to c4</code></li>
+            </ul>
+
+            <img src="images/mid-move.png" class="screenshots" style="max-width: 95%;" alt="mid-move-screenshot"/>
+
+            <h3>Check!</h3>
+            
+            <p>Check is automatically calculated, and typing "help" will provide the list of moves to get out of check. If there are no available, the game ends with a checkmate.</p>
+
+            <img src="images/check-board.png" class="screenshots" style="max-width: 95%;" alt="check-screenshot"/>
+
+            <h3>Saving for Later</h3>
+
+            <p>You can save the current game state at any time by typing "exit" or "save". You will be prompted to name the save file. You can later reload that file in the main menu.</p>
+
+            <img src="images/save-file.png" class="screenshots" style="max-width: 95%;" alt="save-file-screenshot"/>
+
+            <img src="images/load-save.png" class="screenshots" style="max-width: 95%;" alt="load-save-screenshot"/>
+
         </main>
     </div>
+
+    <footer></footer>
     
 </body>
 </html>
