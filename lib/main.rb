@@ -31,7 +31,7 @@ def main
     when 5
       puts 'Load saved game'
       game_file = File.new(load_game, 'r')
-      game = YAML.safe_load(game_file)
+      game = YAML.load(game_file)
       game_file.close
     else
       puts 'Thank you! Have a nice day.'
