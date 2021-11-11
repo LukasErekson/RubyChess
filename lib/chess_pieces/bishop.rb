@@ -13,7 +13,7 @@ class Bishop < ChessPiece
   #                                   location of the piece on the board.
   def initialize(color, position)
     @move_tree_template = build_bishop_move_tree
-    super(color == 'white' ? '♝'.white : '♗', color, position, 3)
+    super(color == 'white' ? '♝' : '♗', color, position, 3)
   end
 
   protected

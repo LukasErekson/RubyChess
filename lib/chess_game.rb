@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'colorize'
+require_relative 'colors.rb'
 require 'stringio'
 require 'yaml'
 require_relative 'chess_pieces/pawn'
@@ -572,7 +572,9 @@ class ChessGame
       string_stream << " #{row} "
       @board[row - 1].each_with_index do |col, col_num|
         bg_color = (row - 1) % 2 == col_num % 2 ? BLACK_SQAURE : WHITE_SQUARE
-        string_stream << col.to_s.colorize(bg_color)
+        space_str = col.to_s.colorize(bg_color)
+        space_str = col.to_s.colorize(bg_color).send(col.color.to_sym) if col.class.superclass == ChessPiece
+        string_stream << space_str
       end
       string_stream << "\t"
       move_index = 8 - row + (history_offset - 8)

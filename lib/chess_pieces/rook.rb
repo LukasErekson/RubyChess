@@ -13,7 +13,7 @@ class Rook < ChessPiece
   #                                   location of the piece on the board.
   def initialize(color, position)
     @move_tree_template = build_rook_move_tree
-    super(color == 'white' ? '♜'.white : '♖', color, position, 5)
+    super(color == 'white' ? '♜' : '♖', color, position, 5)
   end
 
   protected

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'colorize'
+require_relative '../colors.rb'
 require_relative 'move_tree'
 
 ##
@@ -90,7 +90,7 @@ class ChessPiece
   #
   # @return [String] The name of the piece of its color with a space after it.
   def to_s
-    "#{@name} ".colorize(color: @color.to_sym)
+    "#{@name} "
   end
 
   ##
@@ -133,12 +133,12 @@ class ChessPiece
 
     pieces = [@name, other.name].sort
 
-    both_knights = ['♞'.white, '♘'].repeated_combination(2).any? { |combo| pieces == combo }
-    both_bishops = ['♝'.white, '♗'].repeated_combination(2).any? { |combo| pieces == combo }
+    both_knights = ['♞', '♘'].repeated_combination(2).any? { |combo| pieces == combo }
+    both_bishops = ['♝', '♗'].repeated_combination(2).any? { |combo| pieces == combo }
 
     return 0 if both_knights || both_bishops
 
-    return -1 if (@name == '♞'.white) || (@name == '♘')
+    return -1 if (@name == '♞') || (@name == '♘')
 
     # This piece is a bishop and the other is a knight, so return 1.
     1

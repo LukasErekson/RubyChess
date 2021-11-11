@@ -13,7 +13,7 @@ class Queen < ChessPiece
   #                                   location of the piece on the board.
   def initialize(color, position)
     @move_tree_template = build_queen_move_tree
-    super(color == 'white' ? '♛'.white : '♕', color, position, 9)
+    super(color == 'white' ? '♛' : '♕', color, position, 9)
   end
 
   protected

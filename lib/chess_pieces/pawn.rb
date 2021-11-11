@@ -23,7 +23,7 @@ class Pawn < ChessPiece
     @direction = color == 'white' ? 1 : -1
     @back_row = color == 'white' ? 7 : 0
     @move_tree_template = build_pawn_move_tree
-    super(color == 'white' ? '♙'.white : '♙', color, position, 1)
+    super(color == 'white' ? '♙' : '♙', color, position, 1)
   end
 
   ##

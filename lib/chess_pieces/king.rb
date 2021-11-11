@@ -16,7 +16,7 @@ class King < ChessPiece
   def initialize(color, position)
     @move_tree_template = build_king_move_tree
     @moved = false
-    super(color == 'white' ? '♚'.white : '♔', color, position, 10_000)
+    super(color == 'white' ? '♚': '♔', color, position, 10_000)
   end
 
   ##
