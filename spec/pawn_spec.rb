@@ -85,6 +85,22 @@ RSpec.describe Pawn do
         $stdin = StringIO.new("K\n")
         expect(black_pawn.move([0, 1])).to eq(Knight.new('black', [0, 1]))
       end
+
+      it 'rasies an error for an invalid option' do
+        $stdin = StringIO.new("6\n2\n")
+        expect(proc { black_pawn.move([0, 1]) }).not_to raise_error
+      end
+    end
+
+    context 'when a computer player advances to the last space' do
+      it 'returns a queen piece for promotion' do
+        expect(black_pawn.send(:new_piece_type, 'computer')).to eq(Queen)
+      end
+
+      it 'returns a random piece for promotion' do
+        types = [Queen, Knight, Rook, Bishop]
+        expect(types.include?(black_pawn.send(:new_piece_type, 'random'))).to be(true)
+      end
     end
   end
 
