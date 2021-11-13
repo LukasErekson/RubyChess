@@ -354,12 +354,16 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
       end
 
       it 'changes @castle_king to be when validating' do
-        expect(proc { game.validate_move([7, 4], [7, 2]) }).to change{ game.instance_variable_get(:@castle_king) }.from(false).to(true)
+        expect(proc { game.validate_move([7, 4], [7, 2]) }).to change {
+                                                                 game.instance_variable_get(:@castle_king)
+                                                               }.from(false).to(true)
       end
 
       it 'flags @castle_king as false' do
         game.instance_variable_set(:@castle_king, true)
-        expect(proc { game.make_move([7, 4], [7, 2]) }).to change{ game.instance_variable_get(:@castle_king) }.from(true).to(false)
+        expect(proc { game.make_move([7, 4], [7, 2]) }).to change {
+                                                             game.instance_variable_get(:@castle_king)
+                                                           }.from(true).to(false)
       end
     end
 
@@ -375,15 +379,18 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
       end
 
       it 'changes @castle_king to be when validating' do
-        expect(proc { game.validate_move([7, 4], [7, 6]) }).to change{ game.instance_variable_get(:@castle_king) }.from(false).to(true)
+        expect(proc { game.validate_move([7, 4], [7, 6]) }).to change {
+                                                                 game.instance_variable_get(:@castle_king)
+                                                               }.from(false).to(true)
       end
 
       it 'flags @castle_king as false' do
         game.instance_variable_set(:@castle_king, true)
-        expect(proc { game.make_move([7, 4], [7, 6]) }).to change{ game.instance_variable_get(:@castle_king) }.from(true).to(false)
+        expect(proc { game.make_move([7, 4], [7, 6]) }).to change {
+                                                             game.instance_variable_get(:@castle_king)
+                                                           }.from(true).to(false)
       end
     end
-
   end
 
   describe '#random_move' do
