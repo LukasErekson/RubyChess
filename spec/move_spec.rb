@@ -333,5 +333,64 @@ RSpec.describe 'ChessGame#make_move and its sub-methods' do
         expect(game.can_castle?([7, 4], [7, 2])).to be(true)
       end
     end
+
+    context 'when the horizontal difference is not 2' do
+      it 'returns false' do
+        expect(game.can_castle?([7, 4], [7, 7])).to be(false)
+      end
+    end
+  end
+
+  describe 'castling the king' do
+    context 'when castling the king to the left' do
+      before do
+        king = King.new('black', [7, 4])
+        rook = Rook.new('black', [7, 0])
+        current_board = [king, rook].each_with_object({}) do |piece, hash|
+          hash[piece.position] = piece
+        end
+        game.instance_variable_set(:@board, setup_board(current_board))
+        game.instance_variable_set(:@current_player_color, 'black')
+      end
+
+      it 'changes @castle_king to be when validating' do
+        expect(proc { game.validate_move([7, 4], [7, 2]) }).to change{ game.instance_variable_get(:@castle_king) }.from(false).to(true)
+      end
+
+      it 'flags @castle_king as false' do
+        game.instance_variable_set(:@castle_king, true)
+        expect(proc { game.make_move([7, 4], [7, 2]) }).to change{ game.instance_variable_get(:@castle_king) }.from(true).to(false)
+      end
+    end
+
+    context 'when castling the king to the right' do
+      before do
+        king = King.new('black', [7, 4])
+        rook = Rook.new('black', [7, 7])
+        current_board = [king, rook].each_with_object({}) do |piece, hash|
+          hash[piece.position] = piece
+        end
+        game.instance_variable_set(:@board, setup_board(current_board))
+        game.instance_variable_set(:@current_player_color, 'black')
+      end
+
+      it 'changes @castle_king to be when validating' do
+        expect(proc { game.validate_move([7, 4], [7, 6]) }).to change{ game.instance_variable_get(:@castle_king) }.from(false).to(true)
+      end
+
+      it 'flags @castle_king as false' do
+        game.instance_variable_set(:@castle_king, true)
+        expect(proc { game.make_move([7, 4], [7, 6]) }).to change{ game.instance_variable_get(:@castle_king) }.from(true).to(false)
+      end
+    end
+
+  end
+
+  describe '#random_move' do
+    context 'when called' do
+      it 'gives a valid move' do
+        expect(proc { game.make_move(*game.random_move) }).not_to raise_error
+      end
+    end
   end
 end
