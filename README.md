@@ -1,5 +1,11 @@
+
+<img src="images/RubyChessLogo.png" width=100>
+
 # RubyChess
+
 A Ruby implementation of Chess to be played in the terminal.
+
+See the landing page and play online by [clicking here](https://lukaserekson.github.io/RubyChess/).
 
 ## Table of Contents
 1. [Features](#features)
@@ -10,7 +16,7 @@ A Ruby implementation of Chess to be played in the terminal.
 5. [Developing & Contributing](#developing-and-contributing)
     - [Testing](#testing)
     - [Contributing](#contributing)
-6. [Purpose](#purpose)
+6. [Acknowledgements](#acknowledgements)
 
 ## Features
 This implementation features all the standard rules of chess, including some things such as castling the king, the situational move En Passant, and pawn promotion to a player's choice of pieces. It also allows players to quit a game early, saving the state of the board and turn history in the `saves` folder as a YAML file.
@@ -28,9 +34,11 @@ Then, run `ruby lib/main.rb` in the downloaded `RubyChess` directory. A game men
 ### Gameplay
 At any point during the game, typing `help` or `tutorial` will provide detailed instructions on how to make moves (and if you're in check, it will provide a list of moves that you can take to get out of check).
 
-The basic gist of the gameplay consits of typing in the location of the piece you would like to move and then typing the locaiton where you would like it to go. The following syntax is accepted to move a piece from a2 to a4:
-- `a2a4`
-- `a2 to a4`
+The basic gist of the gameplay consits of typing in the location of the piece you would like to move and then typing the locaiton where you would like it to go. The following syntax is accepted to move a piece from f1 to c4:
+- `f1c4`
+- `f1 to c4`
+
+![Make a move image](images/mid-move.png)
 
 To exit the game early, type `quit`, and you will be prompted to give a name for the save file before the program exits to the main menu.
 
@@ -39,10 +47,12 @@ Be sure to check out the RDoc generated documentation by clicking [here](https:/
 
 ## Developing and Contributing
 ### Testing
-A custom test suite with over 100 tests written with RSpec tests the major functionality of the game pieces and the board. It can serve as a good benchmark for anyone who wishes to contribute to the repository while maintaining stability. I also used SimpleCov as one measure of completeness to make sure niche cases were reached and behave as expected.
+A custom test suite with over 100 tests written with RSpec tests the major functionality of the game pieces and the board. It can serve as a good benchmark for anyone who wishes to contribute to the repository while maintaining stability. I also used SimpleCov as one measure of completeness to make sure niche cases were reached and methods behave as expected.
 
 ### Contributing
 Feel free to fork this repo and build on it in any way! I welcome any pull requests that aim to improve the quality of the project. As a matter of fact, it would give me some more experience reviewing others' code and going through pull requests.
 
-## Purpose
+## Acknowledgements
 This serves as a capstone project for [The Odin Project's Ruby Programming course](https://www.theodinproject.com/paths/full-stack-ruby-on-rails/courses/ruby-programming). The whole repository is also an opportunity to practice the standards of a git repository and trying out a new workflow. Although this project is done on my own, I hope that the way I use git provides me with good practice at developing software in team-friendly way.
+
+I'm grateful for the chance to learn from a free and open source cirriculum like the Odin Project.
