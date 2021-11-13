@@ -178,4 +178,43 @@ RSpec.describe ChessGame do
       end
     end
   end
+
+  describe '#play' do
+    context 'given a short game' do
+      before do
+        $stdout = StringIO.new
+      end
+
+      after do
+        $stdin = STDIN
+        $stdout = STDOUT
+      end
+
+      it 'plays the game to completion' do
+        $stdin = StringIO.new("f2f3\ne7e6\ng2g4\nd8h4\n")
+        expect(proc { game.play }).not_to raise_error
+      end
+
+      it 'correctly returns black as the winner' do
+        $stdin = StringIO.new("f2f3\ne7e6\ng2g4\nd8h4\n")
+        expect(game.play).to eq('black')
+      end
+    end
+
+    context 'given a stalemate board' do
+      before do
+        $stdout = StringIO.new
+        game.instance_variable_set(:@game_winner, 'Stalemate')
+      end
+
+      after do
+        $stdin = STDIN
+        $stdout = STDOUT
+      end
+
+      it 'returns stalemate' do
+        expect(game.play).to eq('Stalemate')
+      end
+    end
+  end
 end
